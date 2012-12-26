@@ -3,6 +3,8 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^admin/', include(admin.site.urls)),
+    url('', include('atados.atados.urls', namespace='atados')),
 )
