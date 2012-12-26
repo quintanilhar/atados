@@ -5,6 +5,10 @@
     color: #179bc2;
   }
 
+  label {
+    font-weight: bold;
+  }
+
   #header {
     background:#333 url('../img/sprite.png') repeat-x;
     font-size:14px;
@@ -86,10 +90,6 @@
     }
 
     #register-form {
-      label {
-        font-weight: bold;
-      }
-
       & input[type=text], & input[type=password] { 
         width: 325px;
       }
@@ -113,4 +113,12 @@
       padding-top: 28px;
     }
   }
+
+  #organisation-sign-up {
+    .add-on {
+      font-size:14px;
+      color:#999;
+    }
+  }
+
 }
