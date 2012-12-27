@@ -129,6 +129,10 @@
       width: 178px;
     }
 
+    .error .add-on {
+      color:#B94A48;
+    }
+
     input[type=text], input[type=password] { 
       width: 404px;
     }
@@ -139,4 +143,23 @@
 
   }
 
+  #sign-in {
+    margin:70px auto;
+    width:300px;
+
+    input[type=text], input[type=password] {
+      width:243px;
+    }
+
+    .checkbox {
+      float:right;
+      margin-right:15px;
+      font-size:11px;
+      color:#666;
+
+      input {
+        margin-top:3px;
+      }
+    } 
+  }
 }

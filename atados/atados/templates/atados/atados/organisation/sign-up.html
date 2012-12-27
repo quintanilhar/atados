@@ -1,5 +1,5 @@
 {% extends 'atados/atados/base.html' %}
-{% load i18n %}
+{% load i18n bootstrap_toolkit %}
 
 {% block content %}
 <div id="organisation-sign-up">
@@ -8,20 +8,9 @@
       Desc
     </div>
     <div class="span6">
-      <form class="well">
+      <form class="well" method="post" action="{% url atados:organisation.sign-up %}">{% csrf_token %}
         <fieldset>
-          <label>{% trans "Organization name" %}</label>
-          <input type="text" />
-          <label>{% trans "Username" %}</label>
-          <div class="input-prepend">
-            <span class="add-on">http://www.atados.com.br/</span><input type="text" placeholder="{% trans "green.peace" %}" />
-          </div>
-          <label>{% trans "Your e-mail" %}</label>
-          <input type="text" placeholder="{% trans "example@example.com" %}" />
-          <label>{% trans "Create a new password" %}</label>
-          <input type="password" />
-          <label>{% trans "Confirm your password" %}</label>
-          <input type="password" />
+          {{ form|as_bootstrap }}
         </fieldset>
         <div class="form-terms alert">
           {% url atados:home as terms_url %}
@@ -31,7 +20,7 @@
           {% endblocktrans %}
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
+          <button type="submit" tabindex="6" class="btn btn-primary">{% trans "Sign up" %}</button>
         </div>
       </form>
     </div>

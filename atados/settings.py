@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'atados.atados',
     'registration',
+    'bootstrap_toolkit',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -156,4 +157,10 @@ LOGGING = {
     }
 }
 
+AUTHENTICATION_BACKENDS = (
+    'atados.atados.backends.AuthenticationBackend',
+)
+
 HTTPS_SUPPORT = True
+
+ACCOUNT_ACTIVATION_DAYS = 7
