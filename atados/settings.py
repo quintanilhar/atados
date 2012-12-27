@@ -120,6 +120,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'atados.atados',
+    'atados.organisation',
+    'atados.volunteer',
+    'atados.project',
     'registration',
     'bootstrap_toolkit',
     # Uncomment the next line to enable the admin:

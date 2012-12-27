@@ -6,10 +6,6 @@ from atados.atados.forms import AuthenticationForm
 
 urlpatterns = patterns(
     '',
-    url(r'^$', direct_to_template, {'template': 'atados/atados/home.html'},
-        name='home'),
-
-    url(_(r'^sign-in$'), 'django.contrib.auth.views.login',
-        {'authentication_form': AuthenticationForm,
-         'template_name': 'atados/atados/sign-in.html'}, name='sign-in'),
+    
+    url(_(r'^new$'), direct_to_template, {'template': 'atados/project/new.html'}, name='new'),
 )

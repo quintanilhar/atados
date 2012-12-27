@@ -8,7 +8,7 @@
       Desc
     </div>
     <div class="span6">
-      <form class="well" method="post" action="{% url atados:organisation.sign-up %}">{% csrf_token %}
+      <form class="well" method="post" action="{% url organisation:sign-up %}">{% csrf_token %}
         <fieldset>
           {{ form|as_bootstrap }}
         </fieldset>
