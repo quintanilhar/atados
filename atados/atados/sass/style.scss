@@ -2,29 +2,29 @@
   font-family: Helvetica, sans-serif, Arial;
 
   a {
-    color: #179bc2;
+    //color: #179bc2;
   }
 
   #header {
-    background:#333 url('../img/sprite.png') repeat-x;
+    background:#333;
     font-size:14px;
-    height: 46px;
+    height: 70px;
     margin-bottom: 24px;
     color: #fff;
 
-    a {
-      color: #9ee9ff;
-    }
+    .menu {
+      padding: 25px 0 0;
 
-    ul {
-      padding: 12px 0 0;
+      a {
+        color: #9ee9ff;
+      }
 
       li {
         display: inline;
         color:#999;
 
         a {
-          padding: 9px 8px 9px 9px;
+          padding: 8px 7px 8px 8px;
         }
 
         &:before {
@@ -37,8 +37,20 @@
       }
     }
 
-    .tools {
+    .login {
       float: right;
+      padding-top:12px;
+
+      .checkbox {
+        display:block;
+        font-size:11px;
+        color:#999;
+        margin-top:3px;
+
+        input {
+          margin-top:3px;
+        }
+      }
     }
   }
 
