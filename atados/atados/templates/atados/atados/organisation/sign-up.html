@@ -1,0 +1,41 @@
+{% extends 'atados/atados/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div id="organisation-sign-up">
+  <div class="row">
+    <div class="span6">
+      Desc
+    </div>
+    <div class="span6">
+      <form class="well">
+        <fieldset>
+          <label>{% trans "Organization name" %}</label>
+          <input type="text" />
+          <label>{% trans "Username" %}</label>
+          <div class="input-prepend">
+            <span class="add-on">http://www.atados.com.br/</span><input type="text" placeholder="{% trans "green.peace" %}" />
+          </div>
+          <label>{% trans "Your e-mail" %}</label>
+          <input type="text" placeholder="{% trans "example@example.com" %}" />
+          <label>{% trans "Create a new password" %}</label>
+          <input type="password" />
+          <label>{% trans "Confirm your password" %}</label>
+          <input type="password" />
+        </fieldset>
+        <div class="form-terms alert">
+          {% url atados:home as terms_url %}
+          {% url atados:home as privacy_url %}
+          {% blocktrans %}
+          By clicking Sign Up, you are indicating that you have read and agree to the <a href="{{ terms_url }}">Terms of Service</a> and <a href="{{ privacy_url }}">Privacy Policy</a>.
+          {% endblocktrans %}
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

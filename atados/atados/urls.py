@@ -8,4 +8,6 @@ urlpatterns = patterns(
     '',
     url(r'^$', direct_to_template, {'template': 'atados/atados/home.html'},
         name='home'),
+    url(_(r'^organisation/sign-up$'), direct_to_template, {'template': 'atados/atados/organisation/sign-up.html'},
+        name='organisation.sign-up'),
 )

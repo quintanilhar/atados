@@ -3,11 +3,6 @@
 
 {% block fulltitle %}Atados.com.br{% endblock %}
 
-{% block logo %}
-{% endblock %}
-
-{% block search %}{% endblock %}
-
 {% block content %}
 <div id="home">
   <div class="row">
@@ -20,11 +15,11 @@
       <form class="well" id="register-form">
         <label>{% trans "Name" %}</label>
         <input type="text" placeholder="Type you name here" />
-        <label>Seu e-mail</label>
+        <label>{% trans "Your e-mail" %}</label>
         <input type="text" placeholder="example@example.com" />
-        <label>Crie uma senha</label>
+        <label>{% trans "Create a password" %}</label>
         <input type="password" />
-        <label>Confirme sua senha</label>
+        <label>{% trans "Confirm your password" %}</label>
         <input type="password" />
         <div class="form-terms alert">
           {% url atados:home as terms_url %}
@@ -34,7 +29,7 @@
           {% endblocktrans %}
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary">Cadastrar</button>
+          <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
         </div>
       </form>
     </div>

@@ -5,6 +5,10 @@
     //color: #179bc2;
   }
 
+  label {
+    font-weight: bold;
+  }
+
   #header {
     background:#333;
     font-size:14px;
@@ -98,11 +102,7 @@
     }
 
     #register-form {
-      label {
-        font-weight: bold;
-      }
-
-      & input[type=text], & input[type=password] { 
+      input[type=text], input[type=password] { 
         width: 325px;
       }
       
@@ -125,4 +125,22 @@
       padding-top: 28px;
     }
   }
+
+  #organisation-sign-up {
+    .add-on {
+      font-size:14px;
+      color:#999;
+      width: 178px;
+    }
+
+    input[type=text], input[type=password] { 
+      width: 404px;
+    }
+
+    .input-prepend input {
+      width: 215px;
+    }
+
+  }
+
 }
