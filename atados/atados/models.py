@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
 
+
 class Profile(models.Model):
     user = models.ForeignKey(User)
     address = models.CharField(_('address'), max_length=100, blank=True)

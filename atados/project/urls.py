@@ -6,13 +6,14 @@ from django.utils.translation import ugettext_lazy as _
 from atados.project.models import Project
 from atados.project.forms import ProjectCreateForm
 
+
 urlpatterns = patterns(
     '',
-    
+
     url(_(r'^new$'), CreateView.as_view(
         model=Project,
         form_class=ProjectCreateForm,
         template_name='atados/project/new.html',
         success_url=''
-    ), name='new'),
+        ), name='new'),
 )
