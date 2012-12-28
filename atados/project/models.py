@@ -7,6 +7,7 @@ class Project(models.Model):
     organisation = models.ForeignKey(Organisation)
     name = models.CharField(_('name'), max_length=50)
     slug = models.SlugField(max_length=50)
+    details = models.TextField(_('details'), max_length=500)
 
     def __unicode__(self):
         return self.name
