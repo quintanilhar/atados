@@ -3,7 +3,6 @@ from atados.atados.models import Profile
 from registration.backends.default import DefaultBackend
 
 
-
 class RegistrationBackend(DefaultBackend):
 
     def register(self, request, **kwargs):

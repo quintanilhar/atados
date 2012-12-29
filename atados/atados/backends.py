@@ -10,9 +10,13 @@ class AuthenticationBackend(ModelBackend):
             try:
                 user = User.objects.get(email=username)
                 if user.check_password(password):
-                    return super(AuthenticationBackend, self).authenticate(
+                    return super(
+                        AuthenticationBackend,
+                        self).authenticate(
                             user.username,
                             password)
             except User.DoesNotExist:
                 return None
-        return super(AuthenticationBackend, self).authenticate(username, password)
+        return super(
+            AuthenticationBackend,
+            self).authenticate(username, password)
