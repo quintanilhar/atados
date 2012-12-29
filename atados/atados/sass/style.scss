@@ -55,7 +55,45 @@
   }
 
   #footer {
-    padding-top:38px;
+    padding:25px 10px 25px 40px;
+    margin-top:15px;
+
+    ul {
+      margin-left:0;
+
+      li {
+        list-style:none;
+      }
+    }
+  }
+
+  #footer-legal {
+    padding: 18px 0;
+
+    #copyright {
+      margin:0 0 0 8px;
+    
+      &:after { 
+        content: "";
+      }
+    }
+
+    li {
+      color:#999;
+      display:inline;
+      
+      a {
+        margin:0 14px 0 7px;
+      }
+
+      &:after {
+        content: "|";
+      }
+
+      &:first-child a {
+        margin:0 14px 0 0;
+      }
+    }
   }
 
   .list {

@@ -3,4 +3,9 @@
 
 {% block content %}
 
+<form class="well" method="post" action="{% url project:new %}">{% csrf_token %}
+  {{ form|as_bootstrap }}
+  <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+</form>
+
 {% endblock %}
