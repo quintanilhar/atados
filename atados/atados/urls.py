@@ -12,4 +12,6 @@ urlpatterns = patterns(
     url(_(r'^sign-in$'), 'django.contrib.auth.views.login',
         {'authentication_form': AuthenticationForm,
          'template_name': 'atados/atados/sign-in.html'}, name='sign-in'),
+
+    url(r'^sign-in$', redirect_to, {'url': _('/sign-in'), 'query_string': True}, name='global-sign-in'),
 )

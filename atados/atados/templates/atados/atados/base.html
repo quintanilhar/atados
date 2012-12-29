@@ -35,6 +35,22 @@
               </ul>
             </div>
             <div class="span5">
+              {% if user.is_authenticated %}
+              <div class="dropdown" style="font-weight:bold; margin-top:22px; float:right; color:#999">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.username }} <span class="caret"></span></a>
+                <ul class="dropdown-menu" style="left:auto; right:0">
+                  <li>
+                    <div style="padding:3px 15px; margin-bottom:12px">
+                      <span style="display:block; font-weight:bold">{{ user.first_name }}</span>
+                      <span style="display:block">{{ user.email }}</span>
+                    </div>
+                  </li>
+                  <li><a href="#">{% trans "New project" %}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">{% trans "Sign out" %}</a></li>
+                </ul>
+              </div>
+              {% else %}
               <div class="login">
                 <form class="form-inline" method="post" action="{% url atados:sign-in %}">{% csrf_token %}
                   <input type="text" class="input-small" name="username" placeholder="E-mail">
@@ -42,9 +58,11 @@
                   <button type="submit" class="btn btn-primary">Sign in</button>
                   <label class="checkbox">
                     <input type="checkbox" name="rememberme" checked="checked" /> Remember me
+                    <input type="hidden" name="next" value="{{ next }}" />
                   </label>
                 </form>
-              </div>
+                </div>
+              {% endif %}
             </div>
           </div>
         </div>
@@ -95,6 +113,7 @@
       </div>
 
       <script src="{{ STATIC_URL }}/js/jquery-1.8.3.min.js"></script>
+      <script src="{{ STATIC_URL }}/js/bootstrap.min.js"></script>
       {% block js %}
       {% endblock %}
 
