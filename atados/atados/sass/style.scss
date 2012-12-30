@@ -8,20 +8,29 @@
   #header {
     background:#333;
     font-size:14px;
-    height: 70px;
+    height: 60px;
     margin-bottom: 24px;
     color: #fff;
 
+    input {
+      font-size: 12px;
+    }
+
     .logo {
-      margin-top:25px;
+      margin-top:20px;
 
       a {
         color:#fff;
       }
     }
 
+    .form-search {
+      margin:15px 0 8px;
+    }
+
     .menu {
-      padding: 25px 0 0;
+      margin-top: 20px;
+      margin-left: 0;
 
       a {
         color: #9ee9ff;
@@ -39,15 +48,21 @@
           content: "|";
         }
 
-        &:first-child:before { 
-          content: "";
+        &:first-child {
+          a {
+            padding-left:0;
+          }
+
+          &:before { 
+            content: "";
+          }
         }
       }
     }
 
     .tools {
       font-weight:bold;
-      margin-top:22px;
+      margin-top:20px;
       float:right;
       color:#999;
 
@@ -61,8 +76,14 @@
     }
 
     .login {
-      float: right;
-      padding-top:12px;
+      left:auto;
+      right:0;
+      width:286px;
+      padding:10px;
+
+      form {
+        margin:0;
+      }
 
       .checkbox {
         display:block;

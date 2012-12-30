@@ -1,39 +1,71 @@
 {% load i18n %}<!DOCTYPE html>
-  <html lang="{{ LANGUAGE_CODE }}">
-    <head>
-      <meta charset="utf-8">
-      <title>{% block fulltitle %}{% block title %}{{ site.name }}{% endblock %} - {{ site.name }}{% endblock %}</title>
-      <meta name="description" content="{% block description %}{% endblock %}">
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block fulltitle %}{% block title %}{{ site.name }}{% endblock %} - {{ site.name }}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% endblock %}">
 
-      <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" />
-      <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
-      <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css" />
+    <link rel="shortcut icon" href="{{ STATIC_URL }}favicon.ico" />
 
-      {% block css %}
-      {% endblock %}
+    {% block css %}
+    {% endblock %}
 
-      {% block preload_js %}
-      {% endblock %}
+    {% block preload_js %}
+    {% endblock %}
 
-      {% block extra-head %}{% endblock %}
+    {% block extra-head %}{% endblock %}
 
-    </head>
-    <body>
+  </head>
+  <body>
 
-      <div id="main" class="atados">
+    <div id="main" class="atados">
 
-        <div id="header">
-          <div class="container">
-            <div class="row">
+      <div id="header">
+        <div class="container">
+          <div class="row">
             <div class="span2">
               <div class="logo">
                 <a href="{% url atados:home %}">{{ site.name }}</a>
               </div>
             </div>
-            {% if user.is_authenticated %}
-            <div class="span6">
+            <div class="span3">
+              <form class="form-search">
+                <div class="input-append">
+                  <input type="text" class="span2 search-query" placeholder="{% trans "Search" %}">
+                  <button type="submit" class="btn"><i class="icon-search"></i></button>
+                </div>
+              </form>
+            </div>
+            {% if not user.is_authenticated %}
+            <div class="span5">
               <ul class="menu">
-                <li><a href="{% url volunteer:sign-up %}">{% trans "Explore projects" %}</a></li>
+                <li><a href="{% url project:index %}">{% trans "Explore projects" %}</a></li>
+                <li><a href="{% url volunteer:sign-up %}">{% trans "Become a volunteer" %}</a></li>
+                <li><a href="{% url organisation:sign-up %}">{% trans "Post a project" %}</a></li>
+              </ul>
+            </div>
+            <div class="span2">
+              <div class="dropdown tools">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{% trans "Sign in" %} <span class="caret"></span></a>
+                <div class="login dropdown-menu" style="left:auto; right:0">
+                  <form class="form-inline" method="post" action="{% url atados:sign-in %}">{% csrf_token %}
+                    <input type="text" class="input-small" name="username" placeholder="E-mail">
+                    <input type="password" class="input-small" name="password" placeholder="Password">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <label class="checkbox">
+                      <input type="checkbox" name="rememberme" checked="checked" /> Remember me
+                      <input type="hidden" name="next" value="{{ next }}" />
+                    </label>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% else %}
+            <div class="span3">
+              <ul class="menu">
+                <li><a href="{% url project:index %}">{% trans "Explore projects" %}</a></li>
               </ul>
             </div>
             <div class="span4">
@@ -41,10 +73,10 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.email }} <span class="caret"></span></a>
                 <ul class="dropdown-menu" style="left:auto; right:0">
                   <li>
-                    <div style="padding:3px 15px; margin-bottom:12px">
-                      <span style="display:block; font-weight:bold">{{ user.first_name }}</span>
-                      <span style="display:block">{{ user.email }}</span>
-                    </div>
+                  <div style="padding:3px 15px; margin-bottom:12px">
+                    <span style="display:block; font-weight:bold">{{ user.first_name }}</span>
+                    <span style="display:block">{{ user.email }}</span>
+                  </div>
                   </li>
                   <li><a href="#">{% trans "New project" %}</a></li>
                   <li class="divider"></li>
@@ -52,31 +84,10 @@
                 </ul>
               </div>
             </div>
-            {% else %}
-            <div class="span6">
-              <ul class="menu">
-                <li><a href="{% url volunteer:sign-up %}">{% trans "Explore projects" %}</a></li>
-                <li><a href="{% url volunteer:sign-up %}">{% trans "Become a volunteer" %}</a></li>
-                <li><a href="{% url organisation:sign-up %}">{% trans "Post a project" %}</a></li>
-              </ul>
-            </div>
-            <div class="span4">
-              <div class="login">
-                <form class="form-inline" method="post" action="{% url atados:sign-in %}">{% csrf_token %}
-                  <input type="text" class="input-small" name="username" placeholder="E-mail">
-                  <input type="password" class="input-small" name="password" placeholder="Password">
-                  <button type="submit" class="btn btn-primary">Sign in</button>
-                  <label class="checkbox">
-                    <input type="checkbox" name="rememberme" checked="checked" /> Remember me
-                    <input type="hidden" name="next" value="{{ next }}" />
-                  </label>
-                </form>
-              </div>
-            </div>
             {% endif %}
-          </div>
-        </div>
-      </div>
+          </div><!-- /.row -->
+        </div><!-- /.container -->
+      </div><!-- /#header -->
 
       {% block out_content %}
       <div class="container">
