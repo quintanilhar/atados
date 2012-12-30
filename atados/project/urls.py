@@ -7,5 +7,6 @@ from atados.project.views import ProjectCreateView
 urlpatterns = patterns(
     '',
 
+    url(r'^$', direct_to_template, {'template_name', 'atados/project/index.html'}, name='index'),
     url(_(r'^new$'), ProjectCreateView.as_view(), name='new'),
 )

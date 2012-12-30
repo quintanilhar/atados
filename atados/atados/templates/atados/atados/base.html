@@ -31,7 +31,12 @@
               </div>
             </div>
             {% if user.is_authenticated %}
-            <div class="span10">
+            <div class="span6">
+              <ul class="menu">
+                <li><a href="{% url volunteer:sign-up %}">{% trans "Explore projects" %}</a></li>
+              </ul>
+            </div>
+            <div class="span4">
               <div class="dropdown tools">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.email }} <span class="caret"></span></a>
                 <ul class="dropdown-menu" style="left:auto; right:0">
@@ -48,13 +53,14 @@
               </div>
             </div>
             {% else %}
-            <div class="span5">
+            <div class="span6">
               <ul class="menu">
-                <li><a href="{% url volunteer:sign-up %}">{% trans "I want to volunteer" %}</a></li>
-                <li><a href="{% url organisation:sign-up %}">{% trans "I want to put a project" %}</a></li>
+                <li><a href="{% url volunteer:sign-up %}">{% trans "Explore projects" %}</a></li>
+                <li><a href="{% url volunteer:sign-up %}">{% trans "Become a volunteer" %}</a></li>
+                <li><a href="{% url organisation:sign-up %}">{% trans "Post a project" %}</a></li>
               </ul>
             </div>
-            <div class="span5">
+            <div class="span4">
               <div class="login">
                 <form class="form-inline" method="post" action="{% url atados:sign-in %}">{% csrf_token %}
                   <input type="text" class="input-small" name="username" placeholder="E-mail">
