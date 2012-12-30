@@ -187,6 +187,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "atados.atados.context_processors.site",
+    "atados.organisation.context_processors.organisation",
 )
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

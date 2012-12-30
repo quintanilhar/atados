@@ -8,20 +8,23 @@ from registration.views import register, activate
 urlpatterns = patterns(
     '',
 
-    url(_(r'^sign-up$'), register,
+    url(_(r'^volunteer/sign-up$'), register,
         {'backend': 'atados.volunteer.backends.RegistrationBackend',
          'template_name': 'atados/volunteer/sign-up.html'},
         name='sign-up'),
 
-    url(_(r'^sign-up-confirmartion/(?P<activation_key>\w+)$'), activate,
+    url(_(r'^volunteer/sign-up-confirmartion/(?P<activation_key>\w+)$'), activate,
         {'backend': 'atados.volunteer.backends.RegistrationBackend',
          'template_name': 'atados/volunteer/sign-up-activation.html'},
         name='sign-up-confirmation'),
 
-    url(_(r'^sign-up-activation-complete$'), direct_to_template, {'template': 'atados/volunteer/sign-up-activation-complete.html'},
+    url(_(r'^volunteer/sign-up-activation-complete$'), direct_to_template, {'template': 'atados/volunteer/sign-up-activation-complete.html'},
         name='sign-up-activation-complete'),
 
-    url(_(r'^sign-up-complete$'), direct_to_template, {'template': 'atados/volunteer/sign-up-complete.html'},
+    url(_(r'^volunteer/sign-up-complete$'), direct_to_template, {'template': 'atados/volunteer/sign-up-complete.html'},
         name='sign-up-complete'),
+
+    url(_(r'^volunteer/profile$'), direct_to_template, {'template': 'atados/volunteer/sign-up-complete.html'},
+        name='profile'),
 )
 

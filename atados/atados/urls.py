@@ -7,6 +7,7 @@ from atados.atados.views import home
 
 urlpatterns = patterns(
     '',
+
     url(r'^$', home, name='home'),
 
     url(_(r'^sign-in$'), 'django.contrib.auth.views.login',

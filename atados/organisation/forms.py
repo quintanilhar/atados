@@ -13,7 +13,7 @@ class RegistrationForm(DefaultRegistrationForm):
                                attrs={'class': 'required', 'tabindex': 1}),
                            label=_("Organisation name"))
 
-    organisation_address = forms.RegexField(regex=r'^[\w.-]+$',
+    slug = forms.RegexField(regex=r'^[\w-]+$',
                                 max_length=30,
                                 widget=BootstrapTextInput(
                                     prepend='http://www.atados.com.br/',
@@ -23,7 +23,7 @@ class RegistrationForm(DefaultRegistrationForm):
                                 error_messages={'invalid':
                                                 _("This value may contain "
                                                   "only letters, numbers a"
-                                                  "nd @/./- characters.")
+                                                  "nd \"-\" character.")
                                                 })
 
     first_name = forms.CharField(max_length=30,
@@ -52,7 +52,7 @@ class RegistrationForm(DefaultRegistrationForm):
         super(RegistrationForm, self).__init__(*args, **kwargs)
 
         self.fields.keyOrder = ['organisation_name',
-                                'organisation_address',
+                                'slug',
                                 'first_name',
                                 'email',
                                 'password1',

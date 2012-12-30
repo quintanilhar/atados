@@ -27,7 +27,7 @@ class RegistrationBackend(DefaultBackend):
 
         organisation = Organisation.objects.create(user=new_user)
         organisation.name = kwargs['organisation_name']
-        organisation.slug = kwargs['organisation_address']
+        organisation.slug = kwargs['slug']
         organisation.save()
 
         profile = Profile.objects.create(user=new_user)

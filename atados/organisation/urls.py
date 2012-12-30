@@ -8,20 +8,19 @@ from registration.views import register, activate
 urlpatterns = patterns(
     '',
 
-    url(_(r'^sign-up$'), register,
+    url(_(r'^organisation/sign-up$'), register,
         {'backend': 'atados.organisation.backends.RegistrationBackend',
          'template_name': 'atados/organisation/sign-up.html'},
         name='sign-up'),
 
-    url(_(r'^sign-up-confirmartion/(?P<activation_key>\w+)$'), activate,
+    url(_(r'^organisation/sign-up-confirmartion/(?P<activation_key>\w+)$'), activate,
         {'backend': 'atados.organisation.backends.RegistrationBackend',
          'template_name': 'atados/organisation/sign-up-activation.html'},
         name='sign-up-confirmation'),
 
-
-    url(_(r'^sign-up-activation-complete$'), direct_to_template, {'template': 'atados/organisation/sign-up-activation-complete.html'},
+    url(_(r'^organisation/sign-up-activation-complete$'), direct_to_template, {'template': 'atados/organisation/sign-up-activation-complete.html'},
         name='sign-up-activation-complete'),
 
-    url(_(r'^sign-up-complete$'), direct_to_template, {'template': 'atados/organisation/sign-up-complete.html'},
+    url(_(r'^organisation/sign-up-complete$'), direct_to_template, {'template': 'atados/organisation/sign-up-complete.html'},
         name='sign-up-complete'),
 )

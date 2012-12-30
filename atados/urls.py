@@ -9,9 +9,7 @@ urlpatterns = patterns(
     '',
     url(r'^admin/', include(admin.site.urls)),
     url('', include('atados.atados.urls', namespace='atados')),
-    url(_(r'organisation/'),
-        include('atados.organisation.urls', namespace='organisation')),
-    url(_(r'volunteer/'),
-        include('atados.volunteer.urls', namespace='volunteer')),
-    url(_(r'project/'), include('atados.project.urls', namespace='project')),
+    url('', include('atados.organisation.urls', namespace='organisation')),
+    url('', include('atados.volunteer.urls', namespace='volunteer')),
+    url('', include('atados.project.urls', namespace='project')),
 )

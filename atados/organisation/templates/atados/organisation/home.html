@@ -1,13 +1,20 @@
-{% extends 'atados/atados/base.html' %}
+{% extends 'atados/organisation/base.html' %}
 {% load i18n bootstrap_toolkit %}
 
 {% block content %}
 
 <div class="row">
   <div class="span6">
-    <div class="well">
-      Your projects
+    {% for organisation in organisation_list %}
+    <div class="organisation">
+      <h1>Teto</h1>
+      <a class="btn btn-primary" href="{% url project:new organisation.slug %}">{% trans "Add new project" %}</a>
+      {% for project in organisation.project_set.all %}
+      {% empty %}
+      {% trans "Your organisation does not have any project" %}
+      {% endfor %}
     </div>
+    {% endfor %}
   </div>
   <div class="span6">
     ZZZ

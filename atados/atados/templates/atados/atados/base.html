@@ -78,7 +78,12 @@
                     <span style="display:block">{{ user.email }}</span>
                   </div>
                   </li>
-                  <li><a href="#">{% trans "New project" %}</a></li>
+                  <li><a href="{% url volunteer:profile %}">{% trans "My projects" %}</a></li>
+                  <li class="divider"></li>
+                  <li><a href="{% url volunteer:profile %}">{% trans "Edit your information" %}</a></li>
+                  <li><a href="{% url volunteer:profile %}">{% trans "Change password" %}</a></li>
+                  {% if not user.is_authenticated %}
+                  {% endif %}
                   <li class="divider"></li>
                   <li><a href="{% url atados:sign-out %}">{% trans "Sign out" %}</a></li>
                 </ul>

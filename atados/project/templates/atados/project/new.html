@@ -3,13 +3,19 @@
 
 {% block content %}
 
-<form class="well" method="post" action="{% url project:new %}">{% csrf_token %}
-  <fieldset>
-    {{ form|as_bootstrap }}
-  </fieldset>
-  <div class="form-actions">
-    <button type="submit" tabindex="6" class="btn btn-primary">{% trans "Create" %}</button>
+<div class="row">
+  <div class="span6">
   </div>
-</form>
+  <div class="span6">
+    <form class="well" method="post" action="{% url project:new organisation.slug %}">{% csrf_token %}
+      <fieldset>
+        {{ form|as_bootstrap }}
+      </fieldset>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 {% endblock %}
