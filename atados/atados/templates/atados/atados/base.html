@@ -1,8 +1,8 @@
-  {% load i18n %}<!DOCTYPE html>
+{% load i18n %}<!DOCTYPE html>
   <html lang="{{ LANGUAGE_CODE }}">
     <head>
       <meta charset="utf-8">
-      <title>{% block fulltitle %}{% block title %}Atados.com.br{% endblock %} - Atados.com..br{% endblock %}</title>
+      <title>{% block fulltitle %}{% block title %}{{ site.name }}{% endblock %} - {{ site.name }}{% endblock %}</title>
       <meta name="description" content="{% block description %}{% endblock %}">
 
       <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css" />
@@ -26,18 +26,14 @@
           <div class="container">
             <div class="row">
             <div class="span2">
-              <a href="{% url atados:home %}">LOGO</a>
+              <div class="logo">
+                <a href="{% url atados:home %}">{{ site.name }}</a>
+              </div>
             </div>
-            <div class="span5">
-              <ul class="menu">
-                <li><a href="{% url organisation:sign-up %}">{% trans "I want to volunteer" %}</a></li>
-                <li><a href="{% url organisation:sign-up %}">{% trans "I want to put a project" %}</a></li>
-              </ul>
-            </div>
-            <div class="span5">
-              {% if user.is_authenticated %}
-              <div class="dropdown" style="font-weight:bold; margin-top:22px; float:right; color:#999">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.username }} <span class="caret"></span></a>
+            {% if user.is_authenticated %}
+            <div class="span10">
+              <div class="dropdown tools">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ user.email }} <span class="caret"></span></a>
                 <ul class="dropdown-menu" style="left:auto; right:0">
                   <li>
                     <div style="padding:3px 15px; margin-bottom:12px">
@@ -47,10 +43,18 @@
                   </li>
                   <li><a href="#">{% trans "New project" %}</a></li>
                   <li class="divider"></li>
-                  <li><a href="#">{% trans "Sign out" %}</a></li>
+                  <li><a href="{% url atados:sign-out %}">{% trans "Sign out" %}</a></li>
                 </ul>
               </div>
-              {% else %}
+            </div>
+            {% else %}
+            <div class="span5">
+              <ul class="menu">
+                <li><a href="{% url volunteer:sign-up %}">{% trans "I want to volunteer" %}</a></li>
+                <li><a href="{% url organisation:sign-up %}">{% trans "I want to put a project" %}</a></li>
+              </ul>
+            </div>
+            <div class="span5">
               <div class="login">
                 <form class="form-inline" method="post" action="{% url atados:sign-in %}">{% csrf_token %}
                   <input type="text" class="input-small" name="username" placeholder="E-mail">
@@ -61,9 +65,9 @@
                     <input type="hidden" name="next" value="{{ next }}" />
                   </label>
                 </form>
-                </div>
-              {% endif %}
+              </div>
             </div>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -79,11 +83,14 @@
         <div id="footer" class="well">
           <div class="row-fluid">
             <div class="span3">
+              <div class="logo">
+                {{ site.name }}
+              </div>
             </div>
             <div class="span3">
-              <h4>Atados.com.br</h4>
+              <h4>{{ site.name }}</h4>
               <ul>
-                <li><a href="#">{% trans "About Atados.com.br" %}</a></li>
+                <li><a href="#">{% trans "About us" %}</a></li>
                 <li><a href="#">{% trans "Careers" %}</a></li>
                 <li><a href="#">{% trans "Contact" %}</a></li>
                 <li><a href="#">{% trans "News" %}</a></li>
@@ -92,14 +99,14 @@
             <div class="span3">
               <h4>{% trans "Services" %}</h4>
               <ul>
-                <li><a href="">{% trans "For dealerships" %}</a></li>
-                <li><a href="">{% trans "For developers" %}</a></li>
+                <li><a href="">{% trans "For schools" %}</a></li>
+                <li><a href="">{% trans "For companies" %}</a></li>
               </ul>
             </div>
             <div class="span3">
               <h4>{% trans "Documentation" %}</h4>
               <ul>
-                <li><a href="#">{% trans "Atados.com.br help" %}</a></li>
+                <li><a href="#">{% trans "Help" %}</a></li>
               </ul>
             </div>
           </div>
@@ -110,7 +117,9 @@
             <li><a href="">{% trans "Terms of service" %}</a></li>
             <li><a href="">{% trans "Privacy" %}</a></li>
             <li><a href="">{% trans "Security" %}</a></li>
-            <li id="copyright">{% trans "&copy; 2013 Atados.com.br" %}</li>
+            {% with site.name as site_name %}
+            <li id="copyright">{% blocktrans %}&copy; 2013 {{ site_name }}{% endblocktrans %}</li>
+            {% endwith %}
           </ul>
         </div><!-- /#footer-legal -->
 

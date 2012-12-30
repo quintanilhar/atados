@@ -1,0 +1,3 @@
+{% load i18n %}
+http://{{ site }}{% url volunteer:sign-up-confirmation activation_key %}
+

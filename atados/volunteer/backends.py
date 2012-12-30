@@ -2,9 +2,8 @@ from django.conf import settings
 from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from atados.organisation.forms import RegistrationForm
+from atados.volunteer.forms import RegistrationForm
 from atados.atados.models import Profile
-from atados.organisation.models import Organisation
 from registration.backends.default import DefaultBackend
 from registration.models import RegistrationProfile
 from registration import signals
@@ -25,26 +24,18 @@ class RegistrationBackend(DefaultBackend):
                                      user=new_user,
                                      request=request)
 
-        organisation = Organisation.objects.create(user=new_user)
-        organisation.name = kwargs['organisation_name']
-        organisation.slug = kwargs['organisation_address']
-        organisation.save()
-
-        profile = Profile.objects.create(user=new_user)
-        profile.save()
-
-        new_user.first_name = kwargs['first_name']
-        new_user.save();
+        new_profile = Profile.objects.create(user=new_user)
+        new_profile.save()
 
         self.send_activation_email(new_user)
 
         return new_user
 
     def post_registration_redirect(self, request, user):
-        return ('organisation:sign-up-complete', (), {})
+        return ('volunteer:sign-up-complete', (), {})
 
     def post_activation_redirect(self, request, user):
-        return ('organisation:sign-up-activation-complete', (), {})
+        return ('volunteer:sign-up-activation-complete', (), {})
 
     def get_form_class(self, request):
         return RegistrationForm
@@ -62,7 +53,7 @@ class RegistrationBackend(DefaultBackend):
 
             subject = _("Welcome to {{ site }}")
 
-            message = render_to_string('atados/organisation/activation_email.txt',
+            message = render_to_string('atados/volunteer/activation_email.txt',
                                        ctx_dict)
             
             user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)

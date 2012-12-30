@@ -27,7 +27,7 @@ class SlugifyNameMixin(ModelFormMixin):
         model.slug = slugify(model.name)
         return super(SlugifyNameMixin, self).form_valid(form)
 
-class CreateProjectView(CreateView, OrganisationMixin, SlugifyNameMixin):
+class ProjectCreateView(CreateView, OrganisationMixin, SlugifyNameMixin):
     model=Project
     form_class=ProjectCreateForm
     template_name='atados/project/new.html'

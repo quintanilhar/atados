@@ -12,6 +12,14 @@
     margin-bottom: 24px;
     color: #fff;
 
+    .logo {
+      margin-top:25px;
+
+      a {
+        color:#fff;
+      }
+    }
+
     .menu {
       padding: 25px 0 0;
 
@@ -37,6 +45,21 @@
       }
     }
 
+    .tools {
+      font-weight:bold;
+      margin-top:22px;
+      float:right;
+      color:#999;
+
+      & > a {
+        color:#fff;
+      }
+
+      .caret {
+        border-top-color: #fff;
+      }
+    }
+
     .login {
       float: right;
       padding-top:12px;
@@ -58,6 +81,12 @@
     padding:25px 10px 25px 40px;
     margin-top:15px;
 
+    .logo {
+      margin-top:55px;
+      text-align:center;
+      color:#999;
+    }
+
     ul {
       margin-left:0;
 
@@ -68,7 +97,7 @@
   }
 
   #footer-legal {
-    padding: 18px 0;
+    margin-bottom: 18px;
 
     #copyright {
       margin:0 0 0 8px;
@@ -121,10 +150,11 @@
 
   #home {
     h1 {
-      font-weight:normal;
+      font-weight:bold;
       line-height: 58px;
       font-size: 60px;
       margin-top: 30px;
+      color:#179bc2;
     }
 
     h2 {
@@ -160,11 +190,35 @@
     }
   }
 
-  #organisation-sign-up {
+  #volunteer-sign-up, #organisation-sign-up {
+
+    h1 {
+      font-weight:normal;
+      font-size:28px;
+      margin:0 0 18px;
+    }
+
+    .reasons {
+      h2 {
+        font-weight:normal;
+        font-size:20px;
+        line-height:24px;
+        margin:0 0 16px;
+      }
+
+      p {
+        color:#999;
+      }
+
+      .row {
+        margin-bottom:26px;
+      }
+    }
+
     .add-on {
       font-size:14px;
       color:#999;
-      width: 178px;
+      width:178px;
     }
 
     .error .add-on {
@@ -177,6 +231,17 @@
 
     .input-prepend input {
       width: 215px;
+    }
+
+    .form-terms {
+      font-size: 11px;
+      margin-bottom:10px;
+      margin-top:10px;
+    }
+
+    .form-actions {
+      margin-top: 6px;
+      padding-top: 12px;
     }
 
   }

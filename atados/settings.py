@@ -32,6 +32,11 @@ TIME_ZONE = 'America/Chicago'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
 
+LANGUAGES = (
+    ('en-us', 'English'),
+    ('pt-br', 'Português'),
+)
+
 SITE_ID = 1
 
 # If you set this to False, Django will make some optimizations so as not
@@ -165,8 +170,25 @@ AUTHENTICATION_BACKENDS = (
     'atados.atados.backends.AuthenticationBackend',
 )
 
+LOGIN_REDIRECT_URL = "/"
+
 HTTPS_SUPPORT = True
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
 LOGIN_URL = '/sign-in'
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    "atados.atados.context_processors.site",
+)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DEFAULT_FROM_EMAIL = 'no-reply@atados.com.br'

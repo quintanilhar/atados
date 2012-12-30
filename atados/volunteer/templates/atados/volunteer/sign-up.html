@@ -2,10 +2,10 @@
 {% load i18n bootstrap_toolkit %}
 
 {% block content %}
-<div id="organisation-sign-up">
+<div id="volunteer-sign-up">
   <div class="row">
     <div class="span12">
-      <h1>{% trans "Put your project" %}</h1>
+      <h1>{% trans "Become a volunteer" %}</h1>
     </div>
   </div>
 
@@ -34,10 +34,9 @@
           </p>
         </div>
       </div>
-
     </div>
     <div class="span6">
-      <form class="well" method="post" action="{% url organisation:sign-up %}">{% csrf_token %}
+      <form class="well" method="post" action="{% url volunteer:sign-up %}">{% csrf_token %}
         <fieldset>
           {{ form|as_bootstrap }}
         </fieldset>
@@ -49,7 +48,7 @@
           {% endblocktrans %}
         </div>
         <div class="form-actions">
-          <button type="submit" tabindex="7" class="btn btn-primary">{% trans "Sign up" %}</button>
+          <button type="submit" tabindex="6" class="btn btn-primary">{% trans "Sign up" %}</button>
         </div>
       </form>
     </div>
