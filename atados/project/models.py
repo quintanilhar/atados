@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from atados.organisation.models import Organisation
+from atados.volunteer.models import Volunteer
 
 
 class Project(models.Model):
@@ -19,5 +20,19 @@ class Project(models.Model):
     def get_absolute_url(self):
         return ('project:view', (self.organisation.slug, self.slug))
 
+    @models.permalink
+    def get_edit_url(self):
+        return ('project:edit', (self.organisation.slug, self.slug))
+
     class Meta:
         unique_together = (("slug", "organisation"),)
+
+class Step(models.Model):
+    project = models.ForeignKey(Project)
+    name = models.CharField(_('name'), max_length=50)
+    slug = models.SlugField(max_length=50)
+
+class Request(models.Model):
+    step = models.ForeignKey(Step)
+    volunteer = models.ForeignKey(Volunteer)
+    create_time = models.DateTimeField(True)

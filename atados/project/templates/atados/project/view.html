@@ -1,9 +1,26 @@
 {% extends 'atados/atados/base.html' %}
 {% load i18n bootstrap_toolkit %}
 
+{% block breadcrumb %}
+<li><a href="#">{{ organisation.name }}</a></li>
+<li class="active">{{ project.name }}</li>
+{% endblock %}
+
 {% block content %}
 
-{{ project }}
+<div class="row">
+  <div class="span12">
+    <h1>{{ project.name }}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="span6">
+    X
+  </div>
+  <div class="span6">
+    X
+  </div>
+</div>
 
 {% endblock %}
 

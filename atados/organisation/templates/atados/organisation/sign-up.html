@@ -1,6 +1,10 @@
 {% extends 'atados/organisation/base.html' %}
 {% load i18n bootstrap_toolkit %}
 
+{% block breadcrumb %}
+<li class="active">{% trans "Post a project" %}</li>
+{% endblock %}
+
 {% block content %}
 <div id="organisation-sign-up">
   <div class="row">

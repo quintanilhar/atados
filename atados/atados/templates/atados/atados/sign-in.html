@@ -1,6 +1,10 @@
 {% extends 'atados/atados/base.html' %}
 {% load i18n bootstrap_toolkit %}
 
+{% block breadcrumb %}
+<li class="active">{% trans "Sign in" %}</li>
+{% endblock %}
+
 {% block content %}
 <div id="sign-in">
   <form class="well" method="post" action="{% url atados:sign-in %}">{% csrf_token %}

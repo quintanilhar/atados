@@ -5,6 +5,20 @@
     font-weight: bold;
   }
 
+  h1 {
+    font-weight:normal;
+    font-size:30px;
+    margin:0 0 26px;
+  }
+
+  h2 {
+    font-weight:normal;
+    font-size:20px;
+    line-height:24px;
+    margin:0 0 16px;
+  }
+
+
   #header {
     background:#333;
     font-size:14px;
@@ -89,6 +103,27 @@
 
         input {
           margin-top:6px;
+        }
+      }
+    }
+  }
+
+  .breadcrumb {
+    background:none;
+    padding:0;
+
+    li {
+      &:after {
+        color:#ccc;
+        padding:0 5px 0 10px;
+        content:"/";
+      }
+      &.active {
+        padding-left:2px;
+
+        &:after {
+          content:"";
+          padding:0;
         }
       }
     }
@@ -209,20 +244,7 @@
 
   #volunteer-sign-up, #organisation-sign-up {
 
-    h1 {
-      font-weight:normal;
-      font-size:30px;
-      margin:0 0 26px;
-    }
-
     .reasons {
-      h2 {
-        font-weight:normal;
-        font-size:20px;
-        line-height:24px;
-        margin:0 0 16px;
-      }
-
       p {
         color:#999;
       }
@@ -282,4 +304,40 @@
       }
     } 
   }
+
+  #organisation-home {
+    h1 {
+      margin:10px 0 0;
+    }
+
+    & > .row {
+      margin-bottom:20px;
+    }
+  }
+
+  #project-organisation {
+    .nav  {
+      .label {
+        float:right;
+        margin-top:2px;
+      }
+      li.active {
+        a {
+          background:#08c;
+          color:#fff;
+        }
+      }
+    }
+  }
+
+  #project-edit {
+    .absolute-url {
+      padding:4px 0;
+      display:block
+    }
+    .delete-project {
+      float:right;
+    }
+  }
 }
+

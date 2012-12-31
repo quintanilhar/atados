@@ -1,6 +1,10 @@
 {% extends 'atados/atados/base.html' %}
 {% load i18n bootstrap_toolkit %}
 
+{% block breadcrumb %}
+<li class="active">{% trans "Explore projects" %}</li>
+{% endblock %}
+
 {% block content %}
 <div class="row">
   <div class="span12">

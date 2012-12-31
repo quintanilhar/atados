@@ -1,25 +1,78 @@
 {% extends 'atados/organisation/base.html' %}
 {% load i18n bootstrap_toolkit %}
 
-{% block content %}
-
-<div class="row">
-  <div class="span6">
-    {% for organisation in organisation_list %}
-    <div class="organisation">
-      <h1>Teto</h1>
-      <a class="btn btn-primary" href="{% url project:new organisation.slug %}">{% trans "Add new project" %}</a>
-      {% for project in organisation.project_set.all %}
-      {% empty %}
-      {% trans "Your organisation does not have any project" %}
-      {% endfor %}
-    </div>
-    {% endfor %}
-  </div>
-  <div class="span6">
-    ZZZ
-  </div>
-</div>
-
+{% block out_breadcrumb %}
 {% endblock %}
 
+{% block js %}
+<script>$('.volunteer-link').tooltip({'placement': 'right'});</script>
+{% endblock %}
+
+{% block content %}
+
+<div id="organisation-home">
+  {% for organisation in organisation_list %}
+  <div class="row">
+    <div class="span1">
+      <img src="{{ STATIC_URL }}/img/dummy.jpg" width="60" height="60" class="img-rounded" />
+    </div>
+    <div class="span11">
+      <h1>{{ organisation.name }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span8">
+      <h2>{% trans "Requests" %}</h2>
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td>
+              <a href="#" class="volunteer-link" rel="tooltip" title="{% trans "Rog&eacute;rio has 9 good actions" %}">Rog&eacute;rio</a> do <a href="#">Suspendisse luctus ligula eget dolor sagittis vehicula</a>. <span style="color:#999; font-size:12px">3 days ago</a>
+            </td>
+            <td style="width:105px; text-align:right">
+              <a class="btn btn-primary btn-mini" href="#">{% trans "Confirm" %}</a>
+              <a class="btn btn-mini" href="#">{% trans "Delete" %}</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#">Rog&eacute;rio</a> do <a href="#">Nam rutrum erat sit amet ipsum dignissim</a>. <span style="color:#999; font-size:12px">3 days ago</a>
+            </td>
+            <td style="text-align:right">
+              <a class="btn btn-primary btn-mini" href="#">{% trans "Confirm" %}</a>
+              <a class="btn btn-mini" href="#">{% trans "Delete" %}</a>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#">Rog&eacute;rio</a> do <a href="#">Etiam eget magna eu tortor vestibulum semper</a>. <span style="color:#999; font-size:12px">3 days ago</a>
+            </td>
+            <td style="text-align:right">
+              <a class="btn btn-primary btn-mini" href="#">{% trans "Confirm" %}</a>
+              <a class="btn btn-mini" href="#">{% trans "Delete" %}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="span4">
+      <div class="row">
+        <div class="span2">
+          <h2>{% trans "Projects" %}</h2>
+        </div>
+        <div style="text-align:right" class="span2">
+          <a class="btn btn-primary btn-small" href="{% url project:new organisation.slug %}">{% trans "New project" %}</a>
+        </div>
+      </div>
+      <ul class="nav nav-tabs nav-stacked">
+      {% for project in organisation.project_set.all %}
+        <li><a href="{{ project.get_edit_url }}">{{ project }}</a></li>
+      {% empty %}
+        <li>{% trans "Your organisation does not have any project" %}</li>
+      {% endfor %}
+      <ul>
+    </div><!-- /.span4 -->
+  </div><!-- /.row -->
+  {% endfor %}
+</div>
+{% endblock %}

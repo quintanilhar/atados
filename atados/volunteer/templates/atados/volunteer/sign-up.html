@@ -1,6 +1,10 @@
 {% extends 'atados/volunteer/base.html' %}
 {% load i18n bootstrap_toolkit %}
 
+{% block breadcrumb %}
+<li class="active">{% trans "Become a volunteer" %}</li>
+{% endblock %}
+
 {% block content %}
 <div id="volunteer-sign-up">
   <div class="row">

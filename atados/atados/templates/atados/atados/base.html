@@ -94,6 +94,21 @@
         </div><!-- /.container -->
       </div><!-- /#header -->
 
+
+      {% block out_breadcrumb %}
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <ul class="breadcrumb">
+              <li><a href="{% url atados:home %}">{% trans "Home" %}</a></li>
+              {% block breadcrumb %}
+              {% endblock %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endblock %}
+
       {% block out_content %}
       <div class="container">
         {% block content %}
