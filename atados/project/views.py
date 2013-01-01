@@ -33,13 +33,6 @@ class ProjectMixin(OrganisationMixin):
 class ProjectCreateView(OrganisationMixin, CreateView):
     model=Project
 
-    def get_form_kwargs(self):
-        kwargs = super(ProjectCreateView, self).get_form_kwargs()
-        kwargs.update({
-            'organisation': self.get_organisation(),
-        })
-        return kwargs
-
     def form_valid(self, form):
         model = form.save(commit=False)
         if self.request.user.is_authenticated():
@@ -72,17 +65,21 @@ class ProjectEditView(ProjectMixin, UpdateView):
         return reverse('project:edit',
                        args=[self.object.organisation.slug, self.object.slug])
 
-    def get_form_kwargs(self):
-        kwargs = super(ProjectEditView, self).get_form_kwargs()
-        kwargs.update({
-            'organisation': self.get_organisation(),
-        })
-        return kwargs
+    def clean_name(self):
+        name = self.cleaned_data.get('name')
+        slug = slugify(name)
+        if slug and self.instance.slug != slug and Project.objects.filter(
+                slug=slug, organisation=self.organisation).count():
+            raise forms.ValidationError(_('This name (or a very similar) is already is use.'))
+        return name
 
     def form_valid(self, form):
         model = form.save(commit=False)
         if self.request.user.is_authenticated():
             model.organisation = Organisation.objects.get(user=self.request.user)
+            model.slug = slugify(model.name)
+        else:
+            forms.ValidationError("Authentication required")
         return super(ProjectEditView, self).form_valid(form)
 
 class ProjectCollaboratorsView(ProjectMixin, TemplateView):

@@ -14,6 +14,16 @@
     margin-bottom:50px;
   }
 
+  .span7 > form {
+    input[type=text], input[type=password], textarea {
+      width: 480px;
+    }
+
+    textarea {
+      height:60px;
+    }
+  }
+
   .add-on {
     font-size:14px;
     color:#999;

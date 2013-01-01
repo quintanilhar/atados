@@ -7,63 +7,63 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="span12">
-    <h1>{% trans "New donation project" %}</h1>
+<div id="project-new-donation">
+  <div class="row">
+    <div class="span12">
+      <h1>{% trans "New donation project" %}</h1>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="span7">
-    <form class="well" method="post" action="{% url project:new-donation organisation.slug %}">{% csrf_token %}
-      <fieldset>
-        <legend>{% trans "About donantion" %}</legend>
-        <div class="control-group required">
-          <div class="control-label">
-            <label>What</label>
+  <div class="row">
+    <div class="span7">
+      <form class="well" method="post" action="{% url project:new-donation organisation.slug %}">{% csrf_token %}
+        <fieldset>
+          <legend>{% trans "About donantion" %}</legend>
+          <div class="control-group required">
+            <div class="control-label">
+              <label>What</label>
+            </div>
+            <div class="controls">
+              <textarea placeholder="Add information about what you want to"></textarea>
+            </div>
           </div>
-          <div class="controls">
-            <textarea style="width:480px; height:60px;" placeholder="Add information about what you want to"></textarea>
+        </fieldset>
+        <fieldset>
+          <legend>{% trans "Collecting" %}</legend>
+          <div class="control-group required">
+            <label class="checkbox"><input type="checkbox" />Collection made by the organisation</label>
           </div>
+          <div class="control-group required">
+            <label class="checkbox"><input type="checkbox" checked="checked" />Delivery made by donor</label>
+          </div>
+          <div class="control-group required">
+            <div class="control-label">
+              <label>{% trans "Delivery address" %}</label>
+            </div>
+            <div class="controls">
+              <input type="text" placeholder="{% trans "Example: 123 Main Street" %}" />
+            </div>
+          </div>
+          <div class="control-group required">
+            <div class="control-label">
+              <label>{% trans "Delivery time" %}</label>
+            </div>
+            <div class="controls">
+              <input type="text" placeholder="{% trans "Example: Between monday and friday - 9:00 a.m. / 7:00 p.m." %}" />
+            </div>
+          </div>
+        </fieldset>
+        <fieldset id="project-new">
+          <legend>{% trans "About project" %}</legend>
+          {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
+          <a class="btn" href="{% url project:new organisation.slug %}">{% trans "Back" %}</a>
         </div>
-      </fieldset>
-      <fieldset>
-        <legend>{% trans "Collecting" %}</legend>
-        <div class="control-group required">
-          <label class="checkbox"><input type="checkbox" />Collection made by the organisation</label>
-        </div>
-        <div class="control-group required">
-          <label class="checkbox"><input type="checkbox" checked="checked" />Delivery made by donor</label>
-        </div>
-        <div class="control-group required">
-          <div class="control-label">
-            <label>{% trans "Delivery address" %}</label>
-          </div>
-          <div class="controls">
-            <input style="width:480px;" type="text" placeholder="{% trans "Example: 123 Main Street" %}" />
-          </div>
-        </div>
-        <div class="control-group required">
-          <div class="control-label">
-            <label>{% trans "Delivery time" %}</label>
-          </div>
-          <div class="controls">
-            <input style="width:480px;" type="text" placeholder="{% trans "Example: Between monday and friday - 9:00 a.m. / 7:00 p.m." %}" />
-          </div>
-        </div>
-      </fieldset>
-      <fieldset>
-        <legend>{% trans "About project" %}</legend>
-        {{ form.name|as_bootstrap }}
-        {{ form.slug|as_bootstrap }}
-        {{ form.details|as_bootstrap }}
-      </fieldset>
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
-        <a class="btn" href="{% url project:new organisation.slug %}">{% trans "Back" %}</a>
-      </div>
-    </form>
-  </div>
-  <div class="span5">
+      </form>
+    </div>
+    <div class="span5">
+    </div>
   </div>
 </div>
 {% endblock %}
