@@ -1,11 +1,18 @@
 {% extends 'atados/atados/base.html' %}
 {% load i18n bootstrap_toolkit %}
 
-{% block content %}
+{% block breadcrumb %}
+<li><a href="{% url project:new organisation.slug %}">{% trans "Project kind choose" %}</a></li>
+<li class="active">{% trans "Add new donation project" %}</li>
+{% endblock %}
 
+{% block content %}
 <div class="row">
-  <div class="span6">
+  <div class="span12">
+    <h1>{% trans "New donation project" %}</h1>
   </div>
+</div>
+<div class="row">
   <div class="span6">
     <form class="well" method="post" action="{% url project:new organisation.slug %}">{% csrf_token %}
       <fieldset>
@@ -17,5 +24,4 @@
     </form>
   </div>
 </div>
-
 {% endblock %}

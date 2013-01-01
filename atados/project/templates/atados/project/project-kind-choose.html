@@ -1,0 +1,38 @@
+{% extends 'atados/atados/base.html' %}
+{% load i18n bootstrap_toolkit %}
+
+{% block breadcrumb %}
+<li class="active">{% trans "Project kind choose" %}</li>
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="span12">
+    <h1>{% trans "What kind of project you want to create?" %}</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="span4">
+    <div class="well" style="height:260px; position:relative">
+      <h2>{% trans "Donation" %}</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pharetra condimentum dui et auctor. Fusce rhoncus porta nisl, eu feugiat quam consequat non. Vestibulum pretium pharetra ultrices. Cum sociis natoque.</p>
+      <a class="btn btn-primary btn-large" style="position:absolute; bottom:20px; width:220px" href="{% url project:new-donation organisation.slug %}">{% trans "This one" %}</a>
+    </div>
+  </div>
+  <div class="span4">
+    <div class="well" style="height:260px; position:relative">
+      <h2>{% trans "Just once" %}</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie, nulla aliquet ultricies placerat, enim tellus sagittis sem, luctus porttitor felis erat quis diam. Donec at leo dui. Quisque sit.</p>
+      <a class="btn btn-primary btn-large" style="position:absolute; bottom:20px; width:220px" href="{% url project:new-just-once organisation.slug %}">{% trans "This one" %}</a>
+    </div>
+  </div>
+  <div class="span4">
+    <div class="well" style="height:260px; position:relative">
+      <h2>{% trans "Periodic" %}</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis diam arcu, consequat nec dapibus non, adipiscing at metus. Duis ut turpis ut mauris elementum lobortis. Etiam purus erat, hendrerit non.</p>
+      <a class="btn btn-primary btn-large" style="position:absolute; bottom:20px; width:220px" href="{% url project:new-periodic organisation.slug %}">{% trans "This one" %}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

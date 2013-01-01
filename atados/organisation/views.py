@@ -25,5 +25,12 @@ class OrganisationMixin(object):
     def get_organisation(self):
         return self.organisation
 
-class OrganisationView(TemplateView):
+class OrganisationBaseView(OrganisationMixin, TemplateView):
+    pass
+
+class OrganisationHomeView(TemplateView):
     template_name = 'atados/organisation/home.html'
+
+class OrganisationView(OrganisationBaseView):
+    only_owner = False
+    template_name = 'atados/organisation/view.html'

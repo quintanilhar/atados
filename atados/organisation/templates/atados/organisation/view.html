@@ -1,0 +1,16 @@
+{% extends 'atados/organisation/base.html' %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<li class="active">{{ organisation.name }}</li>
+{% endblock %}
+
+{% block content %}
+<div id="organisation-view">
+  <div class="row">
+    <div class="span12">
+      <h1>{{ organisation.name }}</h1>
+    </div>
+  </div>
+</div>
+{% endblock %}

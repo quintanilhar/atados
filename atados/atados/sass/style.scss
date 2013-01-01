@@ -5,6 +5,12 @@
     font-weight: bold;
   }
 
+  .add-on {
+    font-size:14px;
+    color:#999;
+    padding:4px 8px;
+  }
+
   h1 {
     font-weight:normal;
     font-size:30px;
@@ -119,8 +125,6 @@
         content:"/";
       }
       &.active {
-        padding-left:2px;
-
         &:after {
           content:"";
           padding:0;
@@ -201,18 +205,18 @@
   }
 
   #home {
+
     h1 {
       font-weight:bold;
       line-height: 58px;
       font-size: 60px;
-      margin-top: 30px;
+      margin:10px 0 14px;
       color:#179bc2;
     }
 
     h2 {
       font-weight:normal;
       line-height: 28px;
-      margin-top:20px;
       font-size: 21px;
       color:#999;
     }
@@ -222,6 +226,10 @@
         width: 325px;
       }
       
+      #id_username {
+        width:140px;
+      }
+
       .form-terms {
         font-size: 11px;
         margin-bottom:10px;
@@ -255,8 +263,7 @@
     }
 
     .add-on {
-      font-size:14px;
-      color:#999;
+      padding:4px 5px;
       width:178px;
     }
 

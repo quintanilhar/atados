@@ -48,11 +48,11 @@
           {% url atados:home as terms_url %}
           {% url atados:home as privacy_url %}
           {% blocktrans %}
-          By clicking Sign Up, you are indicating that you have read and agree to the <a href="{{ terms_url }}">Terms of Service</a> and <a href="{{ privacy_url }}">Privacy Policy</a>.
+          By clicking Sign Up, you are indicating that you have read and agree to the <a tabindex="-1" href="{{ terms_url }}">Terms of Service</a> and <a tabindex="-1" href="{{ privacy_url }}">Privacy Policy</a>.
           {% endblocktrans %}
         </div>
         <div class="form-actions">
-          <button type="submit" tabindex="6" class="btn btn-primary">{% trans "Sign up" %}</button>
+          <button type="submit" class="btn btn-primary">{% trans "Sign up" %}</button>
         </div>
       </form>
     </div>

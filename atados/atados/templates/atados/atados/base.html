@@ -51,11 +51,11 @@
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">{% trans "Sign in" %} <span class="caret"></span></a>
                 <div class="login dropdown-menu" style="left:auto; right:0">
                   <form class="form-inline" method="post" action="{% url atados:sign-in %}">{% csrf_token %}
-                    <input type="text" class="input-small" name="username" placeholder="E-mail">
-                    <input type="password" class="input-small" name="password" placeholder="Password">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
+                    <input type="text" class="input-small" name="username" placeholder="{% trans "E-mail" %}">
+                    <input type="password" class="input-small" name="password" placeholder="{% trans "Password" %}">
+                    <button type="submit" class="btn btn-primary">{% trans "Sign in" %}</button>
                     <label class="checkbox">
-                      <input type="checkbox" name="rememberme" checked="checked" /> Remember me
+                      <input type="checkbox" name="rememberme" checked="checked" /> {% trans "Remember me" %}
                       <input type="hidden" name="next" value="{{ next }}" />
                     </label>
                   </form>

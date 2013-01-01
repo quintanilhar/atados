@@ -3,7 +3,7 @@ from django.contrib.sites.models import Site
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
 from atados.volunteer.forms import RegistrationForm
-from atados.atados.models import Profile
+from atados.volunteer.models import Volunteer
 from registration.backends.default import DefaultBackend
 from registration.models import RegistrationProfile
 from registration import signals
@@ -14,7 +14,7 @@ class RegistrationBackend(DefaultBackend):
     site = Site.objects.get_current()
 
     def register(self, request, **kwargs):
-        username, email, password = kwargs['email'], kwargs['email'], kwargs['password1']
+        username, email, password = kwargs['username'], kwargs['email'], kwargs['password1']
         new_user = RegistrationProfile.objects.create_inactive_user(username,
                                                                     email,
                                                                     password,
@@ -24,8 +24,11 @@ class RegistrationBackend(DefaultBackend):
                                      user=new_user,
                                      request=request)
 
-        new_profile = Profile.objects.create(user=new_user)
-        new_profile.save()
+        volunteer = Volunteer.objects.create(user=new_user)
+        volunteer.save()
+
+        new_user.first_name = kwargs['first_name']
+        new_user.save();
 
         self.send_activation_email(new_user)
 
