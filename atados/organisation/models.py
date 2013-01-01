@@ -8,5 +8,9 @@ class Organisation(models.Model):
     name = models.CharField(_('name'), max_length=50)
     slug = models.SlugField(max_length=50)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('slug', (self.slug,))
+
     def __unicode__(self):
         return self.name

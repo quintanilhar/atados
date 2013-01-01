@@ -25,7 +25,7 @@ class ProjectCreateForm(forms.ModelForm):
     details = forms.CharField(max_length=30,
                               widget=forms.Textarea(
                               attrs={'class': 'required',
-                                     'placeholder': _('Add more info')}),
+                                     'placeholder': _('Add more info about this proejct')}),
                               label=_("Details"))
 
     def __init__(self, organisation=None, *args, **kwargs):
@@ -45,3 +45,12 @@ class ProjectCreateForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = ('organisation')
+
+class ProjectDonationCreateForm(ProjectCreateForm):
+    pass
+
+class ProjectJustOnceCreateForm(ProjectCreateForm):
+    pass
+
+class ProjectPeriodicCreateForm(ProjectCreateForm):
+    pass

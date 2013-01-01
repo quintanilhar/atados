@@ -55,4 +55,5 @@ class VolunteerHomeView(TemplateView):
     template_name = 'atados/volunteer/home.html'
 
 class VolunteerView(VolunteerBaseView):
+    only_owner = False
     template_name = 'atados/volunteer/view.html'

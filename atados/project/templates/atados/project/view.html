@@ -2,7 +2,7 @@
 {% load i18n bootstrap_toolkit %}
 
 {% block breadcrumb %}
-<li><a href="#">{{ organisation.name }}</a></li>
+<li><a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a></li>
 <li class="active">{{ project.name }}</li>
 {% endblock %}
 

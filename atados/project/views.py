@@ -8,7 +8,9 @@ from django.core.urlresolvers import reverse
 from atados.project.models import Project
 from atados.organisation.models import Organisation
 from atados.organisation.views import OrganisationMixin
-from atados.project.forms import ProjectCreateForm
+from atados.project.forms import (ProjectDonationCreateForm,
+                                  ProjectJustOnceCreateForm,
+                                  ProjectPeriodicCreateForm)
 
 
 class ProjectMixin(OrganisationMixin):
@@ -30,8 +32,6 @@ class ProjectMixin(OrganisationMixin):
 
 class ProjectCreateView(OrganisationMixin, CreateView):
     model=Project
-    form_class=ProjectCreateForm
-    template_name='atados/project/new.html'
 
     def get_form_kwargs(self):
         kwargs = super(ProjectCreateView, self).get_form_kwargs()
@@ -46,15 +46,26 @@ class ProjectCreateView(OrganisationMixin, CreateView):
             model.organisation = Organisation.objects.get(user=self.request.user)
         return super(ProjectCreateView, self).form_valid(form)
 
+class ProjectDonationCreateView(ProjectCreateView):
+    form_class=ProjectDonationCreateForm
+    template_name='atados/project/new-donation.html'
+
+class ProjectJustOnceCreateView(ProjectCreateView):
+    form_class=ProjectJustOnceCreateForm
+    template_name='atados/project/new-just-once.html'
+
+class ProjectPeriodicCreateView(ProjectCreateView):
+    form_class=ProjectPeriodicCreateForm
+    template_name='atados/project/new-periodic.html'
+
 class ProjectView(ProjectMixin, DetailView):
     model=Project
     only_owner=False
-    form_class=ProjectCreateForm
     template_name='atados/project/view.html'
 
 class ProjectEditView(ProjectMixin, UpdateView):
     model=Project
-    form_class=ProjectCreateForm
+    form_class=ProjectDonationCreateForm
     template_name='atados/project/edit.html'
 
     def get_success_url(self):
