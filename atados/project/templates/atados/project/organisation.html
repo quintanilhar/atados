@@ -15,7 +15,7 @@
         <li class="{% active request href %}"><a href="{{ href }}">{% trans "Collaborators" %}</a></li>
         
         {% url project:requests organisation.slug project.slug as href %}
-        <li class="{% active request href %}"><a href="{{ href }}">{% trans "Requests" %} <span class="label label-success">3</span></a></li>
+        <li class="{% active request href %}"><a href="{{ href }}">{% trans "Requests" %} <span class="badge badge-success">3</span></a></li>
         
         {% url project:steps organisation.slug project.slug as href %}
         <li class="{% active request href %}"><a href="{{ href }}">{% trans "Steps" %}</a></li>

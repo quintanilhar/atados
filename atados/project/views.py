@@ -5,6 +5,7 @@ from django.utils.decorators import method_decorator
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
 from django.core.urlresolvers import reverse
+from django.template.defaultfilters import slugify
 from atados.project.models import Project
 from atados.organisation.models import Organisation
 from atados.organisation.views import OrganisationMixin
@@ -33,10 +34,20 @@ class ProjectMixin(OrganisationMixin):
 class ProjectCreateView(OrganisationMixin, CreateView):
     model=Project
 
+    def get_form_kwargs(self):
+        kwargs = super(ProjectCreateView, self).get_form_kwargs()
+        kwargs.update({
+            'organisation': self.get_organisation(),
+        })
+        return kwargs
+
     def form_valid(self, form):
         model = form.save(commit=False)
         if self.request.user.is_authenticated():
             model.organisation = Organisation.objects.get(user=self.request.user)
+            model.slug = slugify(model.name)
+        else:
+            forms.ValidationError("Authentication required")
         return super(ProjectCreateView, self).form_valid(form)
 
 class ProjectDonationCreateView(ProjectCreateView):
@@ -45,9 +56,9 @@ class ProjectDonationCreateView(ProjectCreateView):
 
 class ProjectJustOnceCreateView(ProjectCreateView):
     form_class=ProjectJustOnceCreateForm
-    template_name='atados/project/new-just-once.html'
+    template_name='atados/project/new-work.html'
 
-class ProjectPeriodicCreateView(ProjectCreateView):
+class ProjectPeriodicCreateView(ProjectJustOnceCreateView):
     form_class=ProjectPeriodicCreateForm
     template_name='atados/project/new-periodic.html'
 
@@ -61,17 +72,16 @@ class ProjectEditView(ProjectMixin, UpdateView):
     form_class=ProjectDonationCreateForm
     template_name='atados/project/edit.html'
 
+    def get_form_kwargs(self):
+        kwargs = super(ProjectCreateView, self).get_form_kwargs()
+        kwargs.update({
+            'organisation': self.get_organisation(),
+        })
+        return kwargs
+
     def get_success_url(self):
         return reverse('project:edit',
                        args=[self.object.organisation.slug, self.object.slug])
-
-    def clean_name(self):
-        name = self.cleaned_data.get('name')
-        slug = slugify(name)
-        if slug and self.instance.slug != slug and Project.objects.filter(
-                slug=slug, organisation=self.organisation).count():
-            raise forms.ValidationError(_('This name (or a very similar) is already is use.'))
-        return name
 
     def form_valid(self, form):
         model = form.save(commit=False)

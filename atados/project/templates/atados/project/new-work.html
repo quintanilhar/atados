@@ -3,30 +3,35 @@
 
 {% block breadcrumb %}
 <li><a href="{% url project:new organisation.slug %}">{% trans "Project kind choose" %}</a></li>
-<li class="active">{% trans "Add new donation project" %}</li>
+<li class="active">{% trans "Add new just once project" %}</li>
 {% endblock %}
 
 {% block content %}
-<div id="project-new-donation">
+<div id="project-new-just-once">
   <div class="row">
     <div class="span12">
-      <h1>{% trans "New donation project" %}</h1>
+      <h1>{% trans "New just once project" %}</h1>
     </div>
   </div>
   <div class="row">
     <div class="span7">
-      <form class="well" method="post" action="{% url project:new-donation organisation.slug %}">{% csrf_token %}
+      <form class="well" method="post" action="{% block action %}{% url project:new-just-once organisation.slug %}{% endblock %}">{% csrf_token %}
         <fieldset>
-          <legend>{% trans "About donantion" %}</legend>
+          <legend>{% trans "About job" %}</legend>
           {{ form.name|as_bootstrap }}
+          <div class="row-fluid">
+            <div class="span6">
+              {{ form.classification|as_bootstrap }}
+            </div>
+            <div class="span6">
+              {% block monthly_hours %}{% endblock %}
+            </div>
+          </div>
           {{ form.details|as_bootstrap }}
         </fieldset>
         <fieldset>
-          <legend>{% trans "Collecting" %}</legend>
-          {{ form.collection_by_organisation|as_bootstrap }}
-        </fieldset>
-        <fieldset>
-          <legend>{% trans "Delivery" %}</legend>
+          <legend>{% trans "Location" %}</legend>
+          {{ form.can_be_done_remotely|as_bootstrap }}
           {{ form.addressline|as_bootstrap }}
           <div class="row-fluid">
             <div class="span6">

@@ -1,4 +1,4 @@
-{% extends 'atados/atados/base.html' %}
+{% extends 'atados/project/new-work.html' %}
 {% load i18n bootstrap_toolkit %}
 
 {% block breadcrumb %}
@@ -6,25 +6,8 @@
 <li class="active">{% trans "Add new periodic project" %}</li>
 {% endblock %}
 
-{% block content %}
-<div class="row">
-  <div class="span12">
-    <h1>{% trans "New periodic project" %}</h1>
-  </div>
-</div>
-<div class="row">
-  <div class="span7">
-    <form class="well" method="post" action="{% url project:new-periodic organisation.slug %}">{% csrf_token %}
-      <fieldset>
-        {{ form|as_bootstrap }}
-      </fieldset>
-      <div class="form-actions">
-        <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
-        <a class="btn" href="{% url project:new organisation.slug %}">{% trans "Back" %}</a>
-      </div>
-    </form>
-  </div>
-  <div class="span5">
-  </div>
-</div>
+{% block action %}{% url project:new-periodic organisation.slug %}{% endblock %}
+
+{% block monthly_hours %}
+{{ form.monthly_hours|as_bootstrap }}
 {% endblock %}
