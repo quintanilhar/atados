@@ -54,6 +54,6 @@ class VolunteerBaseView(VolunteerMixin, TemplateView):
 class VolunteerHomeView(TemplateView):
     template_name = 'atados/volunteer/home.html'
 
-class VolunteerView(VolunteerBaseView):
+class VolunteerDetailsView(VolunteerBaseView):
     only_owner = False
-    template_name = 'atados/volunteer/view.html'
+    template_name = 'atados/volunteer/details.html'

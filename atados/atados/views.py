@@ -1,9 +1,9 @@
 from django.http import Http404
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.models import User
-from atados.volunteer.views import VolunteerView, VolunteerHomeView
+from atados.volunteer.views import VolunteerDetailsView, VolunteerHomeView
 from atados.volunteer.forms import RegistrationForm
-from atados.organisation.views import OrganisationView, OrganisationHomeView
+from atados.organisation.views import OrganisationDetailsView, OrganisationHomeView
 from atados.organisation.models import Organisation
 
 
@@ -26,13 +26,13 @@ def slug(request, *args, **kwargs):
         kwargs.update({
             'username': kwargs.pop('slug')
         })
-        return VolunteerView.as_view()(request, *args, **kwargs)
+        return VolunteerDetailsView.as_view()(request, *args, **kwargs)
     except User.DoesNotExist:
         try:
             Organisation.objects.get(slug=kwargs['slug'])
             kwargs.update({
                 'organisation': kwargs.pop('slug')
             })
-            return OrganisationView.as_view()(request, *args, **kwargs)
+            return OrganisationDetailsView.as_view()(request, *args, **kwargs)
         except Organisation.DoesNotExist:
             raise Http404

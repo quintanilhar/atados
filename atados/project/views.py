@@ -83,7 +83,7 @@ class ProjectDetailsView(ProjectMixin, DetailView):
                 return 'atados/project/details-periodic.html'
             else:
                 return 'atados/project/details-work.html'
-        return 'atados/project/details.html'
+        raise Http404
 
 
 class ProjectEditView(ProjectMixin, UpdateView):

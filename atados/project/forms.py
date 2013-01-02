@@ -37,16 +37,19 @@ class ProjectDonationCreateForm(ProjectCreateForm):
 
 class ProjectJustOnceCreateForm(ProjectCreateForm):
 
+    def __init__(self, *args, **kwargs):
+        super(ProjectJustOnceCreateForm, self).__init__(*args, **kwargs)
+        self.fields['classification'].empty_label = ""
+        
     class Meta:
         model = ProjectWork
         exclude = ('organisation', 'slug', 'monthly_hours')
 
-class ProjectPeriodicCreateForm(ProjectCreateForm):
+class ProjectPeriodicCreateForm(ProjectJustOnceCreateForm):
 
     def __init__(self, *args, **kwargs):
         super(ProjectPeriodicCreateForm, self).__init__(*args, **kwargs)
         self.fields['monthly_hours'].required = True
-        self.fields['classification'].empty_label = ""
 
     class Meta:
         model = ProjectWork

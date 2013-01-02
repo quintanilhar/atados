@@ -31,6 +31,6 @@ class OrganisationBaseView(OrganisationMixin, TemplateView):
 class OrganisationHomeView(TemplateView):
     template_name = 'atados/organisation/home.html'
 
-class OrganisationView(OrganisationBaseView):
+class OrganisationDetailsView(OrganisationBaseView):
     only_owner = False
-    template_name = 'atados/organisation/view.html'
+    template_name = 'atados/organisation/details.html'
