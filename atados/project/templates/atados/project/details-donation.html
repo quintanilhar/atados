@@ -2,23 +2,29 @@
 {% load i18n %}
 
 {% block project %}
-<div class="well">
-  <h2>{% trans "Donation" %}</h2>
-  {{ project.details }}
-</div>
+<div class="row">
+  <div class="span7">
+    <div class="">
+      <div class="well">
+        <h2>{% trans "Donation" %}</h2>
+        {{ project.details }}
+      </div>
 
-<div class="well">
-  <h2>{% trans "Contact" %}</h2>
-  {{ project.responsible }} <br />
-  {{ project.phone }} <br />
-  {{ project.email }} <br />
-</div>
+      <div class="well">
+        <h2>{% trans "Contact" %}</h2>
+        {{ project.responsible }} <br />
+        {{ project.phone }} <br />
+        {{ project.email }} <br />
+      </div>
 
-<div class="well">
-  <h2>{% trans "Delivery and Collection" %}</h2>
-  {{ project.collection_by_organisation }} <br />
-  {{ project.addressline }} <br />
-  {{ project.neighborhood }} <br />
-  {{ project.city }} <br />
+      <div class="well">
+        <h2>{% trans "Delivery and Collection" %}</h2>
+        {{ project.collection_by_organisation }} <br />
+        {{ project.addressline }} <br />
+        {{ project.neighborhood }} <br />
+        {{ project.city }} <br />
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

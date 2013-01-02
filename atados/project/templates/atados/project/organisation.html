@@ -5,14 +5,14 @@
 
 <div id="project-organisation">
   <div class="row">
-    <div class="span3">
+    <div class="span2">
       <ul class="nav nav-tabs nav-stacked">
 
         {% url project:edit organisation.slug project.slug as href %}
         <li class="{% active request href %}"><a href="{{ href }}">{% trans "Options" %}</a></li>
         
         {% url project:collaborators organisation.slug project.slug as href %}
-        <li class="{% active request href %}"><a href="{{ href }}">{% trans "Collaborators" %}</a></li>
+        <li class="{% active request href %}"><a href="{{ href }}">{% trans "Volunteers" %}</a></li>
         
         {% url project:requests organisation.slug project.slug as href %}
         <li class="{% active request href %}"><a href="{{ href }}">{% trans "Requests" %} <span class="badge badge-success">3</span></a></li>

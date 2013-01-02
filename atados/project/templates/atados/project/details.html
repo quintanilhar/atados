@@ -9,16 +9,40 @@
 {% block content %}
 
 <div class="row">
-  <div class="span12">
+  <div class="span9">
     <h1>{{ project.name }}</h1>
+  </div>
+  <div class="span3">
+    <a class="btn btn-primary btn-large" style="width:182px" href="#">{% trans "Apply" %}</a>
   </div>
 </div>
 <div class="row">
-  <div class="span8">
+  <div class="span2">
+    <img class="img-rounded" style="width:100%; margin-bottom:20px;" src="{{ STATIC_URL }}/img/dummy.jpg" />
+    <ul>
+      <li>
+        <img class="img-rounded" style="width:32px; float:left;" src="{{ STATIC_URL }}/img/dummy.jpg" />
+        Rogerio Yokomizo
+      </li>
+      <li>
+        <img class="img-rounded" style="width:32px; float:left;" src="{{ STATIC_URL }}/img/dummy.jpg" />
+        Rogerio Yokomizo
+      </li>
+      <li>
+        <img class="img-rounded" style="width:32px; float:left;" src="{{ STATIC_URL }}/img/dummy.jpg" />
+        Rogerio Yokomizo
+      </li>
+      <li>
+        <img class="img-rounded" style="width:32px; float:left;" src="{{ STATIC_URL }}/img/dummy.jpg" />
+        Rogerio Yokomizo
+      </li>
+    </ul>
+  </div>
+  <div class="span7">
     {% block project %}
     {% endblock %}
   </div>
-  <div class="span4">
+  <div class="span3">
     <div class="well">
       <h2>{% trans "Organisation" %}</h2>
       {{ organisation.name }}
