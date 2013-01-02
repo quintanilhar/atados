@@ -1,0 +1,12 @@
+{% extends 'atados/project/details.html' %}
+{% load i18n %}
+
+{% block project %}
+<div class="well">
+  {{ project.details }} <br />
+
+  {{ project.responsible }} <br />
+  {{ project.phone }} <br />
+  {{ project.email }} <br />
+</div>
+{% endblock %}

@@ -14,11 +14,20 @@
   </div>
 </div>
 <div class="row">
-  <div class="span6">
-    X
+  <div class="span8">
+    <div class="well">
+      {{ project.details }} <br />
+
+      {{ project.responsible }} <br />
+      {{ project.phone }} <br />
+      {{ project.email }} <br />
+    </div>
   </div>
-  <div class="span6">
-    X
+  <div class="span4">
+    <div class="well">
+      <h2>{% trans "Organisation" %}</h2>
+      {{ organisation.name }}
+    </div>
   </div>
 </div>
 

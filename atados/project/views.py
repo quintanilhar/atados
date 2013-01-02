@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.views.generic import TemplateView
 from django.views.generic.edit import CreateView, ModelFormMixin, UpdateView
 from django.views.generic.detail import DetailView
@@ -6,7 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
-from atados.project.models import Project
+from atados.project.models import Project, ProjectDonation, ProjectWork
 from atados.organisation.models import Organisation
 from atados.organisation.views import OrganisationMixin
 from atados.project.forms import (ProjectDonationCreateForm,
@@ -24,9 +25,18 @@ class ProjectMixin(OrganisationMixin):
 
     def get_project(self):
         if self.project is None:
-            self.project = get_object_or_404(Project,
-                                             organisation=self.get_organisation(),
-                                             slug=self.kwargs.get('project'))
+            try:
+                self.project = ProjectWork.objects.get(
+                    organisation=self.get_organisation(),
+                    slug=self.kwargs.get('project'))
+            except ProjectWork.DoesNotExist:
+                try:
+                    self.project = ProjectDonation.objects.get(
+                        organisation=self.get_organisation(),
+                        slug=self.kwargs.get('project'))
+                except ProjectDonation.DoesNotExist:
+                    raise Http404
+
         return self.project
 
     get_object = get_project
@@ -62,10 +72,19 @@ class ProjectPeriodicCreateView(ProjectJustOnceCreateView):
     form_class=ProjectPeriodicCreateForm
     template_name='atados/project/new-periodic.html'
 
-class ProjectView(ProjectMixin, DetailView):
-    model=Project
+class ProjectDetailsView(ProjectMixin, DetailView):
     only_owner=False
-    template_name='atados/project/view.html'
+
+    def get_template_names(self):
+        if isinstance(self.object, ProjectDonation):
+            return 'atados/project/details-donation.html'
+        if isinstance(self.object, ProjectWork):
+            if self.object.monthly_hours > 0:
+                return 'atados/project/details-periodic.html'
+            else:
+                return 'atados/project/details-work.html'
+        return 'atados/project/details.html'
+
 
 class ProjectEditView(ProjectMixin, UpdateView):
     model=Project
@@ -73,7 +92,7 @@ class ProjectEditView(ProjectMixin, UpdateView):
     template_name='atados/project/edit.html'
 
     def get_form_kwargs(self):
-        kwargs = super(ProjectCreateView, self).get_form_kwargs()
+        kwargs = super(ProjectEditView, self).get_form_kwargs()
         kwargs.update({
             'organisation': self.get_organisation(),
         })

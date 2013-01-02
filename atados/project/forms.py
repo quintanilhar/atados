@@ -21,8 +21,6 @@ class ProjectCreateForm(forms.ModelForm):
         self.fields['details'].widget.attrs.update({
             'placeholder' : _('Add more info about this project')})
 
-        self.fields['classification'].empty_label = ""
-
     def clean_name(self):
         name = self.cleaned_data.get('name')
         slug = slugify(name)
@@ -48,6 +46,7 @@ class ProjectPeriodicCreateForm(ProjectCreateForm):
     def __init__(self, *args, **kwargs):
         super(ProjectPeriodicCreateForm, self).__init__(*args, **kwargs)
         self.fields['monthly_hours'].required = True
+        self.fields['classification'].empty_label = ""
 
     class Meta:
         model = ProjectWork

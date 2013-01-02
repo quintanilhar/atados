@@ -30,7 +30,7 @@ class Project(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('project:view', (self.organisation.slug, self.slug))
+        return ('project:details', (self.organisation.slug, self.slug))
 
     @models.permalink
     def get_edit_url(self):
@@ -42,8 +42,6 @@ class Project(models.Model):
 class ProjectDonation(Project):
     collection_by_organisation = models.BooleanField(
             _('Collection made by the organisation'))
-    delivery_by_donor = models.BooleanField(
-            _('Delivery made by donor'))
 
 class ProjectWork(Project):
     classification = models.ForeignKey(Classification)
