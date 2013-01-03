@@ -1,5 +1,5 @@
 from django.http import Http404
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.views.generic.edit import CreateView, ModelFormMixin, UpdateView
 from django.views.generic.detail import DetailView
 from django.utils.decorators import method_decorator
@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
+from atados.atados.views import JSONResponseMixin
 from atados.project.models import Project, ProjectDonation, ProjectWork
 from atados.organisation.models import Organisation
 from atados.organisation.views import OrganisationMixin
@@ -119,3 +120,11 @@ class ProjectRequestsView(ProjectMixin, TemplateView):
 
 class ProjectStepsView(ProjectMixin, TemplateView):
     template_name = 'atados/project/steps.html'
+
+class ProjectApplyView(ProjectMixin, JSONResponseMixin, View):
+    only_owner = False
+
+    def post(self, request, *args, **kwargs):
+        context = {'success': True,
+                   'msg': ''}
+        return self.render_to_response(context)

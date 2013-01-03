@@ -56,7 +56,7 @@
                     <button type="submit" class="btn btn-primary">{% trans "Sign in" %}</button>
                     <label class="checkbox">
                       <input type="checkbox" name="rememberme" checked="checked" /> {% trans "Remember me" %}
-                      <input type="hidden" name="next" value="{{ next }}" />
+                      <input type="hidden" name="next" value="{{ request.path }}" />
                     </label>
                   </form>
                 </div>
@@ -119,8 +119,8 @@
       <div class="container">
         <div id="footer" class="well">
           <div class="row-fluid">
-            <div class="span3">
-              <div class="logo">
+            <div class="span3 logo">
+              <div>
                 {{ site.name }}
               </div>
             </div>
@@ -165,6 +165,37 @@
 
       <script src="{{ STATIC_URL }}/js/jquery-1.8.3.min.js"></script>
       <script src="{{ STATIC_URL }}/js/bootstrap.min.js"></script>
+      <script>
+        function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+              var cookie = jQuery.trim(cookies[i]);
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+              }
+            }
+          }
+          return cookieValue;
+        }
+        var csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+          // these HTTP methods do not require CSRF protection
+          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        $.ajaxSetup({
+          crossDomain: false, // obviates need for sameOrigin test
+          beforeSend: function(xhr, settings) {
+            if (!csrfSafeMethod(settings.type)) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+          }
+        });
+      </script>
       {% block js %}
       {% endblock %}
 

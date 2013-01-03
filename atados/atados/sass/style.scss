@@ -27,6 +27,10 @@
     }
   }
 
+  .well-light {
+    background:#fcfcfc;
+  }
+
   .span7 > form {
     input[type=text], input[type=password], textarea {
       width: 480px;
@@ -181,9 +185,13 @@
     margin-top:15px;
 
     .logo {
-      margin-top:55px;
-      text-align:center;
-      color:#999;
+      width:180px;
+
+      div {
+        margin-top:55px;
+        text-align:center;
+        color:#999;
+      }
     }
 
     ul {

@@ -2,11 +2,26 @@
 {% load i18n %}
 
 {% block project %}
-<div class="well">
-  {{ project.details }} <br />
-
-  {{ project.responsible }} <br />
-  {{ project.phone }} <br />
-  {{ project.email }} <br />
+<div class="row">
+  <div class="span6">
+    <div class="">
+      <div class="well well-light">
+        <h2>{% trans "About work" %}</h2>
+        {{ project.details }} <br />
+        {{ project.classification }} <br />
+        {% block monthly_hours %}{% endblock %}
+        <h2 style="margin-top:22px">{% trans "Contact" %}</h2>
+        {{ project.responsible }} <br />
+        {{ project.phone }} <br />
+        {{ project.email }} <br />
+        <h2 style="margin-top:22px">{% trans "Location" %}</h2>
+        {{ project.can_be_done_remotely }} <br />
+        {{ project.addressline }} <br />
+        {{ project.neighborhood }} <br />
+        {{ project.city }} <br />
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
+

@@ -1,3 +1,5 @@
+from django import http
+from django.utils import simplejson as json
 from django.http import Http404
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.models import User
@@ -36,3 +38,14 @@ def slug(request, *args, **kwargs):
             return OrganisationDetailsView.as_view()(request, *args, **kwargs)
         except Organisation.DoesNotExist:
             raise Http404
+
+class JSONResponseMixin(object):
+
+    def render_to_response(self, context):
+        return self.get_json_response(self.convert_context_to_json(context))
+
+    def get_json_response(self, content, **httpresponse_kwargs):
+        return http.HttpResponse(content, content_type='application/json', **httpresponse_kwargs)
+
+    def convert_context_to_json(self, context):
+        return json.dumps(context)

@@ -8,7 +8,8 @@ from atados.project.views import (ProjectDonationCreateView,
                                   ProjectPeriodicCreateView,
                                   ProjectDetailsView, ProjectEditView,
                                   ProjectCollaboratorsView,
-                                  ProjectRequestsView, ProjectStepsView)
+                                  ProjectRequestsView, ProjectStepsView,
+                                  ProjectApplyView)
 
 urlpatterns = patterns(
     '',
@@ -23,4 +24,5 @@ urlpatterns = patterns(
     url(_(r'^(?P<organisation>[-\w]+)/(?P<project>[-\w]+)/collaborators$'), ProjectCollaboratorsView.as_view(), name='collaborators'),
     url(_(r'^(?P<organisation>[-\w]+)/(?P<project>[-\w]+)/requests$'), ProjectRequestsView.as_view(), name='requests'),
     url(_(r'^(?P<organisation>[-\w]+)/(?P<project>[-\w]+)/steps$'), ProjectStepsView.as_view(), name='steps'),
+    url(_(r'^(?P<organisation>[-\w]+)/(?P<project>[-\w]+)/apply$'), ProjectApplyView.as_view(), name='apply'),
 )
