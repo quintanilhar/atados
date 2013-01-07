@@ -49,3 +49,7 @@ class ProjectWork(Project):
                                         blank=True, null=True)
     can_be_done_remotely = models.BooleanField(
             _('This work can be done remotely.'))
+
+class Apply(models.Model):
+    volunteer = models.ForeignKey(Volunteer)
+    project = models.ForeignKey(Project)

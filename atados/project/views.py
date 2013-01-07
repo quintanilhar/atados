@@ -7,8 +7,10 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext_lazy as _, ugettext as __
 from atados.atados.views import JSONResponseMixin
-from atados.project.models import Project, ProjectDonation, ProjectWork
+from atados.volunteer.models import Volunteer
+from atados.project.models import Project, ProjectDonation, ProjectWork, Apply
 from atados.organisation.models import Organisation
 from atados.organisation.views import OrganisationMixin
 from atados.project.forms import (ProjectDonationCreateForm,
@@ -76,6 +78,17 @@ class ProjectPeriodicCreateView(ProjectJustOnceCreateView):
 class ProjectDetailsView(ProjectMixin, DetailView):
     only_owner=False
 
+    def get_context_data(self, **kwargs):
+        context = super(ProjectDetailsView, self).get_context_data(**kwargs)
+        volunteer = None
+        
+        try:
+            context.update({'apply': Apply.objects.get(project=self.get_project())})
+        except Apply.DoesNotExist:
+            pass
+
+        return context
+
     def get_template_names(self):
         if isinstance(self.object, ProjectDonation):
             return 'atados/project/details-donation.html'
@@ -125,6 +138,15 @@ class ProjectApplyView(ProjectMixin, JSONResponseMixin, View):
     only_owner = False
 
     def post(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            context = {'success': False,
+                       'errors': __('Login required')}
+            return self.render_to_response(context)
+
+        Apply(project=self.get_project(), volunteer=Volunteer.objects.get(user=request.user)).save()
+
         context = {'success': True,
                    'msg': ''}
         return self.render_to_response(context)
+
+    get = post
