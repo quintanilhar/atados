@@ -78,14 +78,26 @@ class ProjectPeriodicCreateView(ProjectJustOnceCreateView):
 class ProjectDetailsView(ProjectMixin, DetailView):
     only_owner=False
 
+    def get_volunteer(self):
+        if self.request.user.is_authenticated():
+            try:
+                return Volunteer.objects.get(user=self.request.user)
+            except Volunteer.DoesNotExist:
+                pass
+        return None
+
     def get_context_data(self, **kwargs):
         context = super(ProjectDetailsView, self).get_context_data(**kwargs)
-        volunteer = None
         
-        try:
-            context.update({'apply': Apply.objects.get(project=self.get_project())})
-        except Apply.DoesNotExist:
-            pass
+        volunteer = self.get_volunteer()
+
+        if volunteer is not None:
+            try:
+                context.update({'apply': Apply.objects.get(
+                    project=self.get_project(),
+                    volunteer=volunteer)})
+            except Apply.DoesNotExist:
+                pass
 
         return context
 

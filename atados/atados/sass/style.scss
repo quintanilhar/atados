@@ -1,4 +1,14 @@
 .atados {
+  background:#fff url('../img/bg.png') no-repeat center 60px;
+  min-width:1000px;
+
+  & > div {
+    padding:0 30px;
+    min-width:940px;
+    margin:0 auto;
+    display:block;
+  }
+
   font-family: Helvetica, sans-serif, Arial;
 
   label {
@@ -73,6 +83,10 @@
 
   #header {
     //top:0; position:fixed; width:100%; z-index:9999; & + * { margin-top:84px }; //Fixed top bar
+    position:relative;
+    top:0;
+    left:0;
+    right:0;
     background:#333;
     font-size:14px;
     height: 60px;
@@ -80,10 +94,16 @@
     color: #fff;
 
     .logo {
-      margin-top:20px;
+      margin-top:12px;
 
       a {
+        background:#333 url('../img/atados.png') no-repeat;
+        width:115px;
+        height:37px;
         color:#fff;
+        display:block;
+        overflow:hidden;
+        text-indent:-9999px;
       }
     }
 

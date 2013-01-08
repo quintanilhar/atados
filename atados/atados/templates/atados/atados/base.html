@@ -19,9 +19,7 @@
 
   </head>
   <body>
-
     <div id="main" class="atados">
-
       <div id="header">
         <div class="container">
           <div class="row">
@@ -94,111 +92,112 @@
         </div><!-- /.container -->
       </div><!-- /#header -->
 
-
-      {% block out_breadcrumb %}
-      <div class="container">
-        <div class="row">
-          <div class="span12">
-            <ul class="breadcrumb">
-              <li><a href="{% url atados:home %}">{% trans "Home" %}</a></li>
-              {% block breadcrumb %}
-              {% endblock %}
-            </ul>
+      <div>
+        {% block out_breadcrumb %}
+        <div class="container">
+          <div class="row">
+            <div class="span12">
+              <ul class="breadcrumb">
+                <li><a href="{% url atados:home %}">{% trans "Home" %}</a></li>
+                {% block breadcrumb %}
+                {% endblock %}
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      {% endblock %}
-
-      {% block out_content %}
-      <div class="container">
-        {% block content %}
         {% endblock %}
-      </div>
-      {% endblock %}
 
-      <div class="container">
-        <div id="footer" class="well">
-          <div class="row-fluid">
-            <div class="span3 logo">
-              <div>
-                {{ site.name }}
+        {% block out_content %}
+        <div class="container">
+          {% block content %}
+          {% endblock %}
+        </div>
+        {% endblock %}
+
+        <div class="container">
+          <div id="footer" class="well">
+            <div class="row-fluid">
+              <div class="span3 logo">
+                <div>
+                  {{ site.name }}
+                </div>
+              </div>
+              <div class="span3">
+                <h4>{{ site.name }}</h4>
+                <ul>
+                  <li><a href="#">{% trans "About us" %}</a></li>
+                  <li><a href="#">{% trans "Careers" %}</a></li>
+                  <li><a href="#">{% trans "Contact" %}</a></li>
+                  <li><a href="#">{% trans "News" %}</a></li>
+                </ul>
+              </div>
+              <div class="span3">
+                <h4>{% trans "Services" %}</h4>
+                <ul>
+                  <li><a href="">{% trans "For schools" %}</a></li>
+                  <li><a href="">{% trans "For companies" %}</a></li>
+                </ul>
+              </div>
+              <div class="span3">
+                <h4>{% trans "Documentation" %}</h4>
+                <ul>
+                  <li><a href="#">{% trans "FAQ" %}</a></li>
+                  <li><a href="#">{% trans "Help" %}</a></li>
+                </ul>
               </div>
             </div>
-            <div class="span3">
-              <h4>{{ site.name }}</h4>
-              <ul>
-                <li><a href="#">{% trans "About us" %}</a></li>
-                <li><a href="#">{% trans "Careers" %}</a></li>
-                <li><a href="#">{% trans "Contact" %}</a></li>
-                <li><a href="#">{% trans "News" %}</a></li>
-              </ul>
-            </div>
-            <div class="span3">
-              <h4>{% trans "Services" %}</h4>
-              <ul>
-                <li><a href="">{% trans "For schools" %}</a></li>
-                <li><a href="">{% trans "For companies" %}</a></li>
-              </ul>
-            </div>
-            <div class="span3">
-              <h4>{% trans "Documentation" %}</h4>
-              <ul>
-                <li><a href="#">{% trans "FAQ" %}</a></li>
-                <li><a href="#">{% trans "Help" %}</a></li>
-              </ul>
-            </div>
           </div>
+
+          <div id="footer-legal" class="row">
+            <ul>
+              <li><a href="">{% trans "Terms of service" %}</a></li>
+              <li><a href="">{% trans "Privacy" %}</a></li>
+              <li><a href="">{% trans "Security" %}</a></li>
+              {% with site.name as site_name %}
+              <li id="copyright">{% blocktrans %}&copy; 2013 {{ site_name }}{% endblocktrans %}</li>
+              {% endwith %}
+            </ul>
+          </div><!-- /#footer-legal -->
+
         </div>
 
-        <div id="footer-legal" class="row">
-          <ul>
-            <li><a href="">{% trans "Terms of service" %}</a></li>
-            <li><a href="">{% trans "Privacy" %}</a></li>
-            <li><a href="">{% trans "Security" %}</a></li>
-            {% with site.name as site_name %}
-            <li id="copyright">{% blocktrans %}&copy; 2013 {{ site_name }}{% endblocktrans %}</li>
-            {% endwith %}
-          </ul>
-        </div><!-- /#footer-legal -->
-
-      </div>
-
-      <script src="{{ STATIC_URL }}/js/jquery-1.8.3.min.js"></script>
-      <script src="{{ STATIC_URL }}/js/bootstrap.min.js"></script>
-      <script>
-        function getCookie(name) {
-          var cookieValue = null;
-          if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-              var cookie = jQuery.trim(cookies[i]);
-              // Does this cookie string begin with the name we want?
-              if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        <script src="{{ STATIC_URL }}/js/jquery-1.8.3.min.js"></script>
+        <script src="{{ STATIC_URL }}/js/bootstrap.min.js"></script>
+        <script>
+          function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+              var cookies = document.cookie.split(';');
+              for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+                }
               }
             }
+            return cookieValue;
           }
-          return cookieValue;
-        }
-        var csrftoken = getCookie('csrftoken');
+          var csrftoken = getCookie('csrftoken');
 
-        function csrfSafeMethod(method) {
-          // these HTTP methods do not require CSRF protection
-          return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-        $.ajaxSetup({
-          crossDomain: false, // obviates need for sameOrigin test
-          beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type)) {
-              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+          }
+          $.ajaxSetup({
+            crossDomain: false, // obviates need for sameOrigin test
+            beforeSend: function(xhr, settings) {
+              if (!csrfSafeMethod(settings.type)) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+              }
             }
-          }
-        });
-      </script>
-      {% block js %}
-      {% endblock %}
+          });
+        </script>
+        {% block js %}
+        {% endblock %}
 
+      </div>
     </div><!-- /#main -->
   </body>
 </html>
