@@ -10,11 +10,44 @@
   <div class="row">
     <div class="span12">
       <h1>{{ organisation.name }}</h1>
-      <ul>
-        {% for project in organisation.project_set.all %}
-        <li><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></li>
-        {% endfor %}
-      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span3">
+      <img class="img-rounded" style="width:100%; margin-bottom:20px;" src="{{ STATIC_URL }}/img/dummy.jpg" />
+      <div class="row">
+        <div class="span3">
+          <h2 style="margin-top:12px">{% trans "Volunteers" %}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span3">
+          <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
+          <div style=""><a href="#">Rogerio da Silva Yokomizo</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span3">
+          <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
+          <div style=""><a href="#">Rogerio Yokomizo</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="well well-light">
+        <h2>{% trans "Projects" %}</h2>
+        <ul>
+          {% for project in organisation.project_set.all %}
+          <li><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="well">
+        <h2>{% trans "Organisation" %}</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a lorem a odio pharetra eleifend.</p>
+      </div>
     </div>
   </div>
 </div>
