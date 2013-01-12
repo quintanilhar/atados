@@ -82,8 +82,8 @@
   }
 
   #header {
-    //top:0; position:fixed; width:100%; z-index:9999; & + * { margin-top:84px }; //Fixed top bar
-    position:relative;
+    z-index:9999;
+    position:fixed;
     top:0;
     left:0;
     right:0;
@@ -92,6 +92,10 @@
     height: 60px;
     margin-bottom: 24px;
     color: #fff;
+
+    & + div {
+      padding-top:84px;
+    }
 
     .logo {
       margin-top:12px;
