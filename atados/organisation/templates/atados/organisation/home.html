@@ -72,7 +72,7 @@
       </div>
       <ul class="nav nav-tabs nav-stacked">
       {% for project in organisation.project_set.all %}
-        <li><a href="{{ project.get_edit_url }}">{{ project }}</a></li>
+        <li><a href="{{ project.get_edit_url }}">{{ project.name }}</a></li>
       {% empty %}
         <li>{% trans "Your organisation does not have any project" %}</li>
       {% endfor %}
