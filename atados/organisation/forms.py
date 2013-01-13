@@ -93,3 +93,8 @@ class RegistrationForm(DefaultRegistrationForm):
                 username=username).count():
             raise forms.ValidationError(_('This e-mail is already is use.'))
         return email
+
+class OrganisationPictureForm(forms.ModelForm):
+    class Meta:
+        model = Organisation
+        fields = ('image',)

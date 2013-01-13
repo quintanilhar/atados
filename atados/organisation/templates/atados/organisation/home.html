@@ -1,5 +1,5 @@
 {% extends 'atados/organisation/base.html' %}
-{% load i18n bootstrap_toolkit %}
+{% load i18n bootstrap_toolkit thumbnail %}
 
 {% block out_breadcrumb %}
 {% endblock %}
@@ -14,10 +14,16 @@
   {% for organisation in organisation_list %}
   <div class="row">
     <div class="span1">
-      <img src="{{ STATIC_URL }}/img/dummy.jpg" width="60" height="60" class="img-rounded" />
+      <a href="{% url slug organisation.slug %}">
+        {% thumbnail organisation.image "60x60" crop="center" as im %}
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-rounded" />
+        {% empty %}
+        <div class="img-rounded icon organisation small"></div>
+        {% endthumbnail %}
+      </a>
     </div>
     <div class="span11">
-      <h1>{{ organisation.name }}</h1>
+      <h1><a href="{% url slug organisation.slug %}">{{ organisation.name }}</a></h1>
     </div>
   </div>
   <div class="row">

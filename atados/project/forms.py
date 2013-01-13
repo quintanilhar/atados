@@ -54,3 +54,8 @@ class ProjectPeriodicCreateForm(ProjectJustOnceCreateForm):
     class Meta:
         model = ProjectWork
         exclude = ('organisation', 'slug')
+
+class ProjectPictureForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ('image',)

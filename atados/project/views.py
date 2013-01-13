@@ -15,7 +15,8 @@ from atados.organisation.models import Organisation
 from atados.organisation.views import OrganisationMixin
 from atados.project.forms import (ProjectDonationCreateForm,
                                   ProjectJustOnceCreateForm,
-                                  ProjectPeriodicCreateForm)
+                                  ProjectPeriodicCreateForm,
+                                  ProjectPictureForm)
 
 
 class ProjectMixin(OrganisationMixin):
@@ -41,8 +42,6 @@ class ProjectMixin(OrganisationMixin):
                     raise Http404
 
         return self.project
-
-    get_object = get_project
 
 class ProjectCreateView(OrganisationMixin, CreateView):
     model=Project
@@ -111,6 +110,8 @@ class ProjectDetailsView(ProjectMixin, DetailView):
                 return 'atados/project/details-work.html'
         raise Http404
 
+    get_object = ProjectMixin.get_project
+
 
 class ProjectEditView(ProjectMixin, UpdateView):
     model=Project
@@ -137,6 +138,8 @@ class ProjectEditView(ProjectMixin, UpdateView):
             forms.ValidationError("Authentication required")
         return super(ProjectEditView, self).form_valid(form)
 
+    get_object = ProjectMixin.get_project
+
 class ProjectCollaboratorsView(ProjectMixin, TemplateView):
     template_name = 'atados/project/collaborators.html'
 
@@ -162,3 +165,9 @@ class ProjectApplyView(ProjectMixin, JSONResponseMixin, View):
         return self.render_to_response(context)
 
     get = post
+
+class ProjectPictureUpdateView(ProjectMixin, UpdateView):
+    model = Project
+    form_class=ProjectPictureForm
+    template_name='atados/project/picture.html'
+    get_object = ProjectMixin.get_project

@@ -9,7 +9,8 @@ from atados.project.views import (ProjectDonationCreateView,
                                   ProjectDetailsView, ProjectEditView,
                                   ProjectCollaboratorsView,
                                   ProjectRequestsView, ProjectStepsView,
-                                  ProjectApplyView)
+                                  ProjectApplyView,
+                                  ProjectPictureUpdateView)
 
 urlpatterns = patterns(
     '',
@@ -25,4 +26,7 @@ urlpatterns = patterns(
     url(_(r'^(?P<organisation>[-\w]+)/(?P<project>[-\w]+)/requests$'), ProjectRequestsView.as_view(), name='requests'),
     url(_(r'^(?P<organisation>[-\w]+)/(?P<project>[-\w]+)/steps$'), ProjectStepsView.as_view(), name='steps'),
     url(_(r'^(?P<organisation>[-\w]+)/(?P<project>[-\w]+)/apply$'), ProjectApplyView.as_view(), name='apply'),
+
+    url(_(r'^(?P<organisation>[-\w]+)/(?P<project>[-\w]+)/edit-project-picture$'), ProjectPictureUpdateView.as_view(),
+        name='edit-project-picture'),
 )

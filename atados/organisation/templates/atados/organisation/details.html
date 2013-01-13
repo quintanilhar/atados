@@ -1,12 +1,12 @@
 {% extends 'atados/organisation/base.html' %}
-{% load i18n %}
+{% load i18n thumbnail %}
 
 {% block breadcrumb %}
 <li class="active">{{ organisation.name }}</li>
 {% endblock %}
 
 {% block content %}
-<div id="organisation-view">
+<div id="organisation-details">
   <div class="row">
     <div class="span12">
       <h1>{{ organisation.name }}</h1>
@@ -14,7 +14,19 @@
   </div>
   <div class="row">
     <div class="span3">
-      <img class="img-rounded" style="width:100%; margin-bottom:20px;" src="{{ STATIC_URL }}/img/dummy.jpg" />
+      <div class="profile-picture">
+        {% thumbnail organisation.image "220x220" crop="center" as im %}
+        <img class="img-rounded" alt="{{ organisation }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% if organisation in organisation_list %}
+        <a class="btn" href="{% url organisation:edit-organisation-picture organisation.slug %}"><i class="icon-edit"></i> {% trans "Edit profile picture" %}</a>
+        {% endif %}
+        {% empty %}
+        <div class="img-rounded icon organisation medium"></div>
+        {% if organisation in organisation_list %}
+        <a class="btn" href="{% url organisation:edit-organisation-picture organisation.slug %}"><i class="icon-edit"></i> {% trans "Add profile picture" %}</a>
+        {% endif %}
+        {% endthumbnail %}
+      </div>
       <div class="row">
         <div class="span3">
           <h2 style="margin-top:12px">{% trans "Volunteers" %}</h2>

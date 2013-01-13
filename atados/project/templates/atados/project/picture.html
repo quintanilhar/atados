@@ -1,0 +1,17 @@
+{% extends 'atados/organisation/base.html' %}
+{% load i18n bootstrap_toolkit %}
+
+{% block breadcrumb %}
+<li><a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a></li>
+<li><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></li>
+<li class="active">{% trans "Edit project picture" %}</li>
+{% endblock %}
+
+{% block content %}
+<form class="well" action="{% url project:edit-project-picture organisation.slug project.slug %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+  {{ form|as_bootstrap }}
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">{% trans "Upload" %}</button>
+  </div>
+</form>
+{% endblock %}

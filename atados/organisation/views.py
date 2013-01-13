@@ -1,8 +1,10 @@
 from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView
+from django.views.generic.edit import UpdateView
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import classonlymethod
 from atados.organisation.models import Organisation
+from atados.organisation.forms import OrganisationPictureForm
 
 
 class OrganisationMixin(object):
@@ -34,3 +36,9 @@ class OrganisationHomeView(TemplateView):
 class OrganisationDetailsView(OrganisationBaseView):
     only_owner = False
     template_name = 'atados/organisation/details.html'
+
+class OrganisationPictureUpdateView(OrganisationMixin, UpdateView):
+    model = Organisation
+    form_class=OrganisationPictureForm
+    template_name='atados/organisation/picture.html'
+    get_object = OrganisationMixin.get_organisation

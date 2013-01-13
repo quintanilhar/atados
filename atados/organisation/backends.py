@@ -60,7 +60,7 @@ class RegistrationBackend(DefaultBackend):
                          'site': site }
 
 
-            subject = _("Welcome to {{ site }}")
+            subject = _("Welcome to %s" % site.name)
 
             message = render_to_string('atados/organisation/activation_email.txt',
                                        ctx_dict)

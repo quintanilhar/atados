@@ -1,5 +1,5 @@
 {% extends 'atados/atados/base.html' %}
-{% load i18n bootstrap_toolkit %}
+{% load i18n bootstrap_toolkit thumbnail %}
 
 {% block breadcrumb %}
 <li><a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a></li>
@@ -28,74 +28,88 @@
 {% endblock %}
 
 {% block content %}
-
-<div class="row">
-  <div class="span9">
-    <h1>{{ project.name }}</h1>
-  </div>
-  <div class="span3">
-    {% if request.user.is_authenticated %}
+<div id="project-details">
+  <div class="row">
+    <div class="span9">
+      <h1>{{ project.name }}</h1>
+      <h2 class="organisation"><a href="{{ organisation.get_absolute_url }}">{{ organisation }}</a></h2>
+    </div>
+    <div class="span3">
+      {% if request.user.is_authenticated %}
       {% if apply %}
-        <span class="btn btn-primary btn-large btn-block disable">{% trans "Already applied" %}</span>
+      <span class="btn btn-primary btn-large btn-block disable">{% trans "Already applied" %}</span>
       {% else %}
-        <a role="button" class="btn btn-primary btn-large btn-block" href="#myModal" data-toggle="modal">{% trans "Apply" %}</a>
+      <a role="button" class="btn btn-primary btn-large btn-block" href="#myModal" data-toggle="modal">{% trans "Apply" %}</a>
       {% endif %}
-    {% else %}
-    <a class="btn btn-primary btn-large btn-block" href="{% url atados:sign-in %}?next={{ request.path }}">{% trans "Sign in to apply" %}</a>
-    {% endif %}
+      {% else %}
+      <a class="btn btn-primary btn-large btn-block" href="{% url atados:sign-in %}?next={{ request.path }}">{% trans "Sign in to apply" %}</a>
+      {% endif %}
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="span3">
-    <img class="img-rounded" style="width:100%; margin-bottom:20px;" src="{{ STATIC_URL }}/img/dummy.jpg" />
-    <div class="row">
-      <div class="span3">
-        <h2 style="margin-top:12px">{% trans "Volunteers" %}</h2>
+  <div class="row">
+    <div class="span3">
+      <div class="profile-picture">
+        {% thumbnail project.image "220x220" crop="center" as im %}
+        <img class="img-rounded" alt="{{ project }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% if organisation in organisation_list %}
+        <a class="btn" href="{% url project:edit-project-picture organisation.slug project.slug %}"><i class="icon-edit"></i> {% trans "Edit project picture" %}</a>
+        {% endif %}
+        {% empty %}
+        <div class="img-rounded icon organisation medium"></div>
+        {% if organisation in organisation_list %}
+        <a class="btn" href="{% url project:edit-project-picture organisation.slug project.slug %}"><i class="icon-edit"></i> {% trans "Add project picture" %}</a>
+        {% endif %}
+        {% endthumbnail %}
+      </div>
+      <div class="row">
+        <div class="span3">
+          <h2 style="margin-top:12px">{% trans "Volunteers" %}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span3">
+          <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
+          <div style=""><a href="#">Rogerio da Silva Yokomizo</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span3">
+          <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
+          <div style=""><a href="#">Rogerio Yokomizo</a></div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="span3">
-        <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
-        <div style=""><a href="#">Rogerio da Silva Yokomizo</a></div>
+    <div class="span6">
+      {% block project %}
+      {% endblock %}
+    </div>
+    <div class="span3">
+      <div class="well">
+        <h2>{% trans "Organisation" %}</h2>
+        <a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a lorem a odio pharetra eleifend.</p>
+        <h2 style="margin-top:22px">{% trans "Other projects" %}</h2>
+        <ul>
+          {% for project in organisation.project_set.all %}
+          <li><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
-    <div class="row">
-      <div class="span3">
-        <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
-        <div style=""><a href="#">Rogerio Yokomizo</a></div>
-      </div>
-    </div>
   </div>
-  <div class="span6">
-    {% block project %}
-    {% endblock %}
-  </div>
-  <div class="span3">
-    <div class="well">
-      <h2>{% trans "Organisation" %}</h2>
-      <a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a lorem a odio pharetra eleifend.</p>
-      <h2 style="margin-top:22px">{% trans "Other projects" %}</h2>
-      <ul>
-        {% for project in organisation.project_set.all %}
-        <li><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>
-  </div>
-</div>
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Modal header</h3>
-  </div>
-  <div class="modal-body">
-    <p>One fine body</p>
-  </div>
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
-    <button type="button" class="btn btn-primary btn-apply" data-loading-text="{% trans "Appying..." %}">{% trans "Apply" %}</button>
+  <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      <h3 id="myModalLabel">Modal header</h3>
+    </div>
+    <div class="modal-body">
+      <p>One fine body</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-dismiss="modal" aria-hidden="true">{% trans "Cancel" %}</button>
+      <button type="button" class="btn btn-primary btn-apply" data-loading-text="{% trans "Appying..." %}">{% trans "Apply" %}</button>
+    </div>
   </div>
 </div>
 

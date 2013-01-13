@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from atados.organisation.models import Organisation
 from atados.volunteer.models import Volunteer
+from sorl.thumbnail import ImageField
+from time import time
 
 
 class Classification(models.Model):
@@ -25,8 +27,16 @@ class Project(models.Model):
     city = models.CharField(_('City'), max_length=50,
                             blank=True, null=True, default=None)
 
+    def image_name(self, filename):
+        left_path, extension = filename.rsplit('.', 1)
+        return 'project/%s/%s/%s.%s' % (self.organisation.slug,
+                                        time(), self.slug, extension)
+
+    image = ImageField(upload_to=image_name, blank=True,
+                       null=True, default=None)
+
     def __unicode__(self):
-        return self.name
+        return  '%s - %s' % (self.name, self.organisation.name)
 
     @models.permalink
     def get_absolute_url(self):
