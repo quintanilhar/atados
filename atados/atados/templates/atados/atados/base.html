@@ -76,10 +76,10 @@
                     <span style="display:block">{{ user.email }}</span>
                   </div>
                   </li>
-                  <li><a href="{% url volunteer:profile %}">{% trans "My projects" %}</a></li>
+                  <li><a href="{{ volunteer_session.get_absolute_url }}">{% trans "My profile" %}</a></li>
                   <li class="divider"></li>
-                  <li><a href="{% url volunteer:profile %}">{% trans "Edit your information" %}</a></li>
-                  <li><a href="{% url volunteer:profile %}">{% trans "Change password" %}</a></li>
+                  <li><a href="#">{% trans "Edit your information" %}</a></li>
+                  <li><a href="#">{% trans "Change password" %}</a></li>
                   {% if not user.is_authenticated %}
                   {% endif %}
                   <li class="divider"></li>

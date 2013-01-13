@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from bootstrap_toolkit.widgets import BootstrapTextInput
 from registration.forms import RegistrationForm as DefaultRegistrationForm
 from atados.organisation.models import Organisation
+from atados.volunteer.models import Volunteer
 
 
 class RegistrationForm(DefaultRegistrationForm):
@@ -67,3 +68,7 @@ class RegistrationForm(DefaultRegistrationForm):
             raise forms.ValidationError(_('This e-mail is already is use.'))
         return email
 
+class VolunteerPictureForm(forms.ModelForm):
+    class Meta:
+        model = Volunteer
+        fields = ('image',)

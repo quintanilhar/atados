@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.views.generic import TemplateView
+from django.views.generic.edit import UpdateView
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import classonlymethod
 from atados.volunteer.models import Volunteer
+from atados.volunteer.forms import VolunteerPictureForm
 
 
 class UserReferenceMixin(object):
@@ -57,3 +59,9 @@ class VolunteerHomeView(TemplateView):
 class VolunteerDetailsView(VolunteerBaseView):
     only_owner = False
     template_name = 'atados/volunteer/details.html'
+
+class VolunteerPictureUpdateView(VolunteerMixin, UpdateView):
+    model = Volunteer
+    form_class=VolunteerPictureForm
+    template_name='atados/volunteer/picture.html'
+    get_object = VolunteerMixin.get_volunteer

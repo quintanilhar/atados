@@ -81,6 +81,10 @@
     &.medium {
       width:220px;
       height:220px;
+
+      &.volunteer {
+        background-position:-220px 0;
+      }
     }
     
     &.small {
