@@ -47,17 +47,35 @@
     </div>
     <div class="span6">
       <div class="well well-light">
-        <h2>{% trans "Projects" %}</h2>
+        <div style="position:relative">
+          <h2>{% trans "Projects" %}</h2>
+          {% if organisation in organisation_list %}
+          <a href="{% url project:new organisation.slug %}" style="position:absolute; top:2px; right:0;">{% trans "New project" %}</a>
+          {% endif %}
+        </div>
         <ul>
           {% for project in organisation.project_set.all %}
-          <li><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></li>
+          <li>
+            {% thumbnail project.image "60x60" crop="center" as im %}
+            <img class="img-rounded" src="{{ im.url }}" widht"{{ im.width }}" height="{{ im.height }}" />
+            {% empty %}
+            <div class="img-rounded icon project medium"></div>
+            {% endthumbnail %}
+            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+            <p>{{ project.details }}</p>
+          </li>
           {% endfor %}
         </ul>
       </div>
     </div>
     <div class="span3">
       <div class="well">
-        <h2>{% trans "Organisation" %}</h2>
+        <div style="position:relative">
+          <h2>{% trans "Organisation" %}</h2>
+          {% if organisation in organisation_list %}
+          <a href="#" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
+          {% endif %}
+        </div>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a lorem a odio pharetra eleifend.</p>
       </div>
     </div>

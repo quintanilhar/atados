@@ -132,6 +132,7 @@ INSTALLED_APPS = (
     'bootstrap_toolkit',
     'south',
     'sorl.thumbnail',
+    'haystack',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -216,6 +217,6 @@ AWS_HEADERS = {
 HAYSTACK_CONNECTIONS = {
     'default': {
         'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-        'URL': 'localhost:8080',
+        'URL': 'http://localhost:8983/solr',
     },
 }

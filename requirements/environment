@@ -6,6 +6,7 @@ django-bootstrap-toolkit==2.6.22
 South==0.7.6
 boto==2.7.0
 django-storages==1.1.6
-django-haystack==1.2.7
+#django-haystack==1.2.7
+https://github.com/toastdriven/django-haystack/zipball/master
 pysolr==2.1.0-beta
 pil==1.1.7
