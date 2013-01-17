@@ -53,17 +53,23 @@
           <a href="{% url project:new organisation.slug %}" style="position:absolute; top:2px; right:0;">{% trans "New project" %}</a>
           {% endif %}
         </div>
-        <ul>
+        <ul class="projects">
           {% for project in organisation.project_set.all %}
-          <li>
-            {% thumbnail project.image "60x60" crop="center" as im %}
-            <img class="img-rounded" src="{{ im.url }}" widht"{{ im.width }}" height="{{ im.height }}" />
-            {% empty %}
-            <div class="img-rounded icon project medium"></div>
-            {% endthumbnail %}
-            <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
-            <p>{{ project.details }}</p>
+          <li class="row-fluid">
+            <div class="span2">
+              {% thumbnail project.image "60x60" crop="center" as im %}
+              <a href="{{ project.get_absolute_url }}"><img class="img-rounded" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" /></a>
+              {% empty %}
+              <a href="{{ project.get_absolute_url }}" class="img-rounded icon project small"></a>
+              {% endthumbnail %}
+            </div>
+            <div class="span10">
+              <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+              <p>{{ project.details }}</p>
+            </div>
           </li>
+          {% empty %}
+          <li>{% trans "This organisation doesn't have any projects." %}</li>
           {% endfor %}
         </ul>
       </div>
@@ -73,10 +79,16 @@
         <div style="position:relative">
           <h2>{% trans "Organisation" %}</h2>
           {% if organisation in organisation_list %}
-          <a href="#" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
+          <a href="{% url organisation:edit-organisation-details organisation.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
           {% endif %}
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a lorem a odio pharetra eleifend.</p>
+        <p>
+        {% if organisation.details %}
+          {{ organisation.details }}
+        {% else %}
+          {% trans "Nothing about this organisation" %}
+        {% endif %}
+        </p>
       </div>
     </div>
   </div>

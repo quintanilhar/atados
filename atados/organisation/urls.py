@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic.simple import direct_to_template, redirect_to
 from django.utils.translation import ugettext_lazy as _
 from atados.atados.forms import AuthenticationForm
-from atados.organisation.views import OrganisationPictureUpdateView
+from atados.organisation.views import (OrganisationPictureUpdateView,
+                                       OrganisationDetailsUpdateView)
 from registration.views import register, activate
 
 urlpatterns = patterns(
@@ -27,4 +28,7 @@ urlpatterns = patterns(
 
     url(_(r'^(?P<organisation>[-\w]+)/edit-organisation-picture$'), OrganisationPictureUpdateView.as_view(),
         name='edit-organisation-picture'),
+
+    url(_(r'^(?P<organisation>[-\w]+)/edit-organisation-details$'), OrganisationDetailsUpdateView.as_view(),
+        name='edit-organisation-details'),
 )

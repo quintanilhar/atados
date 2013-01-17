@@ -98,3 +98,8 @@ class OrganisationPictureForm(forms.ModelForm):
     class Meta:
         model = Organisation
         fields = ('image',)
+
+class OrganisationDetailsForm(forms.ModelForm):
+    class Meta:
+        model = Organisation
+        fields = ('details',)

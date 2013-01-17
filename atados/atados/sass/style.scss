@@ -1,6 +1,7 @@
 .atados {
 
-  $blue:darken(#25b3ef, 10%);
+  //$blue:darken(#25b3ef, 10%);
+  $blue:#25b3ef;
   $gray:#555;
   $dark-blue:darken($blue, 10%);
 
@@ -518,6 +519,21 @@
   #project-details {
     h1 {
       margin-bottom:4px;
+    }
+  }
+
+  ul.projects {
+    padding:0;
+    margin:0;
+
+    li {
+      padding:0;
+      margin:0;
+      list-style:none;
+
+      & + li {
+        margin-top:10px;
+      }
     }
   }
 }

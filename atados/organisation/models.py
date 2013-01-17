@@ -7,9 +7,10 @@ from time import time
 
 class Organisation(models.Model):
     user = models.ForeignKey(User)
-    name = models.CharField(_('name'), max_length=50)
+    name = models.CharField(_('Name'), max_length=50)
     slug = models.SlugField(max_length=50)
-    #details = models.TextField(_('Details'), max_length=1024)
+    details = models.TextField(_('Details'), max_length=1024, blank=True,
+                               null=True, default=None)
 
     def image_name(self, filename):
         left_path, extension = filename.rsplit('.', 1)

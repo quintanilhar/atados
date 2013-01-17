@@ -4,7 +4,8 @@ from django.views.generic.edit import UpdateView
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import classonlymethod
 from atados.organisation.models import Organisation
-from atados.organisation.forms import OrganisationPictureForm
+from atados.organisation.forms import (OrganisationPictureForm,
+                                       OrganisationDetailsForm)
 
 
 class OrganisationMixin(object):
@@ -41,4 +42,10 @@ class OrganisationPictureUpdateView(OrganisationMixin, UpdateView):
     model = Organisation
     form_class=OrganisationPictureForm
     template_name='atados/organisation/picture.html'
+    get_object = OrganisationMixin.get_organisation
+
+class OrganisationDetailsUpdateView(OrganisationMixin, UpdateView):
+    model = Organisation
+    form_class=OrganisationDetailsForm
+    template_name='atados/organisation/edit-details.html'
     get_object = OrganisationMixin.get_organisation
