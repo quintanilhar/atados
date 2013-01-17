@@ -6,9 +6,13 @@
   <div class="span6">
     <div class="">
       <div class="well well-light">
-        <div style="position:relative">
+        <div class="well-header">
           <h2>{% trans "Donation" %}</h2>
-          <a href="#" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
+          {% if organisation in organisation_list %}
+          <div>
+            <a href="{% url project:edit organisation.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
+          </div>
+          {% endif %}
         </div>
         {{ project.details }}
         <h2 style="margin-top:22px">{% trans "Contact" %}</h2>

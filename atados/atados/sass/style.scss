@@ -108,6 +108,14 @@
     &.tiny {
       width:42px;
       height:42px;
+
+      &.organisation {
+        background-position:-120px -220px;
+      }
+
+      &.volunteer {
+        background-position:-180px -220px;
+      }
     }
   }
 
@@ -152,7 +160,7 @@
   }
 
   #header {
-    z-index:9999;
+    z-index:1000;
     position:fixed;
     top:0;
     left:0;
@@ -534,6 +542,16 @@
       & + li {
         margin-top:10px;
       }
+    }
+  }
+
+  .well-header {
+    position:relative;
+
+    div {
+      position:absolute;
+      top:2px;
+      right:0;
     }
   }
 }

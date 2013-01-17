@@ -86,8 +86,25 @@
     <div class="span3">
       <div class="well">
         <h2>{% trans "Organisation" %}</h2>
-        <a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla a lorem a odio pharetra eleifend.</p>
+        <div class="row-fluid">
+          <div class="span4" style="width: 48px">
+            {% thumbnail organisation.image "42x42" crop="center" as im %}
+            <a href="{{ organisation.get_absolute_url }}"><img class="img-rounded" alt="{{ organisation }}" src="{{ im.url }}" width="{{ im.width}}" height="{{ im.height }}" /></a>
+            {% empty %}
+            <a href="{{ organisation.get_absolute_url }}" class="img-rounded icon organisation tiny"></a>
+            {% endthumbnail %}
+          </div>
+          <div class="span8">
+            <a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a>
+          </div>
+        </div>
+        <p>
+        {% if organisation.details %}
+          {{ organisation.details }}
+        {% else %}
+          {% trans "Nothing about this organisation" %}
+        {% endif %}
+        </p>
         <h2 style="margin-top:22px">{% trans "Other projects" %}</h2>
         <ul>
           {% for project in organisation.project_set.all %}
