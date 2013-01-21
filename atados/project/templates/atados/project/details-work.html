@@ -11,14 +11,18 @@
         {{ project.classification }} <br />
         {% block monthly_hours %}{% endblock %}
         <h2 style="margin-top:22px">{% trans "Contact" %}</h2>
-        {{ project.responsible }} <br />
-        {{ project.phone }} <br />
-        {{ project.email }} <br />
+        {% trans "Responsible" %} {{ project.responsible }} <br />
+        {% trans "Phone" %} {{ project.phone }} <br />
+        {% trans "E-mail" %} {{ project.email }} <br />
         <h2 style="margin-top:22px">{% trans "Location" %}</h2>
-        {{ project.can_be_done_remotely }} <br />
-        {{ project.addressline }} <br />
-        {{ project.neighborhood }} <br />
-        {{ project.city }} <br />
+        {% if project.can_be_done_remotely %}
+        {% trans "This work can be done remotely" %}
+        {% else %}
+        {% trans "This work can't be done remotely" %}
+        {% endif %}
+        {% trans "Addressline" %} {{ project.addressline }} <br />
+        {% trans "Neighborhood" %} {{ project.neighborhood }} <br />
+        {% trans "City" %} {{ project.city }} <br />
       </div>
     </div>
   </div>

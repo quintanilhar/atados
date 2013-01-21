@@ -159,6 +159,14 @@
     margin:0 0 16px;
   }
 
+  .img-tiny-list {
+    img, & > div > div > a {
+      width:42px;
+      float:left;
+      margin:0 10px 10px 0
+    }
+  }
+
   #header {
     z-index:1000;
     position:fixed;

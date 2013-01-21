@@ -66,16 +66,18 @@
           <h2 style="margin-top:12px">{% trans "Volunteers" %}</h2>
         </div>
       </div>
-      <div class="row">
-        <div class="span3">
-          <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
-          <div style=""><a href="#">Rogerio da Silva Yokomizo</a></div>
+      <div class="img-tiny-list">
+        <div class="row">
+          <div class="span3">
+            <img class="img-rounded" src="{{ STATIC_URL }}/img/dummy.jpg" />
+            <div><a href="#">Rogerio da Silva Yokomizo</a></div>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="span3">
-          <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
-          <div style=""><a href="#">Rogerio Yokomizo</a></div>
+        <div class="row">
+          <div class="span3">
+            <img class="img-rounded" src="{{ STATIC_URL }}/img/dummy.jpg" />
+            <div><a href="#">Rogerio Yokomizo</a></div>
+          </div>
         </div>
       </div>
     </div>
@@ -86,18 +88,6 @@
     <div class="span3">
       <div class="well">
         <h2>{% trans "Organisation" %}</h2>
-        <div class="row-fluid">
-          <div class="span4" style="width: 48px">
-            {% thumbnail organisation.image "42x42" crop="center" as im %}
-            <a href="{{ organisation.get_absolute_url }}"><img class="img-rounded" alt="{{ organisation }}" src="{{ im.url }}" width="{{ im.width}}" height="{{ im.height }}" /></a>
-            {% empty %}
-            <a href="{{ organisation.get_absolute_url }}" class="img-rounded icon organisation tiny"></a>
-            {% endthumbnail %}
-          </div>
-          <div class="span8">
-            <a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a>
-          </div>
-        </div>
         <p>
         {% if organisation.details %}
           {{ organisation.details }}
@@ -106,11 +96,20 @@
         {% endif %}
         </p>
         <h2 style="margin-top:22px">{% trans "Other projects" %}</h2>
-        <ul>
+        <div class="img-tiny-list">
           {% for project in organisation.project_set.all %}
-          <li><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></li>
+          <div class="row-fluid">
+            <div class="span12">
+              {% thumbnail project.image "42x42" crop="center" as im %}
+              <a href="{{ project.get_absolute_url }}"><img class="img-rounded" alt="{{ project }}" src="{{ im.url }}" width="{{ im.width}}" height="{{ im.height }}" /></a>
+              {% empty %}
+              <a href="{{ project.get_absolute_url }}" class="img-rounded icon project tiny"></a>
+              {% endthumbnail %}
+              <div><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></div>
+            </div>
+          </div>
           {% endfor %}
-        </ul>
+        </div>
       </div>
     </div>
   </div>
