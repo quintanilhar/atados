@@ -137,6 +137,16 @@
           width: 224px;
         }
       }
+      .span4 {
+        input[type=text], input[type=password], textarea {
+          width: 139px;
+        }
+      }
+      .span8 {
+        input[type=text], input[type=password], textarea {
+          width: 308px;
+        }
+      }
     }
   }
 

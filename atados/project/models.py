@@ -17,15 +17,20 @@ class Project(models.Model):
     name = models.CharField(_('Project name'), max_length=50)
     slug = models.SlugField(max_length=50)
     details = models.TextField(_('Details'), max_length=1024)
+    prerequisites = models.TextField(_('Prerequisites'), max_length=1024)
     responsible = models.CharField(_('Responsible name'), max_length=50)
     phone = models.CharField(_('Phone'), max_length=20)
     email = models.EmailField(_('E-mail address'))
+    zipcode = models.CharField(_('Zip code'), max_length=10,
+                               blank=True, null=True, default=None)
     addressline = models.CharField(_('Address line'), max_length=200,
                                   blank=True, null=True, default=None)
     neighborhood = models.CharField(_('Neighborhood'), max_length=50,
                                     blank=True, null=True, default=None)
     city = models.CharField(_('City'), max_length=50,
                             blank=True, null=True, default=None)
+    vacancies = models.IntegerField(_('Vacancies'),
+                                    blank=True, null=True, default=None)
 
     def image_name(self, filename):
         left_path, extension = filename.rsplit('.', 1)
@@ -55,7 +60,7 @@ class ProjectDonation(Project):
 
 class ProjectWork(Project):
     classification = models.ForeignKey(Classification)
-    monthly_hours = models.IntegerField(_('Monthly hours (approximate)'),
+    weekly_hours = models.IntegerField(_('Weekly hours (approximate)'),
                                         blank=True, null=True)
     can_be_done_remotely = models.BooleanField(
             _('This work can be done remotely.'))

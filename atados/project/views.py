@@ -104,7 +104,7 @@ class ProjectDetailsView(ProjectMixin, DetailView):
         if isinstance(self.object, ProjectDonation):
             return 'atados/project/details-donation.html'
         if isinstance(self.object, ProjectWork):
-            if self.object.monthly_hours > 0:
+            if self.object.weekly_hours > 0:
                 return 'atados/project/details-periodic.html'
             else:
                 return 'atados/project/details-work.html'

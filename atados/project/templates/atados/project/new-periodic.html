@@ -8,6 +8,6 @@
 
 {% block action %}{% url project:new-periodic organisation.slug %}{% endblock %}
 
-{% block monthly_hours %}
-{{ form.monthly_hours|as_bootstrap }}
+{% block weekly_hours %}
+{{ form.weekly_hours|as_bootstrap }}
 {% endblock %}

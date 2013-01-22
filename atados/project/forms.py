@@ -43,13 +43,13 @@ class ProjectJustOnceCreateForm(ProjectCreateForm):
         
     class Meta:
         model = ProjectWork
-        exclude = ('organisation', 'slug', 'monthly_hours')
+        exclude = ('organisation', 'slug', 'weekly_hours')
 
 class ProjectPeriodicCreateForm(ProjectJustOnceCreateForm):
 
     def __init__(self, *args, **kwargs):
         super(ProjectPeriodicCreateForm, self).__init__(*args, **kwargs)
-        self.fields['monthly_hours'].required = True
+        self.fields['weekly_hours'].required = True
 
     class Meta:
         model = ProjectWork
