@@ -509,12 +509,15 @@
 
     .checkbox {
       float:right;
-      margin-right:15px;
+      text-align:right;
+      width:130px;
+      margin-right:5px;
       font-size:11px;
       color:#666;
 
       input {
-        margin-top:3px;
+        margin-top:0;
+        float:none;
       }
     } 
   }
