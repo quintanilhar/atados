@@ -7,5 +7,5 @@ from django.utils.translation import ugettext_lazy as _
 
 class AuthenticationForm(ContribAuthenticationForm):
     username = forms.CharField(label=_('E-mail'), max_length=30)
-    rememberme = forms.BooleanField(label=_('Remember me'),
+    rememberme = forms.BooleanField(label=_('Stay signed in'),
                                     initial=True)

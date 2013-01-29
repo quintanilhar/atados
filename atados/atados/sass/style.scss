@@ -205,7 +205,8 @@
 
       a {
         background:url('../img/atados.png') no-repeat;
-        width:115px;
+        //width:115px;
+        width:37px;
         height:37px;
         color:#fff;
         display:block;
@@ -216,6 +217,9 @@
 
     .form-search {
       margin:15px 0 8px;
+      .search-query {
+        width:150px;
+      }
     }
 
     .menu {
@@ -251,7 +255,6 @@
     }
 
     .location-selector {
-      font-weight:bold;
       margin-top:20px;
       color:#999;
 
@@ -265,7 +268,7 @@
 
       .dropdown-menu {
         padding: 10px;
-        width:310px;
+        width:261px;
       }
 
       .nav-pills {

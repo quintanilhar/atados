@@ -23,29 +23,29 @@
       <div id="header">
         <div class="container">
           <div class="row">
-            <div class="span2">
+            <div class="span1">
               <div class="logo">
                 <a href="{% url atados:home %}">{{ site.name }}</a>
               </div>
             </div>
             <div class="span3">
-              <!--
               <form class="form-search">
                 <div class="input-append">
-                  <input type="text" class="span2 search-query" placeholder="{% trans "Search" %}">
+                  <input type="text" class="search-query" placeholder="{% trans "Search" %}">
                   <button type="submit" class="btn"><i class="icon-search"></i></button>
                 </div>
               </form>
-              -->
+            </div>
+            <div class="span2">
               <div class="dropdown location-selector">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Selecione sua cidade <span class="caret"></span></a>
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">{% trans "Explore your city" %} <span class="caret"></span></a>
                 <div class="dropdown-menu">
                   <ul class="nav nav-pills">
                     <li class="active">
-                      <a href="#popular-cities" data-toggle="tab" class="popular-cities">Cidade mais populares</a>
+                    <a href="#popular-cities" data-toggle="tab" class="popular-cities">{% trans "Most popular cities" %}</a>
                     </li>
                     <li>
-                      <a href="#all-cities" data-toggle="tab" class="all-cities">Todas as cidades</a>
+                    <a href="#all-cities" data-toggle="tab" class="all-cities">{% trans "All cities" %}</a>
                     </li>
                   </ul>
                   <div class="tab-content">
@@ -70,11 +70,10 @@
               </div>
             </div>
             {% if not user.is_authenticated %}
-            <div class="span5">
+            <div class="span4">
               <ul class="menu">
                 <li><a href="{% url project:index %}">{% trans "Explore projects" %}</a></li>
                 <li><a href="{% url volunteer:sign-up %}">{% trans "Become a volunteer" %}</a></li>
-                <li><a href="{% url organisation:sign-up %}">{% trans "Post a project" %}</a></li>
               </ul>
             </div>
             <div class="span2">
@@ -86,7 +85,7 @@
                     <input type="password" class="input-small" name="password" placeholder="{% trans "Password" %}">
                     <button type="submit" class="btn btn-primary">{% trans "Sign in" %}</button>
                     <label class="checkbox">
-                      <input type="checkbox" name="rememberme" checked="checked" /> {% trans "Remember me" %}
+                      <input type="checkbox" name="rememberme" checked="checked" /> {% trans "Stay signed in" %}
                       <input type="hidden" name="next" value="{{ request.path }}" />
                     </label>
                   </form>
@@ -94,7 +93,7 @@
               </div>
             </div>
             {% else %}
-            <div class="span3">
+            <div class="span2">
               <ul class="menu">
                 <li><a href="{% url project:index %}">{% trans "Explore projects" %}</a></li>
               </ul>
@@ -165,6 +164,7 @@
               <div class="span3">
                 <h4>{% trans "Services" %}</h4>
                 <ul>
+                  <li><a href="{% url organisation:sign-up %}">{% trans "For organisations" %}</a></li>
                   <li><a href="">{% trans "For schools" %}</a></li>
                   <li><a href="">{% trans "For companies" %}</a></li>
                 </ul>

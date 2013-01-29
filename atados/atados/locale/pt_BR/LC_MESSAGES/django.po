@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-12-26 01:39-0200\n"
+"POT-Creation-Date: 2013-01-29 00:44-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,68 +18,137 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: templates/atados/atados/base.html:57
-msgid "About Atados.com.br"
+#: forms.py:9 templates/atados/atados/base.html:84
+msgid "E-mail"
 msgstr ""
 
-#: templates/atados/atados/base.html:58
+#: forms.py:10 templates/atados/atados/base.html:88
+msgid "Stay signed in"
+msgstr "Continuar conectado"
+
+#: urls.py:13
+msgid "^sign-in$"
+msgstr "^entrar$"
+
+#: urls.py:18 urls.py:22
+msgid "/sign-in"
+msgstr "/entrar"
+
+#: urls.py:21
+msgid "^sign-out$"
+msgstr "sair"
+
+#: templates/atados/atados/base.html:34
+msgid "Search"
+msgstr "Buscar"
+
+#: templates/atados/atados/base.html:41
+msgid "Explore your city"
+msgstr "Atos na sua cidade"
+
+#: templates/atados/atados/base.html:45
+msgid "Most popular cities"
+msgstr "Mais populares"
+
+#: templates/atados/atados/base.html:48
+msgid "All cities"
+msgstr "Todas as cidades"
+
+#: templates/atados/atados/base.html:75 templates/atados/atados/base.html:98
+msgid "Explore projects"
+msgstr "Explore atos"
+
+#: templates/atados/atados/base.html:76
+msgid "Become a volunteer"
+msgstr "Torne-se um volunt&aacute;rio"
+
+#: templates/atados/atados/base.html:81 templates/atados/atados/base.html:86
+#: templates/atados/atados/sign-in.html:5
+#: templates/atados/atados/sign-in.html:12
+msgid "Sign in"
+msgstr "Entrar"
+
+#: templates/atados/atados/base.html:85
+msgid "Password"
+msgstr "Senha"
+
+#: templates/atados/atados/base.html:111
+msgid "My profile"
+msgstr "Meu perfil"
+
+#: templates/atados/atados/base.html:113
+msgid "Edit your information"
+msgstr "Editar suas informa&ccedil;&otilde;es"
+
+#: templates/atados/atados/base.html:114
+msgid "Change password"
+msgstr "Alterar senha"
+
+#: templates/atados/atados/base.html:116
+msgid "Sign out"
+msgstr "Sair"
+
+#: templates/atados/atados/base.html:131
+msgid "Home"
+msgstr "In&iacute;cio"
+
+#: templates/atados/atados/base.html:158
+msgid "About us"
+msgstr "Sobre n&oacute;s"
+
+#: templates/atados/atados/base.html:159
 msgid "Careers"
-msgstr ""
+msgstr "Carreira"
 
-#: templates/atados/atados/base.html:59
+#: templates/atados/atados/base.html:160
 msgid "Contact"
-msgstr ""
+msgstr "Contato"
 
-#: templates/atados/atados/base.html:60
+#: templates/atados/atados/base.html:161
 msgid "News"
-msgstr ""
+msgstr "Novidades"
 
-#: templates/atados/atados/base.html:64
+#: templates/atados/atados/base.html:165
 msgid "Services"
-msgstr ""
+msgstr "Servi&ccedil;os"
 
-#: templates/atados/atados/base.html:66
-msgid "For dealerships"
-msgstr ""
+#: templates/atados/atados/base.html:167
+msgid "For organisations"
+msgstr "Para ONGs"
 
-#: templates/atados/atados/base.html:67
-msgid "For developers"
-msgstr ""
+#: templates/atados/atados/base.html:168
+msgid "For schools"
+msgstr "Para intitui&ccedil;&otilde;s de ensino"
 
-#: templates/atados/atados/base.html:71
+#: templates/atados/atados/base.html:169
+msgid "For companies"
+msgstr "Para empresas"
+
+#: templates/atados/atados/base.html:173
 msgid "Documentation"
-msgstr ""
+msgstr "Documenta&ccedil;&atilde;o"
 
-#: templates/atados/atados/base.html:73
-msgid "Atados.com.br help"
-msgstr ""
+#: templates/atados/atados/base.html:175
+msgid "FAQ"
+msgstr "Perguntas frequentes"
 
-#: templates/atados/atados/base.html:80
+#: templates/atados/atados/base.html:176
+msgid "Help"
+msgstr "Ajuda"
+
+#: templates/atados/atados/base.html:184
 msgid "Terms of service"
-msgstr ""
+msgstr "Termos de uso"
 
-#: templates/atados/atados/base.html:81
+#: templates/atados/atados/base.html:185
 msgid "Privacy"
-msgstr ""
+msgstr "Privacidade"
 
-#: templates/atados/atados/base.html:82
+#: templates/atados/atados/base.html:186
 msgid "Security"
-msgstr ""
+msgstr "Seguran&ccedil;a"
 
-#: templates/atados/atados/base.html:83
-msgid "&copy; 2013 Atados.com.br"
-msgstr ""
-
-#: templates/atados/atados/home.html:21
-msgid "Name"
-msgstr ""
-
-#: templates/atados/atados/home.html:32
+#: templates/atados/atados/base.html:188
 #, python-format
-msgid ""
-"\n"
-"          By clicking Sign Up, you are indicating that you have read and "
-"agree to the <a href=\"%(terms_url)s\">Terms of Service</a> and <a href="
-"\"%(privacy_url)s\">Privacy Policy</a>.\n"
-"          "
+msgid "&copy; 2013 %(site_name)s"
 msgstr ""
