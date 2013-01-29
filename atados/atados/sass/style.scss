@@ -35,8 +35,9 @@
   }
 
   .dropdown-menu {
+    .active > a,
     li > a:hover {
-      background:$blue;
+      background:$dark-blue;
     }
   }
 
@@ -246,6 +247,39 @@
             content: "";
           }
         }
+      }
+    }
+
+    .location-selector {
+      font-weight:bold;
+      margin-top:20px;
+      color:#999;
+
+      & > a {
+        color:#fff;
+      }
+
+      .caret {
+        border-top-color: #fff;
+      }
+
+      .dropdown-menu {
+        padding: 10px;
+        width:310px;
+      }
+
+      .nav-pills {
+        margin:0 0 10px;
+        padding:0;
+      }
+
+      .nav-stacked {
+        margin:0;
+        padding:0;
+      }
+
+      .tab-content {
+        overflow: visible;
       }
     }
 

@@ -29,12 +29,45 @@
               </div>
             </div>
             <div class="span3">
+              <!--
               <form class="form-search">
                 <div class="input-append">
                   <input type="text" class="span2 search-query" placeholder="{% trans "Search" %}">
                   <button type="submit" class="btn"><i class="icon-search"></i></button>
                 </div>
               </form>
+              -->
+              <div class="dropdown location-selector">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Selecione sua cidade <span class="caret"></span></a>
+                <div class="dropdown-menu">
+                  <ul class="nav nav-pills">
+                    <li class="active">
+                      <a href="#popular-cities" data-toggle="tab" class="popular-cities">Cidade mais populares</a>
+                    </li>
+                    <li>
+                      <a href="#all-cities" data-toggle="tab" class="all-cities">Todas as cidades</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="popular-cities">
+                      <ul class="cities nav nav-tabs nav-stacked">
+                        <li><a href="#">S&atilde;o Paulo</a></li>
+                        <li><a href="#">Rio de Janeiro</a></li>
+                        <li><a href="#">Curitiba</a></li>
+                      </ul>
+                    </div>
+                    <div class="tab-pane" id="all-cities">
+                      <ul class="cities nav nav-tabs nav-stacked">
+                        <li><a href="#">Florian&oacute;polis</a></li>
+                        <li><a href="#">Guarulhos</a></li>
+                        <li><a href="#">Manaus</a></li>
+                        <li><a href="#">Osasco</a></li>
+                        <li><a href="#">Tubar&atilde;o</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             {% if not user.is_authenticated %}
             <div class="span5">
@@ -80,8 +113,6 @@
                   <li class="divider"></li>
                   <li><a href="#">{% trans "Edit your information" %}</a></li>
                   <li><a href="#">{% trans "Change password" %}</a></li>
-                  {% if not user.is_authenticated %}
-                  {% endif %}
                   <li class="divider"></li>
                   <li><a href="{% url atados:sign-out %}">{% trans "Sign out" %}</a></li>
                 </ul>
@@ -161,39 +192,9 @@
 
         </div>
 
-        <script src="{{ STATIC_URL }}/js/jquery-1.8.3.min.js"></script>
-        <script src="{{ STATIC_URL }}/js/bootstrap.min.js"></script>
-        <script>
-          function getCookie(name) {
-            var cookieValue = null;
-            if (document.cookie && document.cookie != '') {
-              var cookies = document.cookie.split(';');
-              for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                  break;
-                }
-              }
-            }
-            return cookieValue;
-          }
-          var csrftoken = getCookie('csrftoken');
-
-          function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-          }
-          $.ajaxSetup({
-            crossDomain: false, // obviates need for sameOrigin test
-            beforeSend: function(xhr, settings) {
-              if (!csrfSafeMethod(settings.type)) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-              }
-            }
-          });
-        </script>
+        <script src="{{ STATIC_URL }}js/jquery-1.8.3.min.js"></script>
+        <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+        <script src="{{ STATIC_URL }}js/atados.js"></script>
         {% block js %}
         {% endblock %}
 

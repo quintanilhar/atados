@@ -1,0 +1,355 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-25 14:52-0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: forms.py:19
+msgid "example@example.com"
+msgstr ""
+
+#: forms.py:22
+msgid "Add more info about this project"
+msgstr ""
+
+#: forms.py:29
+msgid "This name (or a very similar) is already is use."
+msgstr ""
+
+#: models.py:10
+msgid "name"
+msgstr ""
+
+#: models.py:17
+msgid "Project name"
+msgstr ""
+
+#: models.py:19
+msgid "Details"
+msgstr ""
+
+#: models.py:20
+msgid "Prerequisites"
+msgstr ""
+
+#: models.py:21
+msgid "Responsible name"
+msgstr ""
+
+#: models.py:22 templates/atados/project/details-work.html:15
+msgid "Phone"
+msgstr ""
+
+#: models.py:23
+msgid "E-mail address"
+msgstr ""
+
+#: models.py:24
+msgid "Zip code"
+msgstr ""
+
+#: models.py:26
+msgid "Address line"
+msgstr ""
+
+#: models.py:28 templates/atados/project/details-work.html:24
+msgid "Neighborhood"
+msgstr ""
+
+#: models.py:30 templates/atados/project/details-work.html:25
+msgid "City"
+msgstr ""
+
+#: models.py:32
+msgid "Vacancies"
+msgstr ""
+
+#: models.py:59
+msgid "Collection made by the organisation"
+msgstr ""
+
+#: models.py:63
+msgid "Weekly hours (approximate)"
+msgstr ""
+
+#: models.py:66
+msgid "This work can be done remotely."
+msgstr ""
+
+#: urls.py:18
+msgid "^project$"
+msgstr ""
+
+#: urls.py:19
+msgid "^(?P<organisation>[-\\w]+)/add-new-project$"
+msgstr ""
+
+#: urls.py:20
+msgid "^(?P<organisation>[-\\w]+)/add-new-project/donation$"
+msgstr ""
+
+#: urls.py:21
+msgid "^(?P<organisation>[-\\w]+)/add-new-project/just-once$"
+msgstr ""
+
+#: urls.py:22
+msgid "^(?P<organisation>[-\\w]+)/add-new-project/periodic$"
+msgstr ""
+
+#: urls.py:23
+msgid "^(?P<organisation>[-\\w]+)/(?P<project>[-\\w]+)$"
+msgstr ""
+
+#: urls.py:24
+msgid "^(?P<organisation>[-\\w]+)/(?P<project>[-\\w]+)/edit$"
+msgstr ""
+
+#: urls.py:25
+msgid "^(?P<organisation>[-\\w]+)/(?P<project>[-\\w]+)/collaborators$"
+msgstr ""
+
+#: urls.py:26
+msgid "^(?P<organisation>[-\\w]+)/(?P<project>[-\\w]+)/requests$"
+msgstr ""
+
+#: urls.py:27
+msgid "^(?P<organisation>[-\\w]+)/(?P<project>[-\\w]+)/steps$"
+msgstr ""
+
+#: urls.py:28
+msgid "^(?P<organisation>[-\\w]+)/(?P<project>[-\\w]+)/apply$"
+msgstr ""
+
+#: urls.py:30
+msgid "^(?P<organisation>[-\\w]+)/(?P<project>[-\\w]+)/edit-project-picture$"
+msgstr ""
+
+#: templates/atados/project/details-donation.html:10
+#: templates/atados/project/project-kind-choose.html:18
+msgid "Donation"
+msgstr ""
+
+#: templates/atados/project/details-donation.html:13
+msgid "Edit"
+msgstr ""
+
+#: templates/atados/project/details-donation.html:18
+#: templates/atados/project/details-work.html:13
+#: templates/atados/project/new-donation.html:41
+#: templates/atados/project/new-work.html:59
+msgid "Contact"
+msgstr ""
+
+#: templates/atados/project/details-donation.html:22
+msgid "Delivery and Collection"
+msgstr ""
+
+#: templates/atados/project/details-work.html:9
+msgid "About work"
+msgstr ""
+
+#: templates/atados/project/details-work.html:14
+msgid "Responsible"
+msgstr ""
+
+#: templates/atados/project/details-work.html:16
+msgid "E-mail"
+msgstr ""
+
+#: templates/atados/project/details-work.html:17
+#: templates/atados/project/new-work.html:39
+msgid "Location"
+msgstr ""
+
+#: templates/atados/project/details-work.html:19
+msgid "This work can be done remotely"
+msgstr ""
+
+#: templates/atados/project/details-work.html:21
+msgid "This work can't be done remotely"
+msgstr ""
+
+#: templates/atados/project/details-work.html:23
+msgid "Addressline"
+msgstr ""
+
+#: templates/atados/project/details.html:40
+msgid "Already applied"
+msgstr ""
+
+#: templates/atados/project/details.html:42
+#: templates/atados/project/details.html:127
+msgid "Apply"
+msgstr ""
+
+#: templates/atados/project/details.html:45
+msgid "Sign in to apply"
+msgstr ""
+
+#: templates/atados/project/details.html:55
+#: templates/atados/project/picture.html:7
+msgid "Edit project picture"
+msgstr ""
+
+#: templates/atados/project/details.html:60
+msgid "Add project picture"
+msgstr ""
+
+#: templates/atados/project/details.html:66
+#: templates/atados/project/organisation.html:15
+msgid "Volunteers"
+msgstr ""
+
+#: templates/atados/project/details.html:90
+msgid "Organisation"
+msgstr ""
+
+#: templates/atados/project/details.html:95
+msgid "Nothing about this organisation"
+msgstr ""
+
+#: templates/atados/project/details.html:98
+msgid "Other projects"
+msgstr ""
+
+#: templates/atados/project/details.html:126
+msgid "Cancel"
+msgstr ""
+
+#: templates/atados/project/details.html:127
+msgid "Appying..."
+msgstr ""
+
+#: templates/atados/project/edit.html:18
+#: templates/atados/project/requests.html:25
+msgid "Delete"
+msgstr ""
+
+#: templates/atados/project/edit.html:31
+msgid "Save"
+msgstr ""
+
+#: templates/atados/project/index.html:5
+#: templates/atados/project/index.html:11
+msgid "Explore projects"
+msgstr ""
+
+#: templates/atados/project/new-donation.html:5
+#: templates/atados/project/new-periodic.html:5
+#: templates/atados/project/new-work.html:5
+#: templates/atados/project/project-kind-choose.html:5
+msgid "Project kind choose"
+msgstr ""
+
+#: templates/atados/project/new-donation.html:6
+msgid "Add new donation project"
+msgstr ""
+
+#: templates/atados/project/new-donation.html:13
+msgid "New donation project"
+msgstr ""
+
+#: templates/atados/project/new-donation.html:20
+msgid "About donantion"
+msgstr ""
+
+#: templates/atados/project/new-donation.html:25
+msgid "Collecting"
+msgstr ""
+
+#: templates/atados/project/new-donation.html:29
+msgid "Delivery"
+msgstr ""
+
+#: templates/atados/project/new-donation.html:53
+#: templates/atados/project/new-work.html:71
+msgid "Create"
+msgstr ""
+
+#: templates/atados/project/new-donation.html:54
+#: templates/atados/project/new-work.html:72
+msgid "Back"
+msgstr ""
+
+#: templates/atados/project/new-periodic.html:6
+msgid "Add new periodic project"
+msgstr ""
+
+#: templates/atados/project/new-work.html:6
+msgid "Add new just once project"
+msgstr ""
+
+#: templates/atados/project/new-work.html:13
+msgid "New just once project"
+msgstr ""
+
+#: templates/atados/project/new-work.html:20
+msgid "About job"
+msgstr ""
+
+#: templates/atados/project/organisation.html:12
+msgid "Options"
+msgstr ""
+
+#: templates/atados/project/organisation.html:18
+#: templates/atados/project/requests.html:12
+msgid "Requests"
+msgstr ""
+
+#: templates/atados/project/organisation.html:21
+msgid "Steps"
+msgstr ""
+
+#: templates/atados/project/picture.html:14
+msgid "Upload"
+msgstr ""
+
+#: templates/atados/project/project-kind-choose.html:12
+msgid "What kind of project you want to create?"
+msgstr ""
+
+#: templates/atados/project/project-kind-choose.html:20
+#: templates/atados/project/project-kind-choose.html:27
+#: templates/atados/project/project-kind-choose.html:34
+msgid "This one"
+msgstr ""
+
+#: templates/atados/project/project-kind-choose.html:25
+msgid "Just once"
+msgstr ""
+
+#: templates/atados/project/project-kind-choose.html:32
+msgid "Periodic"
+msgstr ""
+
+#: templates/atados/project/requests.html:21
+msgid "Rog&eacute;rio has completed 9 good actions"
+msgstr ""
+
+#: templates/atados/project/requests.html:24
+msgid "Received"
+msgstr ""
+
+#: templates/atados/project/requests.html:33
+#: templates/atados/project/requests.html:42
+msgid "Attended"
+msgstr ""
+
+#: templates/atados/project/requests.html:34
+#: templates/atados/project/requests.html:43
+msgid "Missed"
+msgstr ""
