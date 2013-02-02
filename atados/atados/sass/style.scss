@@ -1,11 +1,9 @@
 .atados {
 
-  //$blue:darken(#25b3ef, 10%);
   $blue:#25b3ef;
   $gray:#555;
   $dark-blue:darken($blue, 10%);
 
-  background:#fff url('../img/bg.png') no-repeat center 60px;
   min-width:1000px;
   color:$gray;
 
@@ -283,6 +281,14 @@
 
       .tab-content {
         overflow: visible;
+      }
+
+      form {
+        margin-bottom: 10px;
+
+        input {
+          width:208px;
+        }
       }
     }
 
