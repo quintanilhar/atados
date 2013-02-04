@@ -33,3 +33,6 @@ nosetests.xml
 
 # Sass
 *.scssc
+
+#virtualenv
+env
