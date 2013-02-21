@@ -19,21 +19,24 @@
         <fieldset>
           <legend>{% trans "About job" %}</legend>
           {{ form.name|as_bootstrap }}
+        </fieldset>
+        <fieldset>
+          <legend>{% trans "Cause" %}</legend>
+          {{ form.cause|as_bootstrap }}
+        </fieldset>
+        <fieldset>
+          <legend>{% trans "Skills" %}</legend>
+          {{ form.skill|as_bootstrap }}
+          {{ form.prerequisites|as_bootstrap }}
+        </fieldset>
+        <fieldset>
+          <legend>{% trans "Disponibility" %}</legend>
           <div class="row-fluid">
-            <div class="span6">
-              {{ form.classification|as_bootstrap }}
-            </div>
-            <div class="span6">
+            <div class="span4">
               {% block weekly_hours %}{% endblock %}
             </div>
           </div>
-          <div class="row-fluid">
-            <div class="span6">
-              {{ form.vacancies|as_bootstrap }}
-            </div>
-          </div>
-          {{ form.prerequisites|as_bootstrap }}
-          {{ form.details|as_bootstrap }}
+
         </fieldset>
         <fieldset>
           <legend>{% trans "Location" %}</legend>
@@ -66,6 +69,15 @@
               {{ form.email|as_bootstrap }}
             </div>
           </div>
+        </fieldset>
+        <fieldset>
+          <legend>{% trans "More info" %}</legend>
+          <div class="row-fluid">
+            <div class="span4">
+              {{ form.vacancies|as_bootstrap }}
+            </div>
+          </div>
+          {{ form.details|as_bootstrap }}
         </fieldset>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>

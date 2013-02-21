@@ -5,8 +5,30 @@ from atados.volunteer.models import Volunteer
 from sorl.thumbnail import ImageField
 from time import time
 
+WEEKDAYS = (
+        (0, _('Sunday')),
+        (1, _('Monday')),
+        (2, _('Sunday')),
+        (3, _('Sunday')),
+        (4, _('Sunday')),
+        (5, _('Sunday')),
+        (6, _('Sunday')),
+)
 
-class Classification(models.Model):
+class Disponibility(models.Model):
+    weekday = models.PositiveSmallIntegerField(_('weekday'))
+    hour = models.PositiveSmallIntegerField(_('hour'))
+
+    def __unicode__(self):
+        return '% as %' % self.weekday, self.hour
+
+class Cause(models.Model):
+    name = models.CharField(_('name'), max_length=30)
+
+    def __unicode__(self):
+        return self.name
+
+class Skill(models.Model):
     name = models.CharField(_('name'), max_length=30)
 
     def __unicode__(self):
@@ -14,6 +36,8 @@ class Classification(models.Model):
 
 class Project(models.Model):
     organisation = models.ForeignKey(Organisation)
+    cause = models.ManyToManyField(Cause)
+    disponibility = models.ManyToManyField(Disponibility)
     name = models.CharField(_('Project name'), max_length=50)
     slug = models.SlugField(max_length=50)
     details = models.TextField(_('Details'), max_length=1024)
@@ -29,7 +53,7 @@ class Project(models.Model):
                                     blank=True, null=True, default=None)
     city = models.CharField(_('City'), max_length=50,
                             blank=True, null=True, default=None)
-    vacancies = models.IntegerField(_('Vacancies'),
+    vacancies = models.PositiveSmallIntegerField(_('Vacancies'),
                                     blank=True, null=True, default=None)
 
     def image_name(self, filename):
@@ -59,8 +83,8 @@ class ProjectDonation(Project):
             _('Collection made by the organisation'))
 
 class ProjectWork(Project):
-    classification = models.ForeignKey(Classification)
-    weekly_hours = models.IntegerField(_('Weekly hours (approximate)'),
+    skill = models.ManyToManyField(Skill)
+    weekly_hours = models.PositiveSmallIntegerField(_('Weekly hours'),
                                         blank=True, null=True)
     can_be_done_remotely = models.BooleanField(
             _('This work can be done remotely.'))

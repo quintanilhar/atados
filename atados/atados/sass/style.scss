@@ -67,10 +67,12 @@
     -webkit-margin-top-collapse: separate;
   }
 
-  .required label {
-    &:after {
-      padding-left: 3px;
-      content: "*";
+  .required {
+    & > label, & > legend {
+      &:after {
+        padding-left: 3px;
+        content: "*";
+      }
     }
   }
 
@@ -144,6 +146,10 @@
       .span8 {
         input[type=text], input[type=password], textarea {
           width: 308px;
+        }
+
+        select {
+          width: 322px;
         }
       }
     }
