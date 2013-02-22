@@ -5,18 +5,19 @@ from atados.volunteer.models import Volunteer
 from sorl.thumbnail import ImageField
 from time import time
 
+
 WEEKDAYS = (
         (0, _('Sunday')),
         (1, _('Monday')),
-        (2, _('Sunday')),
-        (3, _('Sunday')),
-        (4, _('Sunday')),
-        (5, _('Sunday')),
-        (6, _('Sunday')),
+        (2, _('Tuesday')),
+        (3, _('Wednesday')),
+        (4, _('Thursday')),
+        (5, _('Friday')),
+        (6, _('Saturday')),
 )
 
-class Disponibility(models.Model):
-    weekday = models.PositiveSmallIntegerField(_('weekday'))
+class Availability(models.Model):
+    weekday = models.PositiveSmallIntegerField(_('weekday'), choices=WEEKDAYS)
     hour = models.PositiveSmallIntegerField(_('hour'))
 
     def __unicode__(self):
@@ -36,8 +37,8 @@ class Skill(models.Model):
 
 class Project(models.Model):
     organisation = models.ForeignKey(Organisation)
-    cause = models.ManyToManyField(Cause)
-    disponibility = models.ManyToManyField(Disponibility)
+    causes = models.ManyToManyField(Cause)
+    availability = models.ManyToManyField(Availability)
     name = models.CharField(_('Project name'), max_length=50)
     slug = models.SlugField(max_length=50)
     details = models.TextField(_('Details'), max_length=1024)
@@ -83,7 +84,7 @@ class ProjectDonation(Project):
             _('Collection made by the organisation'))
 
 class ProjectWork(Project):
-    skill = models.ManyToManyField(Skill)
+    skills = models.ManyToManyField(Skill)
     weekly_hours = models.PositiveSmallIntegerField(_('Weekly hours'),
                                         blank=True, null=True)
     can_be_done_remotely = models.BooleanField(
