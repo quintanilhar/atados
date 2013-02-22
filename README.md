@@ -16,3 +16,10 @@ Running the project
 
 Now, you have a voluntary network at http://localhost:8000 and the
 administrative section as http://localhost:8000/admin.
+
+
+LICENSE
+-------
+
+Apache License, Version 2.0
+See LICENSE file.
