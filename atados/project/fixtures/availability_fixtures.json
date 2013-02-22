@@ -1,0 +1,6 @@
+[
+  { "model": "atados.project.Availability", "pk":   1, "fields": { "weekday": "0", "hour": "0" } },
+  { "model": "atados.project.Availability", "pk":   2, "fields": { "weekday": "0", "hour": "1" } },
+  { "model": "atados.project.Availability", "pk":   3, "fields": { "weekday": "0", "hour": "2" } },
+  { "model": "atados.project.Availability", "pk":   4, "fields": { "weekday": "0", "hour": "3" } },
+]
