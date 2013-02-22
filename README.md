@@ -18,7 +18,7 @@ Now, you have a voluntary network at http://localhost:8000 and the
 administrative section as http://localhost:8000/admin.
 
 
-LICENSE
+License
 -------
 
 Apache License, Version 2.0
