@@ -1,7 +1,7 @@
 Atados
 ======
 
-A voluntary network.
+Voluntary network.
 
 
 Running the project
