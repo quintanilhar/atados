@@ -21,7 +21,7 @@ class ProjectCreateForm(forms.ModelForm):
         self.fields['details'].widget.attrs.update({
             'placeholder' : _('Add more info about this project')})
 
-        self.fields['cause'].empty_label = ""
+        self.fields['causes'].empty_label = ""
 
     def clean_name(self):
         name = self.cleaned_data.get('name')
@@ -41,7 +41,7 @@ class ProjectJustOnceCreateForm(ProjectCreateForm):
 
     def __init__(self, *args, **kwargs):
         super(ProjectJustOnceCreateForm, self).__init__(*args, **kwargs)
-        self.fields['skill'].empty_label = ""
+        self.fields['skills'].empty_label = ""
         
     class Meta:
         model = ProjectWork

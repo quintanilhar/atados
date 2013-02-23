@@ -21,7 +21,7 @@ class Availability(models.Model):
     hour = models.PositiveSmallIntegerField(_('hour'))
 
     def __unicode__(self):
-        return '% as %' % self.weekday, self.hour
+        return _('%s at %s') % (self.get_weekday_display(), self.hour)
 
 class Cause(models.Model):
     name = models.CharField(_('name'), max_length=30)
