@@ -2,11 +2,11 @@
 {% load i18n bootstrap_toolkit %}
 
 {% block breadcrumb %}
-<li><a href="{% url project:new organisation.slug %}">{% trans "Project kind choose" %}</a></li>
+<li><a href="{% url project:new nonprofit.slug %}">{% trans "Project kind choose" %}</a></li>
 <li class="active">{% trans "Add new periodic project" %}</li>
 {% endblock %}
 
-{% block action %}{% url project:new-periodic organisation.slug %}{% endblock %}
+{% block action %}{% url project:new-periodic nonprofit.slug %}{% endblock %}
 
 {% block weekly_hours %}
 {{ form.weekly_hours|as_bootstrap }}

@@ -10,7 +10,7 @@ urlpatterns = patterns(
     '',
     url(r'^admin/', include(admin.site.urls)),
     url('', include('atados.atados.urls', namespace='atados')),
-    url('', include('atados.organisation.urls', namespace='organisation')),
+    url('', include('atados.nonprofit.urls', namespace='nonprofit')),
     url('', include('atados.volunteer.urls', namespace='volunteer')),
     url('', include('atados.project.urls', namespace='project')),
     url(_(r'^(?P<slug>[-\w]+)$'), slug, name='slug'),

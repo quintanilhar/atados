@@ -1,3 +1,0 @@
-{% load i18n %}
-http://{{ site }}{% url organisation:sign-up-confirmation activation_key %}
-

@@ -1,0 +1,16 @@
+{% extends 'atados/nonprofit/base.html' %}
+{% load i18n bootstrap_toolkit %}
+
+{% block breadcrumb %}
+<li><a href="{{ nonprofit.get_absolute_url }}">{{ nonprofit.name }}</a></li>
+<li class="active">{% trans "Edit nonprofit details" %}</li>
+{% endblock %}
+
+{% block content %}
+<form class="well" action="{% url nonprofit:edit-nonprofit-details nonprofit.slug %}" method="post">{% csrf_token %}
+  {{ form|as_bootstrap }}
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary">{% trans "Save" %}</button>
+  </div>
+</form>
+{% endblock %}

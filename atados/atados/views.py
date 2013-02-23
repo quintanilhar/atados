@@ -5,8 +5,8 @@ from django.views.generic.simple import direct_to_template
 from django.contrib.auth.models import User
 from atados.volunteer.views import VolunteerDetailsView, VolunteerHomeView
 from atados.volunteer.forms import RegistrationForm
-from atados.organisation.views import OrganisationDetailsView, OrganisationHomeView
-from atados.organisation.models import Organisation
+from atados.nonprofit.views import NonprofitDetailsView, NonprofitHomeView
+from atados.nonprofit.models import Nonprofit
 
 
 template_name = 'atados/atados/home.html'
@@ -14,9 +14,9 @@ template_name = 'atados/atados/home.html'
 def home(request, *args, **kwargs):
     if request.user.is_authenticated():
         try:
-            Organisation.objects.get(user=request.user)
-            return OrganisationHomeView.as_view()(request, *args, **kwargs)
-        except Organisation.DoesNotExist:
+            Nonprofit.objects.get(user=request.user)
+            return NonprofitHomeView.as_view()(request, *args, **kwargs)
+        except Nonprofit.DoesNotExist:
             return VolunteerHomeView.as_view()(request, *args, **kwargs)
 
     return direct_to_template(request, 'atados/atados/home.html',
@@ -31,12 +31,12 @@ def slug(request, *args, **kwargs):
         return VolunteerDetailsView.as_view()(request, *args, **kwargs)
     except User.DoesNotExist:
         try:
-            Organisation.objects.get(slug=kwargs['slug'])
+            Nonprofit.objects.get(slug=kwargs['slug'])
             kwargs.update({
-                'organisation': kwargs.pop('slug')
+                'nonprofit': kwargs.pop('slug')
             })
-            return OrganisationDetailsView.as_view()(request, *args, **kwargs)
-        except Organisation.DoesNotExist:
+            return NonprofitDetailsView.as_view()(request, *args, **kwargs)
+        except Nonprofit.DoesNotExist:
             raise Http404
 
 class JSONResponseMixin(object):

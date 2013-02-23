@@ -8,9 +8,9 @@
       <div class="well well-light">
         <div class="well-header">
           <h2>{% trans "Donation" %}</h2>
-          {% if organisation in organisation_list %}
+          {% if nonprofit in nonprofit_list %}
           <div>
-            <a href="{% url project:edit organisation.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
+            <a href="{% url project:edit nonprofit.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
           </div>
           {% endif %}
         </div>
@@ -20,7 +20,7 @@
         {{ project.phone }} <br />
         {{ project.email }} <br />
         <h2 style="margin-top:22px">{% trans "Delivery and Collection" %}</h2>
-        {{ project.collection_by_organisation }} <br />
+        {{ project.collection_by_nonprofit }} <br />
         {{ project.addressline }} <br />
         {{ project.neighborhood }} <br />
         {{ project.city }} <br />

@@ -125,7 +125,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'atados.atados',
-    'atados.organisation',
+    'atados.nonprofit',
     'atados.volunteer',
     'atados.project',
     'registration',
@@ -190,17 +190,17 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
     "atados.atados.context_processors.site",
-    "atados.organisation.context_processors.organisation",
+    "atados.nonprofit.context_processors.nonprofit",
     "atados.volunteer.context_processors.volunteer",
 )
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'no-reply@atados.com.br'
-EMAIL_HOST_PASSWORD = 'yokomizo'
-EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_PORT = 587
+#EMAIL_HOST_USER = 'no-reply@atados.com.br'
+#EMAIL_HOST_PASSWORD = 'yokomizo'
+#EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'no-reply@atados.com.br'
 
 THUMBNAIL_DEBUG = DEBUG

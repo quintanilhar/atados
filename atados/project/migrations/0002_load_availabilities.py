@@ -1,140 +1,22 @@
 # -*- coding: utf-8 -*-
 import datetime
 from south.db import db
-from south.v2 import SchemaMigration
+from south.v2 import DataMigration
 from django.db import models
 
-
-class Migration(SchemaMigration):
+class Migration(DataMigration):
 
     def forwards(self, orm):
-        # Adding model 'Availability'
-        db.create_table('project_availability', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('weekday', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
-            ('hour', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
-        ))
-        db.send_create_signal('project', ['Availability'])
-
-        # Adding model 'Cause'
-        db.create_table('project_cause', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-        ))
-        db.send_create_signal('project', ['Cause'])
-
-        # Adding model 'Skill'
-        db.create_table('project_skill', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-        ))
-        db.send_create_signal('project', ['Skill'])
-
-        # Adding model 'Project'
-        db.create_table('project_project', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('nonprofit', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['nonprofit.Nonprofit'])),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50)),
-            ('details', self.gf('django.db.models.fields.TextField')(max_length=1024)),
-            ('prerequisites', self.gf('django.db.models.fields.TextField')(max_length=1024)),
-            ('responsible', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('phone', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('zipcode', self.gf('django.db.models.fields.CharField')(default=None, max_length=10, null=True, blank=True)),
-            ('addressline', self.gf('django.db.models.fields.CharField')(default=None, max_length=200, null=True, blank=True)),
-            ('neighborhood', self.gf('django.db.models.fields.CharField')(default=None, max_length=50, null=True, blank=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(default=None, max_length=50, null=True, blank=True)),
-            ('vacancies', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=None, null=True, blank=True)),
-            ('image', self.gf('sorl.thumbnail.fields.ImageField')(default=None, max_length=100, null=True, blank=True)),
-        ))
-        db.send_create_signal('project', ['Project'])
-
-        # Adding unique constraint on 'Project', fields ['slug', 'nonprofit']
-        db.create_unique('project_project', ['slug', 'nonprofit_id'])
-
-        # Adding M2M table for field causes on 'Project'
-        db.create_table('project_project_causes', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('project', models.ForeignKey(orm['project.project'], null=False)),
-            ('cause', models.ForeignKey(orm['project.cause'], null=False))
-        ))
-        db.create_unique('project_project_causes', ['project_id', 'cause_id'])
-
-        # Adding M2M table for field availability on 'Project'
-        db.create_table('project_project_availability', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('project', models.ForeignKey(orm['project.project'], null=False)),
-            ('availability', models.ForeignKey(orm['project.availability'], null=False))
-        ))
-        db.create_unique('project_project_availability', ['project_id', 'availability_id'])
-
-        # Adding model 'ProjectDonation'
-        db.create_table('project_projectdonation', (
-            ('project_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['project.Project'], unique=True, primary_key=True)),
-            ('collection_by_nonprofit', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('project', ['ProjectDonation'])
-
-        # Adding model 'ProjectWork'
-        db.create_table('project_projectwork', (
-            ('project_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['project.Project'], unique=True, primary_key=True)),
-            ('weekly_hours', self.gf('django.db.models.fields.PositiveSmallIntegerField')(null=True, blank=True)),
-            ('can_be_done_remotely', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('project', ['ProjectWork'])
-
-        # Adding M2M table for field skills on 'ProjectWork'
-        db.create_table('project_projectwork_skills', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('projectwork', models.ForeignKey(orm['project.projectwork'], null=False)),
-            ('skill', models.ForeignKey(orm['project.skill'], null=False))
-        ))
-        db.create_unique('project_projectwork_skills', ['projectwork_id', 'skill_id'])
-
-        # Adding model 'Apply'
-        db.create_table('project_apply', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('volunteer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['volunteer.Volunteer'])),
-            ('project', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['project.Project'])),
-        ))
-        db.send_create_signal('project', ['Apply'])
-
+        from atados.project.models import Availability
+        for weekday in range(7):
+            for hour in range(24):
+                availability = Availability()
+                availability.weekday = weekday
+                availability.hour = hour
+                availability.save()
 
     def backwards(self, orm):
-        # Removing unique constraint on 'Project', fields ['slug', 'nonprofit']
-        db.delete_unique('project_project', ['slug', 'nonprofit_id'])
-
-        # Deleting model 'Availability'
-        db.delete_table('project_availability')
-
-        # Deleting model 'Cause'
-        db.delete_table('project_cause')
-
-        # Deleting model 'Skill'
-        db.delete_table('project_skill')
-
-        # Deleting model 'Project'
-        db.delete_table('project_project')
-
-        # Removing M2M table for field causes on 'Project'
-        db.delete_table('project_project_causes')
-
-        # Removing M2M table for field availability on 'Project'
-        db.delete_table('project_project_availability')
-
-        # Deleting model 'ProjectDonation'
-        db.delete_table('project_projectdonation')
-
-        # Deleting model 'ProjectWork'
-        db.delete_table('project_projectwork')
-
-        # Removing M2M table for field skills on 'ProjectWork'
-        db.delete_table('project_projectwork_skills')
-
-        # Deleting model 'Apply'
-        db.delete_table('project_apply')
-
+        raise RuntimeError("Cannot reverse this migration.")
 
     models = {
         'auth.group': {
@@ -245,3 +127,4 @@ class Migration(SchemaMigration):
     }
 
     complete_apps = ['project']
+    symmetrical = True

@@ -8,18 +8,21 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Volunteer'
-        db.create_table('volunteer_volunteer', (
+        # Adding model 'Nonprofit'
+        db.create_table('nonprofit_nonprofit', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50)),
+            ('details', self.gf('django.db.models.fields.TextField')(default=None, max_length=1024, null=True, blank=True)),
             ('image', self.gf('sorl.thumbnail.fields.ImageField')(default=None, max_length=100, null=True, blank=True)),
         ))
-        db.send_create_signal('volunteer', ['Volunteer'])
+        db.send_create_signal('nonprofit', ['Nonprofit'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Volunteer'
-        db.delete_table('volunteer_volunteer')
+        # Deleting model 'Nonprofit'
+        db.delete_table('nonprofit_nonprofit')
 
 
     models = {
@@ -59,12 +62,15 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        'volunteer.volunteer': {
-            'Meta': {'object_name': 'Volunteer'},
+        'nonprofit.nonprofit': {
+            'Meta': {'object_name': 'Nonprofit'},
+            'details': ('django.db.models.fields.TextField', [], {'default': 'None', 'max_length': '1024', 'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('sorl.thumbnail.fields.ImageField', [], {'default': 'None', 'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         }
     }
 
-    complete_apps = ['volunteer']
+    complete_apps = ['nonprofit']

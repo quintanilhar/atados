@@ -11,15 +11,15 @@ from django.utils.translation import ugettext_lazy as _, ugettext as __
 from atados.atados.views import JSONResponseMixin
 from atados.volunteer.models import Volunteer
 from atados.project.models import Project, ProjectDonation, ProjectWork, Apply
-from atados.organisation.models import Organisation
-from atados.organisation.views import OrganisationMixin
+from atados.nonprofit.models import Nonprofit
+from atados.nonprofit.views import NonprofitMixin
 from atados.project.forms import (ProjectDonationCreateForm,
                                   ProjectJustOnceCreateForm,
                                   ProjectPeriodicCreateForm,
                                   ProjectPictureForm)
 
 
-class ProjectMixin(OrganisationMixin):
+class ProjectMixin(NonprofitMixin):
     project = None
 
     def get_context_data(self, **kwargs):
@@ -31,32 +31,32 @@ class ProjectMixin(OrganisationMixin):
         if self.project is None:
             try:
                 self.project = ProjectWork.objects.get(
-                    organisation=self.get_organisation(),
+                    nonprofit=self.get_nonprofit(),
                     slug=self.kwargs.get('project'))
             except ProjectWork.DoesNotExist:
                 try:
                     self.project = ProjectDonation.objects.get(
-                        organisation=self.get_organisation(),
+                        nonprofit=self.get_nonprofit(),
                         slug=self.kwargs.get('project'))
                 except ProjectDonation.DoesNotExist:
                     raise Http404
 
         return self.project
 
-class ProjectCreateView(OrganisationMixin, CreateView):
+class ProjectCreateView(NonprofitMixin, CreateView):
     model=Project
 
     def get_form_kwargs(self):
         kwargs = super(ProjectCreateView, self).get_form_kwargs()
         kwargs.update({
-            'organisation': self.get_organisation(),
+            'nonprofit': self.get_nonprofit(),
         })
         return kwargs
 
     def form_valid(self, form):
         model = form.save(commit=False)
         if self.request.user.is_authenticated():
-            model.organisation = Organisation.objects.get(user=self.request.user)
+            model.nonprofit = Nonprofit.objects.get(user=self.request.user)
             model.slug = slugify(model.name)
         else:
             forms.ValidationError("Authentication required")
@@ -121,18 +121,18 @@ class ProjectEditView(ProjectMixin, UpdateView):
     def get_form_kwargs(self):
         kwargs = super(ProjectEditView, self).get_form_kwargs()
         kwargs.update({
-            'organisation': self.get_organisation(),
+            'nonprofit': self.get_nonprofit(),
         })
         return kwargs
 
     def get_success_url(self):
         return reverse('project:edit',
-                       args=[self.object.organisation.slug, self.object.slug])
+                       args=[self.object.nonprofit.slug, self.object.slug])
 
     def form_valid(self, form):
         model = form.save(commit=False)
         if self.request.user.is_authenticated():
-            model.organisation = Organisation.objects.get(user=self.request.user)
+            model.nonprofit = Nonprofit.objects.get(user=self.request.user)
             model.slug = slugify(model.name)
         else:
             forms.ValidationError("Authentication required")

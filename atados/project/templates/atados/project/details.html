@@ -2,7 +2,7 @@
 {% load i18n bootstrap_toolkit thumbnail %}
 
 {% block breadcrumb %}
-<li><a href="{{ organisation.get_absolute_url }}">{{ organisation.name }}</a></li>
+<li><a href="{{ nonprofit.get_absolute_url }}">{{ nonprofit.name }}</a></li>
 <li class="active">{{ project.name }}</li>
 {% endblock %}
 
@@ -12,7 +12,7 @@
     btn = $(this);
     btn.button('loading');
     $.ajax({
-      url: '{% url project:apply organisation.slug project.slug %}',
+      url: '{% url project:apply nonprofit.slug project.slug %}',
       dataType: 'json',
       type: 'post',
       success: function(data) {
@@ -32,7 +32,7 @@
   <div class="row">
     <div class="span9">
       <h1>{{ project.name }}</h1>
-      <h2 class="organisation"><a href="{{ organisation.get_absolute_url }}">{{ organisation }}</a></h2>
+      <h2 class="nonprofit"><a href="{{ nonprofit.get_absolute_url }}">{{ nonprofit }}</a></h2>
     </div>
     <div class="span3">
       {% if request.user.is_authenticated %}
@@ -51,13 +51,13 @@
       <div class="profile-picture">
         {% thumbnail project.image "220x220" crop="center" as im %}
         <img class="img-rounded" alt="{{ project }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-        {% if organisation in organisation_list %}
-        <a class="btn" href="{% url project:edit-project-picture organisation.slug project.slug %}"><i class="icon-edit"></i> {% trans "Edit project picture" %}</a>
+        {% if nonprofit in nonprofit %}
+        <a class="btn" href="{% url project:edit-project-picture nonprofit.slug project.slug %}"><i class="icon-edit"></i> {% trans "Edit project picture" %}</a>
         {% endif %}
         {% empty %}
-        <div class="img-rounded icon organisation medium"></div>
-        {% if organisation in organisation_list %}
-        <a class="btn" href="{% url project:edit-project-picture organisation.slug project.slug %}"><i class="icon-edit"></i> {% trans "Add project picture" %}</a>
+        <div class="img-rounded icon nonprofit medium"></div>
+        {% if nonprofit in nonprofit %}
+        <a class="btn" href="{% url project:edit-project-picture nonprofit.slug project.slug %}"><i class="icon-edit"></i> {% trans "Add project picture" %}</a>
         {% endif %}
         {% endthumbnail %}
       </div>
@@ -87,17 +87,17 @@
     </div>
     <div class="span3">
       <div class="well">
-        <h2>{% trans "Organisation" %}</h2>
+        <h2>{% trans "nonprofit" %}</h2>
         <p>
-        {% if organisation.details %}
-          {{ organisation.details }}
+        {% if nonprofit.details %}
+          {{ nonprofit.details }}
         {% else %}
-          {% trans "Nothing about this organisation" %}
+          {% trans "Nothing about this nonprofit" %}
         {% endif %}
         </p>
         <h2 style="margin-top:22px">{% trans "Other projects" %}</h2>
         <div class="img-tiny-list">
-          {% for project in organisation.project_set.all %}
+          {% for project in nonprofit.project_set.all %}
           <div class="row-fluid">
             <div class="span12">
               {% thumbnail project.image "42x42" crop="center" as im %}

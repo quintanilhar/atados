@@ -10,10 +10,10 @@ from atados.project.models import (Project,
 
 class ProjectCreateForm(forms.ModelForm):
 
-    def __init__(self, organisation, *args, **kwargs):
+    def __init__(self, nonprofit, *args, **kwargs):
         super(ProjectCreateForm, self).__init__(*args, **kwargs)
 
-        self.organisation = organisation
+        self.nonprofit = nonprofit
 
         self.fields['email'].widget.attrs.update({
             'placeholder' : _('example@example.com')})
@@ -27,7 +27,7 @@ class ProjectCreateForm(forms.ModelForm):
         name = self.cleaned_data.get('name')
         slug = slugify(name)
         if slug and self.instance.slug != slug and Project.objects.filter(
-                slug=slug, organisation=self.organisation).count():
+                slug=slug, nonprofit=self.nonprofit).count():
             raise forms.ValidationError(_('This name (or a very similar) is already is use.'))
         return name
 
@@ -35,7 +35,7 @@ class ProjectDonationCreateForm(ProjectCreateForm):
 
     class Meta:
         model = ProjectDonation
-        exclude = ('organisation', 'slug')
+        exclude = ('nonprofit', 'slug')
 
 class ProjectJustOnceCreateForm(ProjectCreateForm):
 
@@ -45,7 +45,7 @@ class ProjectJustOnceCreateForm(ProjectCreateForm):
         
     class Meta:
         model = ProjectWork
-        exclude = ('organisation', 'slug', 'weekly_hours')
+        exclude = ('nonprofit', 'slug', 'weekly_hours')
 
 class ProjectPeriodicCreateForm(ProjectJustOnceCreateForm):
 
@@ -55,7 +55,7 @@ class ProjectPeriodicCreateForm(ProjectJustOnceCreateForm):
 
     class Meta:
         model = ProjectWork
-        exclude = ('organisation', 'slug')
+        exclude = ('nonprofit', 'slug')
 
 class ProjectPictureForm(forms.ModelForm):
     class Meta:

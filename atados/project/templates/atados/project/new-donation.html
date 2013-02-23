@@ -2,7 +2,7 @@
 {% load i18n bootstrap_toolkit %}
 
 {% block breadcrumb %}
-<li><a href="{% url project:new organisation.slug %}">{% trans "Project kind choose" %}</a></li>
+<li><a href="{% url project:new nonprofit.slug %}">{% trans "Project kind choose" %}</a></li>
 <li class="active">{% trans "Add new donation project" %}</li>
 {% endblock %}
 
@@ -15,7 +15,7 @@
   </div>
   <div class="row">
     <div class="span7">
-      <form class="well" method="post" action="{% url project:new-donation organisation.slug %}">{% csrf_token %}
+      <form class="well" method="post" action="{% url project:new-donation nonprofit.slug %}">{% csrf_token %}
         <fieldset>
           <legend>{% trans "About donantion" %}</legend>
           {{ form.name|as_bootstrap }}
@@ -23,7 +23,7 @@
         </fieldset>
         <fieldset>
           <legend>{% trans "Collecting" %}</legend>
-          {{ form.collection_by_organisation|as_bootstrap }}
+          {{ form.collection_by_nonprofit|as_bootstrap }}
         </fieldset>
         <fieldset>
           <legend>{% trans "Delivery" %}</legend>
@@ -51,7 +51,7 @@
         </fieldset>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
-          <a class="btn" href="{% url project:new organisation.slug %}">{% trans "Back" %}</a>
+          <a class="btn" href="{% url project:new nonprofit.slug %}">{% trans "Back" %}</a>
         </div>
       </form>
     </div>

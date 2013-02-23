@@ -97,7 +97,7 @@
       width:60px;
       height:60px;
 
-      &.organisation {
+      &.nonprofit {
         background-position:0 -220px;
       }
 
@@ -110,7 +110,7 @@
       width:42px;
       height:42px;
 
-      &.organisation {
+      &.nonprofit {
         background-position:-120px -220px;
       }
 
@@ -469,7 +469,7 @@
     }
   }
 
-  #volunteer-sign-up, #organisation-sign-up {
+  #volunteer-sign-up, #nonprofit-sign-up {
 
     .reasons {
       p {
@@ -534,7 +534,7 @@
     } 
   }
 
-  #organisation-home {
+  #nonprofit-home {
     h1 {
       margin:10px 0 0;
     }
@@ -544,7 +544,7 @@
     }
   }
 
-  #project-organisation {
+  #project-nonprofit {
     .nav  {
       .badge {
         float:right;

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from atados.organisation.models import Organisation
+from atados.nonprofit.models import Nonprofit
 from atados.volunteer.models import Volunteer
 from sorl.thumbnail import ImageField
 from time import time
@@ -36,7 +36,7 @@ class Skill(models.Model):
         return self.name
 
 class Project(models.Model):
-    organisation = models.ForeignKey(Organisation)
+    nonprofit = models.ForeignKey(Nonprofit)
     causes = models.ManyToManyField(Cause)
     availability = models.ManyToManyField(Availability)
     name = models.CharField(_('Project name'), max_length=50)
@@ -59,29 +59,29 @@ class Project(models.Model):
 
     def image_name(self, filename):
         left_path, extension = filename.rsplit('.', 1)
-        return 'project/%s/%s/%s.%s' % (self.organisation.slug,
+        return 'project/%s/%s/%s.%s' % (self.nonprofit.slug,
                                         time(), self.slug, extension)
 
     image = ImageField(upload_to=image_name, blank=True,
                        null=True, default=None)
 
     def __unicode__(self):
-        return  '%s - %s' % (self.name, self.organisation.name)
+        return  '%s - %s' % (self.name, self.nonprofit.name)
 
     @models.permalink
     def get_absolute_url(self):
-        return ('project:details', (self.organisation.slug, self.slug))
+        return ('project:details', (self.nonprofit.slug, self.slug))
 
     @models.permalink
     def get_edit_url(self):
-        return ('project:edit', (self.organisation.slug, self.slug))
+        return ('project:edit', (self.nonprofit.slug, self.slug))
 
     class Meta:
-        unique_together = (("slug", "organisation"),)
+        unique_together = (("slug", "nonprofit"),)
 
 class ProjectDonation(Project):
-    collection_by_organisation = models.BooleanField(
-            _('Collection made by the organisation'))
+    collection_by_nonprofit = models.BooleanField(
+            _('Collection made by the nonprofit'))
 
 class ProjectWork(Project):
     skills = models.ManyToManyField(Skill)

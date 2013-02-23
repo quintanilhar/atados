@@ -1,0 +1,100 @@
+{% extends 'atados/nonprofit/base.html' %}
+{% load i18n thumbnail %}
+
+{% block breadcrumb %}
+<li class="active">{{ nonprofit.name }}</li>
+{% endblock %}
+
+{% block content %}
+<div id="nonprofit-details">
+  <div class="row">
+    <div class="span12">
+      <h1>{{ nonprofit.name }}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span3">
+      <div class="profile-picture">
+        {% thumbnail nonprofit.image "220x220" crop="center" as im %}
+        <img class="img-rounded" alt="{{ nonprofit }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+        {% if nonprofit in nonprofit_list %}
+        <a class="btn" href="{% url nonprofit:edit-nonprofit-picture nonprofit.slug %}"><i class="icon-edit"></i> {% trans "Edit profile picture" %}</a>
+        {% endif %}
+        {% empty %}
+        <div class="img-rounded icon nonprofit medium"></div>
+        {% if nonprofit in nonprofit_list %}
+        <a class="btn" href="{% url nonprofit:edit-nonprofit-picture nonprofit.slug %}"><i class="icon-edit"></i> {% trans "Add profile picture" %}</a>
+        {% endif %}
+        {% endthumbnail %}
+      </div>
+      <div class="row">
+        <div class="span3">
+          <h2 style="margin-top:12px">{% trans "Volunteers" %}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span3">
+          <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
+          <div style=""><a href="#">Rogerio da Silva Yokomizo</a></div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span3">
+          <img class="img-rounded" style="width:42px; float:left; margin:0 10px 10px 0" src="{{ STATIC_URL }}/img/dummy.jpg" />
+          <div style=""><a href="#">Rogerio Yokomizo</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="well well-light">
+        <div class="well-header">
+          <h2>{% trans "Projects" %}</h2>
+          {% if nonprofit in nonprofit_list %}
+          <div>
+            <a href="{% url project:new nonprofit.slug %}">{% trans "New project" %}</a>
+          </div>
+          {% endif %}
+        </div>
+        <ul class="projects">
+          {% for project in nonprofit.project_set.all %}
+          <li class="row-fluid">
+            <div class="span2">
+              {% thumbnail project.image "60x60" crop="center" as im %}
+              <a href="{{ project.get_absolute_url }}"><img class="img-rounded" alt="{{ project }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" /></a>
+              {% empty %}
+              <a href="{{ project.get_absolute_url }}" class="img-rounded icon project small"></a>
+              {% endthumbnail %}
+            </div>
+            <div class="span10">
+              <a href="{{ project.get_absolute_url }}">{{ project.name }}</a>
+              <p>{{ project.details }}</p>
+            </div>
+          </li>
+          {% empty %}
+          <li>{% trans "This nonprofit doesn't have any projects." %}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    <div class="span3">
+      <div class="well">
+        <div class="well-header">
+          <h2>{% trans "Nonprofit" %}</h2>
+          {% if nonprofit in nonprofit_list %}
+          <div>
+            <a href="{% url nonprofit:edit-nonprofit-details nonprofit.slug %}">{% trans "Edit" %}</a>
+          </div>
+          {% endif %}
+        </div>
+        <p>
+        {% if nonprofit.details %}
+          {{ nonprofit.details }}
+        {% else %}
+          {% trans "Nothing about this nonprofit" %}
+        {% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
