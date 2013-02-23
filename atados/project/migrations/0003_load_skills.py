@@ -73,8 +73,8 @@ class Migration(DataMigration):
         },
         'project.availability': {
             'Meta': {'object_name': 'Availability'},
-            'hour': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'period': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
             'weekday': ('django.db.models.fields.PositiveSmallIntegerField', [], {})
         },
         'project.cause': {

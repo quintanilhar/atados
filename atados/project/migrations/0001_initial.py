@@ -12,7 +12,7 @@ class Migration(SchemaMigration):
         db.create_table('project_availability', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('weekday', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
-            ('hour', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
+            ('period', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
         ))
         db.send_create_signal('project', ['Availability'])
 
@@ -190,8 +190,8 @@ class Migration(SchemaMigration):
         },
         'project.availability': {
             'Meta': {'object_name': 'Availability'},
-            'hour': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'period': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
             'weekday': ('django.db.models.fields.PositiveSmallIntegerField', [], {})
         },
         'project.cause': {

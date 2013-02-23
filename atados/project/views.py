@@ -10,7 +10,8 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _, ugettext as __
 from atados.atados.views import JSONResponseMixin
 from atados.volunteer.models import Volunteer
-from atados.project.models import Project, ProjectDonation, ProjectWork, Apply
+from atados.project.models import (Project, ProjectDonation, ProjectWork,
+                                   Apply, Availability)
 from atados.nonprofit.models import Nonprofit
 from atados.nonprofit.views import NonprofitMixin
 from atados.project.forms import (ProjectDonationCreateForm,
@@ -18,6 +19,19 @@ from atados.project.forms import (ProjectDonationCreateForm,
                                   ProjectPeriodicCreateForm,
                                   ProjectPictureForm)
 
+
+class AvailabilityMixin(object):
+    availability_list = None
+
+    def __init__(self, *args, **kwargs):
+        super(AvailabilityMixin, self).__init__(*args, **kwargs)
+        self.availability_list = Availability.objects.all()
+
+
+    def get_context_data(self, **kwargs):
+        context = super(AvailabilityMixin, self).get_context_data(**kwargs)
+        context.update({'availability_list': self.availability_list})
+        return context
 
 class ProjectMixin(NonprofitMixin):
     project = None
@@ -43,7 +57,7 @@ class ProjectMixin(NonprofitMixin):
 
         return self.project
 
-class ProjectCreateView(NonprofitMixin, CreateView):
+class ProjectCreateView(NonprofitMixin, AvailabilityMixin, CreateView):
     model=Project
 
     def get_form_kwargs(self):

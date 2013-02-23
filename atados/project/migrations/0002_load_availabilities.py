@@ -9,10 +9,10 @@ class Migration(DataMigration):
     def forwards(self, orm):
         from atados.project.models import Availability
         for weekday in range(7):
-            for hour in range(24):
+            for period in range(3):
                 availability = Availability()
                 availability.weekday = weekday
-                availability.hour = hour
+                availability.period = period
                 availability.save()
 
     def backwards(self, orm):
@@ -72,8 +72,8 @@ class Migration(DataMigration):
         },
         'project.availability': {
             'Meta': {'object_name': 'Availability'},
-            'hour': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'period': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
             'weekday': ('django.db.models.fields.PositiveSmallIntegerField', [], {})
         },
         'project.cause': {

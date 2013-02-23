@@ -37,6 +37,10 @@
             </div>
           </div>
 
+          {% for availability in availability_list %}
+          <p>x. {{ availability }}</p>
+          {% endfor %}
+
         </fieldset>
         <fieldset>
           <legend>{% trans "Location" %}</legend>

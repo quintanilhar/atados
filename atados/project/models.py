@@ -6,22 +6,28 @@ from sorl.thumbnail import ImageField
 from time import time
 
 
-WEEKDAYS = (
-        (0, _('Sunday')),
-        (1, _('Monday')),
-        (2, _('Tuesday')),
-        (3, _('Wednesday')),
-        (4, _('Thursday')),
-        (5, _('Friday')),
-        (6, _('Saturday')),
-)
-
 class Availability(models.Model):
+    WEEKDAYS = (
+            (0, _('Sunday')),
+            (1, _('Monday')),
+            (2, _('Tuesday')),
+            (3, _('Wednesday')),
+            (4, _('Thursday')),
+            (5, _('Friday')),
+            (6, _('Saturday')),
+    )
+
+    PERIOD = (
+            (0, _('Morning')),
+            (1, _('Afternoon')),
+            (2, _('Evening')),
+    )
+
     weekday = models.PositiveSmallIntegerField(_('weekday'), choices=WEEKDAYS)
-    hour = models.PositiveSmallIntegerField(_('hour'))
+    period = models.PositiveSmallIntegerField(_('period'), choices=PERIOD)
 
     def __unicode__(self):
-        return _('%s at %s') % (self.get_weekday_display(), self.hour)
+        return _('%s at %s') % (self.get_weekday_display(), self.get_period_display())
 
 class Cause(models.Model):
     name = models.CharField(_('name'), max_length=30)
