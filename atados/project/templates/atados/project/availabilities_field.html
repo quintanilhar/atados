@@ -1,0 +1,30 @@
+<label class="control-label">{{ field.label }}</label>
+<div class="controls">
+
+  <table>
+    <tr>
+      <td></td>
+      {% for period_id, period_label in periods %}
+        <td>{{ period_label }}</td>
+      {% endfor %}
+    </tr>
+    {% for weekday_id, weekday_label in weekdays %}
+    <tr>
+      <td>{{ weekday_label }}</td>
+      {% for period_id, period_label in periods %}
+      <td>
+        {% get_availability weekday_id period_id %}
+        <input
+            type="checkbox"
+            name="{{ field.html_name }}"
+            value="{{ choice_id }}"
+            {% if choice_id|safe in field.value|safe %}checked{% endif %}
+        >
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+
+  {% include "bootstrap_toolkit/field_errors.html" with display="block" %}
+</div>

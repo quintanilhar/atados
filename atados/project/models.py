@@ -6,25 +6,25 @@ from sorl.thumbnail import ImageField
 from time import time
 
 
+WEEKDAYS = (
+        (1, _('Monday')),
+        (2, _('Tuesday')),
+        (3, _('Wednesday')),
+        (4, _('Thursday')),
+        (5, _('Friday')),
+        (6, _('Saturday')),
+        (0, _('Sunday')),
+)
+
+PERIODS = (
+        (0, _('Morning')),
+        (1, _('Afternoon')),
+        (2, _('Evening')),
+)
+
 class Availability(models.Model):
-    WEEKDAYS = (
-            (0, _('Sunday')),
-            (1, _('Monday')),
-            (2, _('Tuesday')),
-            (3, _('Wednesday')),
-            (4, _('Thursday')),
-            (5, _('Friday')),
-            (6, _('Saturday')),
-    )
-
-    PERIOD = (
-            (0, _('Morning')),
-            (1, _('Afternoon')),
-            (2, _('Evening')),
-    )
-
     weekday = models.PositiveSmallIntegerField(_('weekday'), choices=WEEKDAYS)
-    period = models.PositiveSmallIntegerField(_('period'), choices=PERIOD)
+    period = models.PositiveSmallIntegerField(_('period'), choices=PERIODS)
 
     def __unicode__(self):
         return _('%s at %s') % (self.get_weekday_display(), self.get_period_display())
@@ -44,7 +44,7 @@ class Skill(models.Model):
 class Project(models.Model):
     nonprofit = models.ForeignKey(Nonprofit)
     causes = models.ManyToManyField(Cause)
-    availability = models.ManyToManyField(Availability)
+    availabilities = models.ManyToManyField(Availability)
     name = models.CharField(_('Project name'), max_length=50)
     slug = models.SlugField(max_length=50)
     details = models.TextField(_('Details'), max_length=1024)

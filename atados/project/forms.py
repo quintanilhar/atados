@@ -22,7 +22,7 @@ class ProjectCreateForm(forms.ModelForm):
             'placeholder' : _('Add more info about this project')})
 
         self.fields['causes'].empty_label = ""
-
+        
     def clean_name(self):
         name = self.cleaned_data.get('name')
         slug = slugify(name)

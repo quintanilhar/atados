@@ -1,5 +1,5 @@
 {% extends 'atados/atados/base.html' %}
-{% load i18n bootstrap_toolkit %}
+{% load i18n bootstrap_toolkit atados.project %}
 
 {% block breadcrumb %}
 <li><a href="{% url project:new nonprofit.slug %}">{% trans "Project kind choose" %}</a></li>
@@ -37,9 +37,7 @@
             </div>
           </div>
 
-          {% for availability in availability_list %}
-          <p>x. {{ availability }}</p>
-          {% endfor %}
+          {{ form.availabilities|as_availabilities_field }}
 
         </fieldset>
         <fieldset>
