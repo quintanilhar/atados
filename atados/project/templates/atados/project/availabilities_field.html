@@ -1,6 +1,5 @@
 <label class="control-label">{{ field.label }}</label>
 <div class="controls">
-
   <table>
     <tr>
       <td></td>
@@ -8,17 +7,16 @@
         <td>{{ period_label }}</td>
       {% endfor %}
     </tr>
-    {% for weekday_id, weekday_label in weekdays %}
+    {% for weekday_id, weekday in availabilities.iteritems %}
     <tr>
-      <td>{{ weekday_label }}</td>
-      {% for period_id, period_label in periods %}
+      <td>{{ weekday.weekday_label }}</td>
+      {% for period_id, availability_id in weekday.periods.iteritems %}
       <td>
-        {% get_availability weekday_id period_id %}
         <input
             type="checkbox"
             name="{{ field.html_name }}"
-            value="{{ choice_id }}"
-            {% if choice_id|safe in field.value|safe %}checked{% endif %}
+            value="{{ availability_id }}"
+            {% if availability_id|safe in field.value|safe %}checked{% endif %}
         >
       </td>
       {% endfor %}
