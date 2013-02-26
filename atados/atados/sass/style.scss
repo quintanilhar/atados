@@ -624,4 +624,29 @@
       right:0;
     }
   }
+
+  .select-button-list {
+    padding:0;
+    margin:1px 1px 10px 0;
+    float:left;
+
+    li {
+      list-style:none;
+      margin:0;
+      padding:0;
+      float:left;
+      width:107px;
+      height:107px;
+      overflow:hidden;
+      padding:8px;
+      border:1px solid #ccc;
+      margin:-1px -1px 0 0;
+      cursor:pointer;
+
+      &:hover {
+        background:$dark-blue;
+        color:#fff;
+      }
+    }
+  }
 }
