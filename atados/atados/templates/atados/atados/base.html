@@ -31,7 +31,7 @@
             <div class="span3">
               <form class="form-search" action="{% url atados:search %}" method="get">
                 <div class="input-append">
-                  <input type="text" class="search-query" placeholder="{% trans "Search" %}">
+                  <input type="text" class="search-query" name="q" placeholder="{% trans "Search" %}">
                   <button type="submit" class="btn"><i class="icon-search"></i></button>
                 </div>
               </form>
