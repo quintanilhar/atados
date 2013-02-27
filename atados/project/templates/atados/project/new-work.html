@@ -3,21 +3,22 @@
 
 {% block breadcrumb %}
 <li><a href="{% url project:new nonprofit.slug %}">{% trans "Project kind choose" %}</a></li>
-<li class="active">{% trans "Add new just once project" %}</li>
+<li class="active">{% trans "Add new work" %}</li>
 {% endblock %}
 
 {% block content %}
 <div id="project-new-just-once">
   <div class="row">
     <div class="span12">
-      <h1>{% trans "New just once project" %}</h1>
+      {% block h1 %}
+      <h1>{% trans "Add new work" %}</h1>
+      {% endblock %}
     </div>
   </div>
   <div class="row">
     <div class="span7">
       <form class="well" method="post" action="{% block action %}{% url project:new-just-once nonprofit.slug %}{% endblock %}">{% csrf_token %}
         <fieldset>
-          <legend>{% trans "About job" %}</legend>
           {{ form.name|as_bootstrap }}
         </fieldset>
         <fieldset>

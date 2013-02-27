@@ -1,25 +1,27 @@
 {% extends 'atados/atados/base.html' %}
-{% load i18n bootstrap_toolkit %}
+{% load i18n bootstrap_toolkit atados.project %}
 
 {% block breadcrumb %}
 <li><a href="{% url project:new nonprofit.slug %}">{% trans "Project kind choose" %}</a></li>
-<li class="active">{% trans "Add new donation project" %}</li>
+<li class="active">{% trans "Add new donation" %}</li>
 {% endblock %}
 
 {% block content %}
 <div id="project-new-donation">
   <div class="row">
     <div class="span12">
-      <h1>{% trans "New donation project" %}</h1>
+      <h1>{% trans "Add new donation" %}</h1>
     </div>
   </div>
   <div class="row">
     <div class="span7">
       <form class="well" method="post" action="{% url project:new-donation nonprofit.slug %}">{% csrf_token %}
         <fieldset>
-          <legend>{% trans "About donantion" %}</legend>
           {{ form.name|as_bootstrap }}
-          {{ form.details|as_bootstrap }}
+        </fieldset>
+        <fieldset>
+          <legend>{% trans "Causes" %}</legend>
+          {{ form.causes|as_select_button_list_field }}
         </fieldset>
         <fieldset>
           <legend>{% trans "Collecting" %}</legend>
@@ -27,7 +29,14 @@
         </fieldset>
         <fieldset>
           <legend>{% trans "Delivery" %}</legend>
-          {{ form.addressline|as_bootstrap }}
+          <div class="row-fluid">
+            <div class="span4">
+              {{ form.zipcode|as_bootstrap }}
+            </div>
+            <div class="span8">
+              {{ form.addressline|as_bootstrap }}
+            </div>
+          </div>
           <div class="row-fluid">
             <div class="span6">
               {{ form.neighborhood|as_bootstrap }}
@@ -48,6 +57,10 @@
               {{ form.email|as_bootstrap }}
             </div>
           </div>
+        </fieldset>
+        <fieldset>
+          <legend>{% trans "More info" %}</legend>
+          {{ form.details|as_bootstrap }}
         </fieldset>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">{% trans "Create" %}</button>
