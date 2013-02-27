@@ -675,4 +675,41 @@
       text-align:center;
     }
   }
+
+  #search-result {
+    .nav  {
+      li.active {
+        a {
+          background:$dark-blue;
+          color:#fff;
+        }
+      }
+    }
+
+    hr {
+      margin-top:0;
+    }
+
+    form {
+
+      input {
+        font-size:18px;
+        height:30px;
+      }
+
+      button {
+        font-size:18px;
+        height:40px;
+      }
+    }
+
+    .results {
+      .thumb {
+      }
+      .title {
+      }
+      .description {
+      }
+    }
+  }
 }

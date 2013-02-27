@@ -12,3 +12,9 @@ pep8:
 	
 sass:
 	@sass --style compressed --watch atados/atados/sass:atados/atados/static/css
+
+solr-rebuild:
+	@python ./manage.py rebuild_index
+
+solr-schema:
+	@python ./manage.py build_solr_schema > schema.xml

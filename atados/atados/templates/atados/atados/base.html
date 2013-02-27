@@ -28,14 +28,16 @@
                 <a href="{% url atados:home %}">{{ site.name }}</a>
               </div>
             </div>
+            {% block search %}
             <div class="span3">
               <form class="form-search" action="{% url atados:search %}" method="get">
                 <div class="input-append">
-                  <input type="text" class="search-query" name="q" placeholder="{% trans "Search" %}">
+                  <input type="text" class="search-query" name="q" value="{{ form.q.value }}" placeholder="{% trans "Search" %}">
                   <button type="submit" class="btn"><i class="icon-search"></i></button>
                 </div>
               </form>
             </div>
+            {% endblock %}
             <div class="span2">
               <div class="dropdown location-selector">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">{% trans "Explore your city" %} <span class="caret"></span></a>
