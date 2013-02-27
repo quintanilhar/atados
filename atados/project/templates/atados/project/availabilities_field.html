@@ -17,7 +17,7 @@
             name="{{ field.html_name }}"
             value="{{ availability_id }}"
             {% if availability_id|safe in field.value|safe %}checked{% endif %}
-        >
+        />
       </td>
       {% endfor %}
     </tr>

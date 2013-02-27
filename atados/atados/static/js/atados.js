@@ -35,4 +35,18 @@
     $(this).tab('show');
   });
 
+  
+  $('.select-button-list li a').click(function(){
+    li = $(this).parent('li');
+    checkbox = $('[type=checkbox]', li);
+    if (checkbox.is(':checked')) {
+      checkbox.prop('checked', false);
+      li.removeClass('active');
+    } else {
+      checkbox.prop('checked', true);
+      li.addClass('active');
+    }
+    return false;
+  });
+
 }( window , window.jQuery ));
