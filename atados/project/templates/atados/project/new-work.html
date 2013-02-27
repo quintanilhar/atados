@@ -22,11 +22,11 @@
         </fieldset>
         <fieldset>
           <legend>{% trans "Causes" %}</legend>
-          {{ form.causes|as_causes_field }}
+          {{ form.causes|as_select_button_list_field }}
         </fieldset>
         <fieldset>
           <legend>{% trans "Skills" %}</legend>
-          {{ form.skills|as_skills_field }}
+          {{ form.skills|as_select_button_list_field }}
           {{ form.prerequisites|as_bootstrap }}
         </fieldset>
         <fieldset>

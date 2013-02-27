@@ -15,7 +15,6 @@ def as_availabilities_field(field):
         availabilities[availability.weekday]['periods'].update(
                 {availability.period: availability.id})
 
-    print availabilities
     return get_template("atados/project/availabilities_field.html").render(
         Context({
             'field': field,
@@ -26,16 +25,8 @@ def as_availabilities_field(field):
     )
 
 @register.filter
-def as_causes_field(field):
-    return get_template("atados/project/causes_field.html").render(
-        Context({
-            'field': field,
-        })
-    )
-
-@register.filter
-def as_skills_field(field):
-    return get_template("atados/project/skills_field.html").render(
+def as_select_button_list_field(field):
+    return get_template("atados/project/select_button_list_field.html").render(
         Context({
             'field': field,
         })
