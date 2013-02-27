@@ -22,6 +22,8 @@ class ProjectCreateForm(forms.ModelForm):
             'placeholder' : _('Add more info about this project')})
 
         self.fields['causes'].empty_label = ""
+
+        self.fields['causes'].label = _("Select one or more causes")
         
     def clean_name(self):
         name = self.cleaned_data.get('name')
@@ -42,6 +44,7 @@ class ProjectJustOnceCreateForm(ProjectCreateForm):
     def __init__(self, *args, **kwargs):
         super(ProjectJustOnceCreateForm, self).__init__(*args, **kwargs)
         self.fields['skills'].empty_label = ""
+        self.fields['skills'].label = _("Select one or more skills")
         
     class Meta:
         model = ProjectWork

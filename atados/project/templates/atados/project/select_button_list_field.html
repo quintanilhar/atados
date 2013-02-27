@@ -1,21 +1,24 @@
-<div class="controls">
-  {{ choices_start }}
-  <ul class="select-button-list">
-    {% for choice_id, choice_label in field.field.choices %}
-    {% if choice_id %}
-    <li{% if choice_id|safe in field.value|safe %} class="active"{% endif %}>
-      <a href="#">{{ choice_label }}</a>
-      <input
-        type="checkbox"
-        name="{{ field.html_name }}"
-        value="{{ choice_id }}"
-        {% if choice_id|safe in field.value|safe %}checked{% endif %}
-      />
-    </li>
-    {% endif %}
-    {% endfor %}
-  </ul>
-  {{ choices_end }}
+<div class="control-group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+  <label class="control-label">{{ field.label }}</label>
+  <div class="controls">
+    {{ choices_start }}
+    <ul class="select-button-list">
+      {% for choice_id, choice_label in field.field.choices %}
+      {% if choice_id %}
+      <li{% if choice_id|safe in field.value|safe %} class="active"{% endif %}>
+        <a href="#">{{ choice_label }}</a>
+        <input
+          type="checkbox"
+          name="{{ field.html_name }}"
+          value="{{ choice_id }}"
+          {% if choice_id|safe in field.value|safe %}checked{% endif %}
+        />
+      </li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+    {{ choices_end }}
 
-  {% include "bootstrap_toolkit/field_errors.html" with display="block" %}
+    {% include "bootstrap_toolkit/field_errors.html" with display="block" %}
+  </div>
 </div>

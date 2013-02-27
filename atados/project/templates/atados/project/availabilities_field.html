@@ -1,28 +1,34 @@
-<label class="control-label">{{ field.label }}</label>
-<div class="controls">
-  <table>
-    <tr>
-      <td></td>
-      {% for period_id, period_label in periods %}
-        <td>{{ period_label }}</td>
-      {% endfor %}
-    </tr>
-    {% for weekday_id, weekday in availabilities.iteritems %}
-    <tr>
-      <td>{{ weekday.weekday_label }}</td>
-      {% for period_id, availability_id in weekday.periods.iteritems %}
-      <td>
-        <input
-            type="checkbox"
-            name="{{ field.html_name }}"
-            value="{{ availability_id }}"
-            {% if availability_id|safe in field.value|safe %}checked{% endif %}
-        />
-      </td>
-      {% endfor %}
-    </tr>
-    {% endfor %}
-  </table>
+<div class="control-group{% if field.errors %} error{% endif %}{% if field.field.required %} required{% endif %}">
+  <label class="control-label">{{ field.label }}</label>
+  <div class="controls">
+    <table class="table table-bordered table-striped table-availabilities">
+      <thead>
+        <tr>
+          <th></th>
+          {% for period_id, period_label in periods %}
+            <th>{{ period_label }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for weekday_id, weekday in availabilities.iteritems %}
+        <tr>
+          <th>{{ weekday.weekday_label }}</th>
+          {% for period_id, availability_id in weekday.periods.iteritems %}
+          <td>
+            <input
+                type="checkbox"
+                name="{{ field.html_name }}"
+                value="{{ availability_id }}"
+                {% if availability_id|safe in field.value|safe %}checked{% endif %}
+            />
+          </td>
+          {% endfor %}
+        </tr>
+        {% endfor %}
+      <tbody>
+    </table>
 
-  {% include "bootstrap_toolkit/field_errors.html" with display="block" %}
+    {% include "bootstrap_toolkit/field_errors.html" with display="block" %}
+  </div>
 </div>
