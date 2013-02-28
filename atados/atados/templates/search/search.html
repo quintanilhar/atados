@@ -111,16 +111,16 @@
         {% else %}
         <div class="well">
           {% if 'Project' in form.types.value and form.types.value|length == 1 or not form.types.value %}
-          {% blocktrans %}We couldn't find any projects matching '{{ query }}'{% endblocktrans %}
+          {% blocktrans %}We couldn't find any projects matching '{{ query }}'.{% endblocktrans %}
 
           {% elif 'Nonprofit' in form.types.value and form.types.value|length == 1 %}
-          {% blocktrans %}We couldn't find any nonprofits matching '{{ query }}'{% endblocktrans %}
+          {% blocktrans %}We couldn't find any nonprofits matching '{{ query }}'.{% endblocktrans %}
 
           {% elif 'Volunteer' in form.types.value and form.types.value|length == 1 %}
-          {% blocktrans %}We couldn't find any volunteers matching '{{ query }}'{% endblocktrans %}
+          {% blocktrans %}We couldn't find any volunteers matching '{{ query }}'.{% endblocktrans %}
 
           {% else %}
-          {% blocktrans %}We couldn't find any results matching '{{ query }}'{% endblocktrans %}
+          {% blocktrans %}We couldn't find any results matching '{{ query }}'.{% endblocktrans %}
           {% endif %}
         </div>
         {% endif %}
