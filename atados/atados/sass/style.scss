@@ -704,11 +704,28 @@
     }
 
     .results {
-      .thumb {
+
+      .bar {
+        font-weight:bold;
+        margin-bottom:18px;
       }
-      .title {
-      }
-      .description {
+
+      ul {
+        margin:0;
+        padding:0;
+
+        li {
+          list-style:none;
+          border-top:1px solid #eee;
+          padding:18px 0;
+        }
+
+        .thumb {
+        }
+        .title {
+        }
+        .description {
+        }
       }
     }
   }

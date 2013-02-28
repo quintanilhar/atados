@@ -1,5 +1,5 @@
 {% extends 'atados/atados/base.html' %}
-{% load i18n bootstrap_toolkit %}
+{% load i18n bootstrap_toolkit thumbnail %}
 
 {% block breadcrumb %}
 <li class="active">{% trans "Search" %}</li>
@@ -34,17 +34,32 @@
     </div>
     <div class="span9">
       {% if query %}
-      <ul class="results">
-        {% trans "We've found XXXXX project results" %}
-        {% for result in page.object_list %}
-        <li>
-          <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.name }}</a>
-          <p class="description">{{ result.object.details }}</p>
-        </li>
-        {% empty %}
-        <p>No results found.</p>
-        {% endfor %}
-      </ul>
+      <div class="results">
+        <div class="bar">
+          {% trans "We've found XXXXX project results" %}
+        </div>
+        <ul>
+          {% for result in page.object_list %}
+          <li>
+          <div class="row">
+            <div class="span1">
+              {% thumbnail result.object.image "60x60" crop="center" as im %}
+              <img class="img-rounded" alt="{{ result.object }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
+              {% empty %}
+              <div class="img-rounded icon project small"></div>
+              {% endthumbnail %}
+            </div>
+            <div class="span8">
+              <a class="title" href="{{ result.object.get_absolute_url }}">{{ result.object.name }}</a>
+              <p class="description">{{ result.object.details }}</p>
+            </div>
+          </div>
+          </li>
+          {% empty %}
+          <p>No results found.</p>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </div>
   {% if page.has_previous or page.has_next %}
