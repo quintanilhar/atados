@@ -703,14 +703,14 @@
       }
     }
 
-    .results {
+    .result {
 
       .bar {
         font-weight:bold;
         margin-bottom:18px;
       }
 
-      ul {
+      .results {
         margin:0;
         padding:0;
 
@@ -719,12 +719,24 @@
           border-top:1px solid #eee;
           padding:18px 0;
         }
+      }
 
-        .thumb {
-        }
-        .title {
-        }
-        .description {
+      .pagination {
+
+        li {
+          list-style:none;
+          display:inline;
+          
+          &:before {
+            content:"|";
+            color:#ccc;
+          }
+
+          &:first-child {
+            &:before {
+              content:"";
+            }
+          }
         }
       }
     }

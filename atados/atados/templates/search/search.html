@@ -31,20 +31,20 @@
     <div class="span3">
       <ul class="nav nav-tabs nav-stacked">
         <li{% if 'Project' in form.types.value or not form.types.value %} class="active"{% endif %}>
-        <a href="?q={{ form.q.value }}&types=Project">{% trans "Projects" %}</a>
+        <a href="?q={{ form.q.value }}&amp;types=Project">{% trans "Projects" %}</a>
         </li>
         <li{% if 'Nonprofit' in form.types.value %} class="active"{% endif %}>
-        <a href="?q={{ form.q.value }}&types=Nonprofit">{% trans "Nonprofits" %}</a>
+        <a href="?q={{ form.q.value }}&amp;types=Nonprofit">{% trans "Nonprofits" %}</a>
         </li>
         <li{% if 'Volunteer' in form.types.value %} class="active"{% endif %}>
-        <a href="?q={{ form.q.value }}&types=Volunteer">{% trans "Volunteers" %}</a>
+        <a href="?q={{ form.q.value }}&amp;types=Volunteer">{% trans "Volunteers" %}</a>
         </li>
       </ul>
     </div>
     <div class="span9">
       {% if query %}
-      <div class="results">
-        {% if paginator.count > 1 %}
+      <div class="result">
+        {% if paginator.count > 0 %}
         <div class="bar">
           {% with paginator.count as count %}
           {% if 'Project' in form.types.value and form.types.value|length == 1 or not form.types.value %}
@@ -53,26 +53,31 @@
           {% elif count == 1 %}
           {% blocktrans %}We've found 1 project{% endblocktrans %}
           {% endif %}
-          {% endif %}
 
-          {% if 'Nonprofit' in form.types.value and form.types.value|length == 1 %}
+          {% elif 'Nonprofit' in form.types.value and form.types.value|length == 1 %}
           {% if count > 1 %}
           {% blocktrans %}We've found {{ count }} nonprofits{% endblocktrans %}
           {% elif count == 1 %}
           {% blocktrans %}We've found 1 nonprofit{% endblocktrans %}
           {% endif %}
-          {% endif %}
 
-          {% if 'Volunteer' in form.types.value and form.types.value|length == 1 %}
+          {% elif 'Volunteer' in form.types.value and form.types.value|length == 1 %}
           {% if count > 1 %}
           {% blocktrans %}We've found {{ count }} volunteers{% endblocktrans %}
           {% elif count == 1 %}
           {% blocktrans %}We've found 1 volunteer{% endblocktrans %}
           {% endif %}
+
+          {% else %}
+          {% if count > 1 %}
+          {% blocktrans %}We've found {{ count }} results{% endblocktrans %}
+          {% elif count == 1 %}
+          {% blocktrans %}We've found 1 result{% endblocktrans %}
+          {% endif %}
           {% endif %}
           {% endwith %}
         </div>
-        <ul>
+        <ul class="results">
           {% for result in page.object_list %}
           <li>
           <div class="row">
@@ -91,31 +96,37 @@
           </li>
           {% endfor %}
         </ul>
+
+        {% if page.has_previous or page.has_next %}
+        <ul class="pagination">
+          <li>
+          {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}{% trans "Previous" %}{% if page.has_previous %}</a>{% endif %}
+          </li>
+          <li>
+          {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}{% trans "Next" %}{% if page.has_next %}</a>{% endif %}
+          </li>
+        </ul>
+        {% endif %}
+
         {% else %}
         <div class="well">
           {% if 'Project' in form.types.value and form.types.value|length == 1 or not form.types.value %}
-          {% blocktrans %}We couldn't find any repositories matching '{{ query }}'{% endblocktrans %}
-          {% endif %}
+          {% blocktrans %}We couldn't find any projects matching '{{ query }}'{% endblocktrans %}
 
-          {% if 'Nonprofit' in form.types.value and form.types.value|length == 1 %}
+          {% elif 'Nonprofit' in form.types.value and form.types.value|length == 1 %}
           {% blocktrans %}We couldn't find any nonprofits matching '{{ query }}'{% endblocktrans %}
-          {% endif %}
 
-          {% if 'Volunteer' in form.types.value and form.types.value|length == 1 %}
+          {% elif 'Volunteer' in form.types.value and form.types.value|length == 1 %}
           {% blocktrans %}We couldn't find any volunteers matching '{{ query }}'{% endblocktrans %}
+
+          {% else %}
+          {% blocktrans %}We couldn't find any results matching '{{ query }}'{% endblocktrans %}
           {% endif %}
         </div>
         {% endif %}
       </div>
     </div>
   </div>
-  {% if page.has_previous or page.has_next %}
-  <div>
-    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-    |
-    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-  </div>
-  {% endif %}
   {% else %}
   {# Show some example queries to run, maybe query syntax, something else? #}
   {% endif %}
