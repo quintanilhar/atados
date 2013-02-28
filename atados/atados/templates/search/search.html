@@ -31,21 +31,46 @@
     <div class="span3">
       <ul class="nav nav-tabs nav-stacked">
         <li{% if 'Project' in form.types.value or not form.types.value %} class="active"{% endif %}>
-          <a href="?q={{ form.q.value }}&types=Project">{% trans "Projects" %}</a>
+        <a href="?q={{ form.q.value }}&types=Project">{% trans "Projects" %}</a>
         </li>
         <li{% if 'Nonprofit' in form.types.value %} class="active"{% endif %}>
-          <a href="?q={{ form.q.value }}&types=Nonprofit">{% trans "Nonprofits" %}</a>
+        <a href="?q={{ form.q.value }}&types=Nonprofit">{% trans "Nonprofits" %}</a>
         </li>
         <li{% if 'Volunteer' in form.types.value %} class="active"{% endif %}>
-          <a href="?q={{ form.q.value }}&types=Volunteer">{% trans "Volunteers" %}</a>
+        <a href="?q={{ form.q.value }}&types=Volunteer">{% trans "Volunteers" %}</a>
         </li>
       </ul>
     </div>
     <div class="span9">
       {% if query %}
       <div class="results">
+        {% if paginator.count > 1 %}
         <div class="bar">
-          {% trans "We've found XXXXX project results" %}
+          {% with paginator.count as count %}
+          {% if 'Project' in form.types.value and form.types.value|length == 1 or not form.types.value %}
+          {% if count > 1 %}
+          {% blocktrans %}We've found {{ count }} projects{% endblocktrans %}
+          {% elif count == 1 %}
+          {% blocktrans %}We've found 1 project{% endblocktrans %}
+          {% endif %}
+          {% endif %}
+
+          {% if 'Nonprofit' in form.types.value and form.types.value|length == 1 %}
+          {% if count > 1 %}
+          {% blocktrans %}We've found {{ count }} nonprofits{% endblocktrans %}
+          {% elif count == 1 %}
+          {% blocktrans %}We've found 1 nonprofit{% endblocktrans %}
+          {% endif %}
+          {% endif %}
+
+          {% if 'Volunteer' in form.types.value and form.types.value|length == 1 %}
+          {% if count > 1 %}
+          {% blocktrans %}We've found {{ count }} volunteers{% endblocktrans %}
+          {% elif count == 1 %}
+          {% blocktrans %}We've found 1 volunteer{% endblocktrans %}
+          {% endif %}
+          {% endif %}
+          {% endwith %}
         </div>
         <ul>
           {% for result in page.object_list %}
@@ -64,10 +89,23 @@
             </div>
           </div>
           </li>
-          {% empty %}
-          <p>No results found.</p>
           {% endfor %}
         </ul>
+        {% else %}
+        <div class="well">
+          {% if 'Project' in form.types.value and form.types.value|length == 1 or not form.types.value %}
+          {% blocktrans %}We couldn't find any repositories matching '{{ query }}'{% endblocktrans %}
+          {% endif %}
+
+          {% if 'Nonprofit' in form.types.value and form.types.value|length == 1 %}
+          {% blocktrans %}We couldn't find any nonprofits matching '{{ query }}'{% endblocktrans %}
+          {% endif %}
+
+          {% if 'Volunteer' in form.types.value and form.types.value|length == 1 %}
+          {% blocktrans %}We couldn't find any volunteers matching '{{ query }}'{% endblocktrans %}
+          {% endif %}
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
