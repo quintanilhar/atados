@@ -5,7 +5,7 @@ from django.contrib.auth.forms import (
 from django.utils.translation import ugettext_lazy as _
 from haystack.forms import SearchForm as HaystackSearchForm, model_choices
 from atados.nonprofit.models import Nonprofit
-from atados.project.models import Project
+from atados.project.models import ProjectDonation, ProjectWork
 from atados.volunteer.models import Volunteer
 
 
@@ -24,13 +24,13 @@ class SearchForm(HaystackSearchForm):
         search_models = []
 
         if self.is_valid():
-            print self.cleaned_data['types']
             if 'Nonprofit' in self.cleaned_data['types']:
                 search_models.append(Nonprofit)
             if 'Volunteer' in self.cleaned_data['types']:
                 search_models.append(Volunteer)
             if 'Project' in self.cleaned_data['types'] or not search_models:
-                search_models.append(Project)
+                search_models.append(ProjectDonation)
+                search_models.append(ProjectWork)
 
         return search_models
 

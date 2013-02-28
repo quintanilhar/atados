@@ -1,10 +1,16 @@
 import datetime
 from haystack import indexes
-from atados.project.models import Project
+from atados.project.models import ProjectWork, ProjectDonation
 
 
-class ProjectIndex(indexes.SearchIndex, indexes.Indexable):
+class ProjectDonationIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
     text = indexes.CharField(document=True, model_attr='details')
 
     def get_model(self):
-        return Project
+        return ProjectDonation
+
+class ProjectWorkIndex(indexes.RealTimeSearchIndex, indexes.Indexable):
+    text = indexes.CharField(document=True, model_attr='details')
+
+    def get_model(self):
+        return ProjectWork

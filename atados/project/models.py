@@ -44,11 +44,9 @@ class Skill(models.Model):
 class Project(models.Model):
     nonprofit = models.ForeignKey(Nonprofit)
     causes = models.ManyToManyField(Cause)
-    availabilities = models.ManyToManyField(Availability)
     name = models.CharField(_('Project name'), max_length=50)
     slug = models.SlugField(max_length=50)
     details = models.TextField(_('Details'), max_length=1024)
-    prerequisites = models.TextField(_('Prerequisites'), max_length=1024)
     responsible = models.CharField(_('Responsible name'), max_length=50)
     phone = models.CharField(_('Phone'), max_length=20)
     email = models.EmailField(_('E-mail address'))
@@ -90,6 +88,8 @@ class ProjectDonation(Project):
             _('Collection made by the nonprofit'))
 
 class ProjectWork(Project):
+    availabilities = models.ManyToManyField(Availability)
+    prerequisites = models.TextField(_('Prerequisites'), max_length=1024)
     skills = models.ManyToManyField(Skill)
     weekly_hours = models.PositiveSmallIntegerField(_('Weekly hours'),
                                         blank=True, null=True)
