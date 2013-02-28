@@ -17,6 +17,9 @@
         <div class="input-append">
           <input type="text" class="input-xxlarge search-query" name="q" value="{{ form.q.value }}" />
           <button type="submit" class="btn">{% trans "Search" %}</button>
+          {% for type in form.types.value %}
+          <input type="hidden" name="types" value="{{ type }}" />
+          {% endfor %}
         </div>
       </form>
     </div>
@@ -27,9 +30,15 @@
   <div class="row">
     <div class="span3">
       <ul class="nav nav-tabs nav-stacked">
-        <li class="active"><a href="#">{% trans "Projects" %}</a></li>
-        <li><a href="#">{% trans "Nonprofits" %}</a></li>
-        <li><a href="#">{% trans "Volunteers" %}</a></li>
+        <li{% if 'Project' in form.types.value %} class="active"{% endif %}>
+          <a href="?q={{ form.q.value }}&types=Project">{% trans "Projects" %}</a>
+        </li>
+        <li{% if 'Nonprofit' in form.types.value %} class="active"{% endif %}>
+          <a href="?q={{ form.q.value }}&types=Nonprofit">{% trans "Nonprofits" %}</a>
+        </li>
+        <li{% if 'Volunteer' in form.types.value %} class="active"{% endif %}>
+          <a href="?q={{ form.q.value }}&types=Volunteer">{% trans "Volunteers" %}</a>
+        </li>
       </ul>
     </div>
     <div class="span9">
