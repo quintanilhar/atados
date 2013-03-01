@@ -19,7 +19,7 @@ Seguem algumas maneiras de colaborar com o projeto:
  * [Reportar bugs](https://github.com/atados/atados/issues/new).
  * Formatar o código de acordo com a [PEP8](http://www.python.org/dev/peps/pep-0008/).
  * Enviar testes unitários.
- * Resolver [nossos bugs](https://github.com/atados/atados/issues). Recomendamos que você comece por [bugs que marcas como "bons para começar"](https://github.com/atados/atados/issues?labels=good+first+bug&page=1&state=open).
+ * Resolver [nossos bugs](https://github.com/atados/atados/issues). Recomendamos que você comece por [bugs que marcamos como "bons para começar"](https://github.com/atados/atados/issues?labels=good+first+bug&page=1&state=open).
 
 
 Como rodar o projeto
