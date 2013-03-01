@@ -47,7 +47,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="span3">
+    <!-- <div class="span3">
       <div class="profile-picture">
         {% thumbnail project.image "220x220" crop="center" as im %}
         <img class="img-rounded" alt="{{ project }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
@@ -61,38 +61,29 @@
         {% endif %}
         {% endthumbnail %}
       </div>
-      <div class="row">
-        <div class="span3">
-          <h2 style="margin-top:12px">{% trans "Volunteers" %}</h2>
-        </div>
-      </div>
-      <div class="img-tiny-list">
-        <div class="row">
-          <div class="span3">
-            <img class="img-rounded" src="{{ STATIC_URL }}/img/dummy.jpg" />
-            <div><a href="#">Rogerio da Silva Yokomizo</a></div>
+    </div> -->
+    <div class="span8">
+      <div class="well well-light">
+        <div class="well-header">
+          <h2>{% trans "Project" %}</h2>
+          {% if nonprofit in nonprofit_list %}
+          <div>
+            <a href="{% url project:edit nonprofit.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
           </div>
+          {% endif %}
         </div>
-        <div class="row">
-          <div class="span3">
-            <img class="img-rounded" src="{{ STATIC_URL }}/img/dummy.jpg" />
-            <div><a href="#">Rogerio Yokomizo</a></div>
-          </div>
-        </div>
+        {% block project %}
+        {% endblock %}
       </div>
     </div>
-    <div class="span6">
-      {% block project %}
-      {% endblock %}
-    </div>
-    <div class="span3">
+    <div class="span4">
       <div class="well">
         <h2>{% trans "Nonprofit" %}</h2>
         <p>
         {% if nonprofit.details %}
-          {{ nonprofit.details }}
+        {{ nonprofit.details }}
         {% else %}
-          {% trans "Nothing about this nonprofit" %}
+        {% trans "Nothing about this nonprofit" %}
         {% endif %}
         </p>
         <h2 style="margin-top:22px">{% trans "Other projects" %}</h2>

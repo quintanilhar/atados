@@ -2,34 +2,25 @@
 {% load i18n %}
 
 {% block project %}
-<div class="row">
-  <div class="span6">
-    <div class="">
-      <div class="well well-light">
-        <h2>{% trans "About work" %}</h2>
-        {{ project.details }} <br />
-        <h2>{% trans "Causes" %}</h2>
-        {{ project.causes }} <br />
-        <h2>{% trans "Skills" %}</h2>
-        {{ project.skills }} <br />
-        {{ project.prerequisites }} <br />
-        {% block monthly_hours %}{% endblock %}
-        <h2 style="margin-top:22px">{% trans "Contact" %}</h2>
-        {% trans "Responsible" %} {{ project.responsible }} <br />
-        {% trans "Phone" %} {{ project.phone }} <br />
-        {% trans "E-mail" %} {{ project.email }} <br />
-        <h2 style="margin-top:22px">{% trans "Location" %}</h2>
-        {% if project.can_be_done_remotely %}
-        {% trans "This work can be done remotely" %}
-        {% else %}
-        {% trans "This work can't be done remotely" %}
-        {% endif %}
-        {% trans "Addressline" %} {{ project.addressline }} <br />
-        {% trans "Neighborhood" %} {{ project.neighborhood }} <br />
-        {% trans "City" %} {{ project.city }} <br />
-      </div>
-    </div>
-  </div>
-</div>
+{{ project.details }} <br />
+<h2>{% trans "Causes" %}</h2>
+{{ project.causes }} <br />
+<h2>{% trans "Skills" %}</h2>
+{{ project.skills }} <br />
+{{ project.prerequisites }} <br />
+{% block monthly_hours %}{% endblock %}
+<h2 style="margin-top:22px">{% trans "Contact" %}</h2>
+{% trans "Responsible" %} {{ project.responsible }} <br />
+{% trans "Phone" %} {{ project.phone }} <br />
+{% trans "E-mail" %} {{ project.email }} <br />
+<h2 style="margin-top:22px">{% trans "Location" %}</h2>
+{% if project.can_be_done_remotely %}
+{% trans "This work can be done remotely" %}
+{% else %}
+{% trans "This work can't be done remotely" %}
+{% endif %}
+{% trans "Addressline" %} {{ project.addressline }} <br />
+{% trans "Neighborhood" %} {{ project.neighborhood }} <br />
+{% trans "City" %} {{ project.city }} <br />
 {% endblock %}
 

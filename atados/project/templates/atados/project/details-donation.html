@@ -2,30 +2,22 @@
 {% load i18n %}
 
 {% block project %}
-<div class="row">
-  <div class="span6">
-    <div class="">
-      <div class="well well-light">
-        <div class="well-header">
-          <h2>{% trans "Donation" %}</h2>
-          {% if nonprofit in nonprofit_list %}
-          <div>
-            <a href="{% url project:edit nonprofit.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
-          </div>
-          {% endif %}
-        </div>
-        {{ project.details }}
-        <h2 style="margin-top:22px">{% trans "Contact" %}</h2>
-        {{ project.responsible }} <br />
-        {{ project.phone }} <br />
-        {{ project.email }} <br />
-        <h2 style="margin-top:22px">{% trans "Delivery and Collection" %}</h2>
-        {{ project.collection_by_nonprofit }} <br />
-        {{ project.addressline }} <br />
-        {{ project.neighborhood }} <br />
-        {{ project.city }} <br />
-      </div>
-    </div>
+<div class="well-header">
+  <h2>{% trans "Donation" %}</h2>
+  {% if nonprofit in nonprofit_list %}
+  <div>
+    <a href="{% url project:edit nonprofit.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
   </div>
+  {% endif %}
 </div>
+{{ project.details }}
+<h2 style="margin-top:22px">{% trans "Contact" %}</h2>
+{{ project.responsible }} <br />
+{{ project.phone }} <br />
+{{ project.email }} <br />
+<h2 style="margin-top:22px">{% trans "Delivery and Collection" %}</h2>
+{{ project.collection_by_nonprofit }} <br />
+{{ project.addressline }} <br />
+{{ project.neighborhood }} <br />
+{{ project.city }} <br />
 {% endblock %}
