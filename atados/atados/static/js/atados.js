@@ -32,13 +32,6 @@
     }
   });
 
-  $('.all-cities, .popular-cities').click(function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $(this).tab('show');
-  });
-
-  
   $('.select-button-list li a').click(function(){
     li = $(this).parent('li');
     checkbox = $('[type=checkbox]', li);

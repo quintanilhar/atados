@@ -42,38 +42,12 @@
               <div class="dropdown location-selector">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">{% trans "Explore your city" %} <span class="caret"></span></a>
                 <div class="dropdown-menu">
-                  <ul class="nav nav-pills">
-                    <li class="active">
-                    <a href="#popular-cities" data-toggle="tab" class="popular-cities">{% trans "Most popular cities" %}</a>
-                    </li>
-                    <li>
-                    <a href="#all-cities" data-toggle="tab" class="all-cities">{% trans "All cities" %}</a>
-                    </li>
+                  <ul class="cities nav nav-tabs nav-stacked">
+                    <li><a href="#">S&atilde;o Paulo</a></li>
+                    <li><a href="#">Rio de Janeiro</a></li>
+                    <li><a href="#">Curitiba</a></li>
                   </ul>
-                  <div class="tab-content">
-                    <div class="tab-pane active" id="popular-cities">
-                      <ul class="cities nav nav-tabs nav-stacked">
-                        <li><a href="#">S&atilde;o Paulo</a></li>
-                        <li><a href="#">Rio de Janeiro</a></li>
-                        <li><a href="#">Curitiba</a></li>
-                      </ul>
-                    </div>
-                    <div class="tab-pane" id="all-cities">
-                      <form>
-                        <div class="input-append">
-                          <input type="text" class="search-city" placeholder="{% trans "Search your city" %}" />
-                          <button type="submit" class="btn"><i class="icon-search"></i></button>
-                        </div>
-                      </form>
-                      <ul class="cities nav nav-tabs nav-stacked">
-                        <li><a href="#">Florian&oacute;polis</a></li>
-                        <li><a href="#">Guarulhos</a></li>
-                        <li><a href="#">Manaus</a></li>
-                        <li><a href="#">Osasco</a></li>
-                        <li><a href="#">Tubar&atilde;o</a></li>
-                      </ul>
-                    </div>
-                  </div>
+                  {% trans "More cities soon." %}
                 </div>
               </div>
             </div>
