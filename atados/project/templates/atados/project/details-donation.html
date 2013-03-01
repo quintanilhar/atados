@@ -2,14 +2,6 @@
 {% load i18n %}
 
 {% block project %}
-<div class="well-header">
-  <h2>{% trans "Donation" %}</h2>
-  {% if nonprofit in nonprofit_list %}
-  <div>
-    <a href="{% url project:edit nonprofit.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
-  </div>
-  {% endif %}
-</div>
 {{ project.details }}
 <h2 style="margin-top:22px">{% trans "Contact" %}</h2>
 {{ project.responsible }} <br />
