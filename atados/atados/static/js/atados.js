@@ -1,4 +1,7 @@
 ( function ( w , $ , undefined ) {
+
+  $('html').removeClass('no-js').addClass('js');
+
   function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
