@@ -14,7 +14,7 @@ você faz bem, pode fazer bem a alguém.
 Por que colaborar com o projeto?
 --------------------------------
 
-Porque você quer viver em uma sociedade melhor.
+Porque você quer viver em uma sociedade melhor!
 
 Já que você está aqui, provavelmente você é alguém envolvido com
 tecnologia. Suas habilidades são muito valiosas para a sociedade. Colaborar com
