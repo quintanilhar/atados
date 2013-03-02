@@ -1,0 +1,26 @@
+{% load atados.project %}
+{{ availabilities.all }}
+<table class="table table-bordered table-striped table-availabilities">
+  <thead>
+    <tr>
+      <th></th>
+      {% for period_id, period_label in periods %}
+      <th>{{ period_label }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for weekday_id, weekday in availabilities.iteritems %}
+    <tr>
+      <th>{{ weekday.weekday_label }}</th>
+      {% for period_id, checked in weekday.periods.iteritems %}
+      <td>
+        {% if checked %}
+        <span class="checked">X</span>
+        {% endif %}
+      </td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  <tbody>
+</table>

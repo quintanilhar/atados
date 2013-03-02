@@ -42,6 +42,14 @@
 {% block hours %}{% endblock %}
 <div class="row">
   <div class="span2">
+    <h2>{% trans "availability" %}</h2>
+  </div>
+  <div class="span6">
+    {{ project.availabilities|as_availabilities_table }}
+  </div>
+</div>
+<div class="row">
+  <div class="span2">
     <h2>{% trans "Contact" %}</h2>
   </div>
   <div class="span6">
