@@ -18,7 +18,7 @@ Porque você quer viver em uma sociedade melhor!
 
 Já que você está aqui, provavelmente você é alguém envolvido com
 tecnologia. Suas habilidades são muito valiosas para a sociedade. Colaborar com
-o Atados é uma forma de contribuir para o desenvolvimento da sociedade fazendo
+o Atados é uma forma de contribuir para o desenvolvimento coletivo fazendo
 algo que você faz muito bem!
 
 Agora você deve estar se perguntando se esse projeto tem a ver com as causas
