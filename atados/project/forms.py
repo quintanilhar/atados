@@ -54,7 +54,6 @@ class ProjectPeriodicCreateForm(ProjectJustOnceCreateForm):
 
     def __init__(self, *args, **kwargs):
         super(ProjectPeriodicCreateForm, self).__init__(*args, **kwargs)
-        self.fields['weekly_hours'].required = True
 
     class Meta:
         model = ProjectWork
