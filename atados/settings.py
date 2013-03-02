@@ -13,12 +13,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'atados',
-        'USER': 'atados',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'atados.sqlite',
+        'USER': '',
         'PASSWORD': '',
         'HOST': '',
-        'PORT': '3306',
+        'PORT': '',
     }
 }
 
@@ -205,14 +205,14 @@ DEFAULT_FROM_EMAIL = 'no-reply@atados.com.br'
 
 THUMBNAIL_DEBUG = DEBUG
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-AWS_ACCESS_KEY_ID = 'AKIAIQ42GPO6DJ7O2THA'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'atados'
-AWS_S3_SECURE_URLS = False
-AWS_HEADERS = {
-    'Expires': 'Thu, 1 Dec 2015 00:00:01 GMT',
-}
+#DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+#AWS_ACCESS_KEY_ID = 'AKIAIQ42GPO6DJ7O2THA'
+#AWS_SECRET_ACCESS_KEY = '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'
+#AWS_STORAGE_BUCKET_NAME = 'atados'
+#AWS_S3_SECURE_URLS = False
+#AWS_HEADERS = {
+#    'Expires': 'Thu, 1 Dec 2015 00:00:01 GMT',
+#}
 
 HAYSTACK_CONNECTIONS = {
     'default': {
