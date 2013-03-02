@@ -30,8 +30,8 @@ Você vai contribuir com o trabalho de diversas ONGs que juntas apoiam todas as
 causas!
 
 
-Ok, estou convencido. Como participar?
---------------------------------------
+Quero colaborar!
+----------------
 
 Você pode entrar em contato com <contato@atados.com.br> para nos contar um
 pouco mais sobre você, e como você gostaria de ajudar, ou então:
