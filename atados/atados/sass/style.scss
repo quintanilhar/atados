@@ -580,8 +580,23 @@
   }
 
   #project-details {
-    h1 {
-      margin-bottom:4px;
+    .project {
+      border-top:1px solid #eee;
+      
+      .row {
+        margin-top:20px;
+
+        p {
+          text-align: justify;
+        }
+
+        h2 {
+          text-transform:uppercase;
+          text-align:right;
+          font-weight:bold;
+          font-size:1em;
+        }
+      }
     }
   }
 

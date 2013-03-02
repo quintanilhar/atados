@@ -30,9 +30,15 @@
 {% block content %}
 <div id="project-details">
   <div class="row">
-    <div class="span9">
+    <div class="span2">
+    </div>
+    <div class="span7">
       <h1>{{ project.name }}</h1>
-      <h2 class="nonprofit"><a href="{{ nonprofit.get_absolute_url }}">{{ nonprofit }}</a></h2>
+      {% if nonprofit in nonprofit_list %}
+      <div>
+        <a href="{% url project:edit nonprofit.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
+      </div>
+      {% endif %}
     </div>
     <div class="span3">
       {% if request.user.is_authenticated %}
@@ -47,31 +53,8 @@
     </div>
   </div>
   <div class="row">
-    <!-- <div class="span3">
-      <div class="profile-picture">
-        {% thumbnail project.image "220x220" crop="center" as im %}
-        <img class="img-rounded" alt="{{ project }}" src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" />
-        {% if nonprofit in nonprofit %}
-        <a class="btn" href="{% url project:edit-project-picture nonprofit.slug project.slug %}"><i class="icon-edit"></i> {% trans "Edit project picture" %}</a>
-        {% endif %}
-        {% empty %}
-        <div class="img-rounded icon nonprofit medium"></div>
-        {% if nonprofit in nonprofit %}
-        <a class="btn" href="{% url project:edit-project-picture nonprofit.slug project.slug %}"><i class="icon-edit"></i> {% trans "Add project picture" %}</a>
-        {% endif %}
-        {% endthumbnail %}
-      </div>
-    </div> -->
     <div class="span8">
-      <div class="well well-light">
-        <div class="well-header">
-          <h2>{% trans "Project" %}</h2>
-          {% if nonprofit in nonprofit_list %}
-          <div>
-            <a href="{% url project:edit nonprofit.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
-          </div>
-          {% endif %}
-        </div>
+      <div class="project">
         {% block project %}
         {% endblock %}
       </div>
@@ -79,6 +62,7 @@
     <div class="span4">
       <div class="well">
         <h2>{% trans "Nonprofit" %}</h2>
+        <a href="{{ nonprofit.get_absolute_url }}">{{ nonprofit }}</a>
         <p>
         {% if nonprofit.details %}
         {{ nonprofit.details }}

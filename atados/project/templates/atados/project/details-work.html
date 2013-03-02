@@ -1,26 +1,69 @@
 {% extends 'atados/project/details.html' %}
-{% load i18n %}
+{% load i18n atados.project %}
 
 {% block project %}
-{{ project.details }} <br />
-<h2>{% trans "Causes" %}</h2>
-{{ project.causes }} <br />
-<h2>{% trans "Skills" %}</h2>
-{{ project.skills }} <br />
-{{ project.prerequisites }} <br />
-{% block monthly_hours %}{% endblock %}
-<h2 style="margin-top:22px">{% trans "Contact" %}</h2>
-{% trans "Responsible" %} {{ project.responsible }} <br />
-{% trans "Phone" %} {{ project.phone }} <br />
-{% trans "E-mail" %} {{ project.email }} <br />
-<h2 style="margin-top:22px">{% trans "Location" %}</h2>
-{% if project.can_be_done_remotely %}
-{% trans "This work can be done remotely" %}
-{% else %}
-{% trans "This work can't be done remotely" %}
-{% endif %}
-{% trans "Addressline" %} {{ project.addressline }} <br />
-{% trans "Neighborhood" %} {{ project.neighborhood }} <br />
-{% trans "City" %} {{ project.city }} <br />
+
+<div class="row">
+  <div class="span2">
+    <h2>{% trans "About" %}</h2>
+  </div>
+  <div class="span6">
+    {{ project.details|linebreaks }}
+  </div>
+</div>
+<div class="row">
+  <div class="span2">
+    <h2>{% trans "Causes" %}</h2>
+  </div>
+  <div class="span6">
+    {% for cause in  project.causes.all %}
+    <span class="label label-info">{{ cause }}</span>
+    {% endfor %}
+  </div>
+</div>
+<div class="row">
+  <div class="span2">
+    <h2>{% trans "Skills" %}</h2>
+  </div>
+  <div class="span6">
+    {% for skill in  project.skills.all %}
+    <span class="label label-info">{{ skill }}</span>
+    {% endfor %}
+  </div>
+</div>
+<div class="row">
+  <div class="span2">
+    <h2>{% trans "Prerequisites" %}</h2>
+  </div>
+  <div class="span6">
+    {{ project.prerequisites }}
+  </div>
+</div>
+{% block hours %}{% endblock %}
+<div class="row">
+  <div class="span2">
+    <h2>{% trans "Contact" %}</h2>
+  </div>
+  <div class="span6">
+    {% trans "Responsible" %} {{ project.responsible }} <br />
+    {% trans "Phone" %} {{ project.phone }} <br />
+    {% trans "E-mail" %} {{ project.email }} <br />
+  </div>
+</div>
+<div class="row">
+  <div class="span2">
+    <h2>{% trans "Location" %}</h2>
+  </div>
+  <div class="span6">
+    {% if project.can_be_done_remotely %}
+    {% trans "This work can be done remotely" %}
+    {% else %}
+    {% trans "This work can't be done remotely" %}
+    {% endif %} <br />
+    {% trans "Addressline" %} {{ project.addressline }} <br />
+    {% trans "Neighborhood" %} {{ project.neighborhood }} <br />
+    {% trans "City" %} {{ project.city }} <br />
+  </div>
+</div>
 {% endblock %}
 
