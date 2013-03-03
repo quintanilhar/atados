@@ -1,5 +1,5 @@
 {% extends 'atados/atados/base.html' %}
-{% load i18n bootstrap_toolkit flatblock_tags %}
+{% load i18n bootstrap_toolkit flatblock_tags markup %}
 
 {% block fulltitle %}{{ site.name }}{% endblock %}
 
@@ -13,7 +13,7 @@
 </div>
 <div class="row">
   <div class="span8">
-    {% filter linebreaks %}{% plain_flatblock "terms" %}{% endfilter %}
+    {% filter markdown %}{% plain_flatblock "terms" %}{% endfilter %}
   </div>
 </div>
 {% endblock %}

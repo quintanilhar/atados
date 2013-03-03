@@ -124,6 +124,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.markup',
     'atados.atados',
     'atados.nonprofit',
     'atados.volunteer',
