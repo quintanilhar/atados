@@ -1,12 +1,11 @@
 from django.contrib import admin
-from atados.project.models import (Skill, Project,
-                                   ProjectWork, ProjectDonation,
-                                   Cause, Availability)
+from atados.project import models
 
 
-admin.site.register(Availability)
-admin.site.register(Cause)
-admin.site.register(Skill)
-admin.site.register(Project)
-admin.site.register(ProjectWork)
-admin.site.register(ProjectDonation)
+admin.site.register(models.Apply)
+admin.site.register(models.Availability)
+admin.site.register(models.Cause)
+admin.site.register(models.Skill)
+admin.site.register(models.Project)
+admin.site.register(models.ProjectWork)
+admin.site.register(models.ProjectDonation)
