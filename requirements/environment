@@ -10,3 +10,4 @@ django-storages==1.1.6
 https://github.com/toastdriven/django-haystack/zipball/master
 pysolr==2.1.0-beta
 pil==1.1.7
+django-flatblocks==0.6.0

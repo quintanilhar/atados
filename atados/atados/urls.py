@@ -23,4 +23,6 @@ urlpatterns = patterns(
         {'next_page': _('/sign-in')}, name='sign-out'),
 
     url(_(r'^search$'), SearchView(form_class=SearchForm), name='search'),
+
+    url(_(r'^terms$'), direct_to_template, {'template': 'atados/atados/terms.html'}, name='terms'),
 )
