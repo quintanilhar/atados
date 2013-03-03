@@ -1,4 +1,4 @@
-{% extends 'atados/nonprofit/base.html' %}
+{% extends 'atados/project/nonprofit.html' %}
 {% load i18n bootstrap_toolkit %}
 
 {% block breadcrumb %}
@@ -7,7 +7,7 @@
 <li class="active">{% trans "Edit project picture" %}</li>
 {% endblock %}
 
-{% block content %}
+{% block inner_content %}
 <form class="well" action="{% url project:edit-project-picture nonprofit.slug project.slug %}" method="post" enctype="multipart/form-data">{% csrf_token %}
   {{ form|as_bootstrap }}
   <div class="form-actions">

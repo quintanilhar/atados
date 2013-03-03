@@ -156,11 +156,8 @@ class ProjectDetailsView(ProjectMixin, DetailView):
 class ProjectCollaboratorsView(ProjectMixin, TemplateView):
     template_name = 'atados/project/collaborators.html'
 
-class ProjectRequestsView(ProjectMixin, TemplateView):
-    template_name = 'atados/project/requests.html'
-
-class ProjectStepsView(ProjectMixin, TemplateView):
-    template_name = 'atados/project/steps.html'
+class ProjectDeleteView(ProjectMixin, TemplateView):
+    template_name = 'atados/project/delete.html'
 
 class ProjectApplyView(ProjectMixin, JSONResponseMixin, View):
     only_owner = False

@@ -8,7 +8,7 @@ from atados.project.views import (ProjectDonationCreateView,
                                   ProjectJobCreateView,
                                   ProjectDetailsView, ProjectUpdateView,
                                   ProjectCollaboratorsView,
-                                  ProjectRequestsView, ProjectStepsView,
+                                  ProjectDeleteView,
                                   ProjectApplyView,
                                   ProjectPictureUpdateView)
 
@@ -23,10 +23,9 @@ urlpatterns = patterns(
     url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)$'), ProjectDetailsView.as_view(), name='details'),
     url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/edit$'), ProjectUpdateView.as_view(), name='edit'),
     url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/collaborators$'), ProjectCollaboratorsView.as_view(), name='collaborators'),
-    url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/requests$'), ProjectRequestsView.as_view(), name='requests'),
-    url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/steps$'), ProjectStepsView.as_view(), name='steps'),
+    url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/delete$'), ProjectDeleteView.as_view(), name='delete'),
     url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/apply$'), ProjectApplyView.as_view(), name='apply'),
 
-    url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/edit-project-picture$'), ProjectPictureUpdateView.as_view(),
+    url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/picture$'), ProjectPictureUpdateView.as_view(),
         name='edit-project-picture'),
 )

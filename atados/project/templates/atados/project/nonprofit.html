@@ -19,11 +19,11 @@
         {% url project:collaborators nonprofit.slug project.slug as href %}
         <li class="{% active request href %}"><a href="{{ href }}">{% trans "Volunteers" %}</a></li>
         
-        {% url project:requests nonprofit.slug project.slug as href %}
-        <li class="{% active request href %}"><a href="{{ href }}">{% trans "Requests" %} <span class="badge badge-success">3</span></a></li>
+        {% url project:edit-project-picture nonprofit.slug project.slug as href %}
+        <li class="{% active request href %}"><a href="{{ href }}">{% trans "Picture" %}</span></a></li>
         
-        {% url project:steps nonprofit.slug project.slug as href %}
-        <li class="{% active request href %}"><a href="{{ href }}">{% trans "Steps" %}</a></li>
+        {% url project:delete nonprofit.slug project.slug as href %}
+        <li class="{% active request href %}"><a href="{{ href }}">{% trans "Delete this project" %}</a></li>
 
       </ul>
     </div>
