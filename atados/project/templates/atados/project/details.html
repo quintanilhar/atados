@@ -29,18 +29,10 @@
 
 {% block content %}
 <div id="project-details">
-  <div class="row">
-    <div class="span2">
-    </div>
-    <div class="span7">
-      <h1>{{ project.name }}</h1>
-      {% if nonprofit in nonprofit_list %}
-      <div>
-        <a href="{% url project:edit nonprofit.slug project.slug %}" style="position:absolute; top:2px; right:0;">{% trans "Edit" %}</a>
-      </div>
-      {% endif %}
-    </div>
-    <div class="span3">
+  <div class="page-header">
+    <h1>{{ project.name }}</h1>
+
+    <div class="project-actions">
       {% if request.user.is_authenticated %}
       {% if apply %}
       <span class="btn btn-primary btn-large btn-block disable">{% trans "Already applied" %}</span>
@@ -54,38 +46,43 @@
   </div>
   <div class="row">
     <div class="span8">
-      <div class="project">
+      <section class="project">
         {% block project %}
         {% endblock %}
-      </div>
+      </section>
     </div>
     <div class="span4">
-      <div class="well">
-        <h2>{% trans "Nonprofit" %}</h2>
-        <a href="{{ nonprofit.get_absolute_url }}">{{ nonprofit }}</a>
-        <p>
-        {% if nonprofit.details %}
-        {{ nonprofit.details }}
-        {% else %}
-        {% trans "Nothing about this nonprofit" %}
-        {% endif %}
-        </p>
-        <h2 style="margin-top:22px">{% trans "Other projects" %}</h2>
-        <div class="img-tiny-list">
-          {% for project in nonprofit.project_set.all %}
-          <div class="row-fluid">
-            <div class="span12">
-              {% thumbnail project.image "42x42" crop="center" as im %}
-              <a href="{{ project.get_absolute_url }}"><img class="img-rounded" alt="{{ project }}" src="{{ im.url }}" width="{{ im.width}}" height="{{ im.height }}" /></a>
-              {% empty %}
-              <a href="{{ project.get_absolute_url }}" class="img-rounded icon project tiny"></a>
-              {% endthumbnail %}
-              <div><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></div>
+      <aside>
+        <div class="row">
+          <div class="span4">
+            <div class="well">
+              <h2>{% trans "Volunteers" %}</h2>
             </div>
           </div>
-          {% endfor %}
         </div>
-      </div>
+
+        <div class="row">
+          <div class="span4">
+            <div class="well">
+              <h2>{% trans "Other projects" %}</h2>
+              <div class="img-tiny-list">
+                {% for project in nonprofit.project_set.all %}
+                <div class="row-fluid">
+                  <div class="span12">
+                    {% thumbnail project.image "42x42" crop="center" as im %}
+                    <a href="{{ project.get_absolute_url }}"><img class="img-rounded" alt="{{ project }}" src="{{ im.url }}" width="{{ im.width}}" height="{{ im.height }}" /></a>
+                    {% empty %}
+                    <a href="{{ project.get_absolute_url }}" class="img-rounded icon project tiny"></a>
+                    {% endthumbnail %}
+                    <div><a href="{{ project.get_absolute_url }}">{{ project.name }}</a></div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
     </div>
   </div>
 

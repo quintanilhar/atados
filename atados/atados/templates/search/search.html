@@ -8,24 +8,18 @@
 {% block content %}
 
 <div id="search-result">
-  <div class="row">
-    <div class="span3">
-      <h1>{% trans "Search" %}</h1>
-    </div>
-    <div class="span9">
-      <form class="form-search" method="get" action="{% url atados:search %}">
-        <div class="input-append">
-          <input type="text" class="input-xxlarge search-query" name="q" value="{{ form.q.value }}" />
-          <button type="submit" class="btn">{% trans "Search" %}</button>
-          {% for type in form.types.value %}
-          <input type="hidden" name="types" value="{{ type }}" />
-          {% endfor %}
-        </div>
-      </form>
-    </div>
+  <div class="page-header">
+    <h1>{% trans "Search" %}</h1>
+    <form class="form-search" method="get" action="{% url atados:search %}">
+      <div class="input-append">
+        <input type="text" class="input-xxlarge search-query" name="q" value="{{ form.q.value }}" />
+        <button type="submit" class="btn">{% trans "Search" %}</button>
+        {% for type in form.types.value %}
+        <input type="hidden" name="types" value="{{ type }}" />
+        {% endfor %}
+      </div>
+    </form>
   </div>
-
-  <hr />
 
   <div class="row">
     <div class="span3">

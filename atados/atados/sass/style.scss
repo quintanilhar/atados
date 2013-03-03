@@ -84,9 +84,18 @@
     display:block;
     background:url('../img/icons.png') no-repeat;
 
-    &.medium {
+    &.large {
       width:220px;
       height:220px;
+
+      &.volunteer {
+        background-position:-220px 0;
+      }
+    }
+
+    &.medium {
+      width:140px;
+      height:140px;
 
       &.volunteer {
         background-position:-220px 0;
@@ -164,7 +173,6 @@
   h1 {
     font-weight:normal;
     font-size:30px;
-    margin:0 0 26px;
   }
 
   h2 {
@@ -324,6 +332,7 @@
   .breadcrumb {
     background:none;
     padding:0;
+    margin:0;
 
     li {
       &:after {
@@ -580,21 +589,44 @@
   }
 
   #project-details {
+    .page-header {
+      position:relative;
+
+      .project-actions {
+        position:absolute;
+        right:0;
+        top:0;
+        width:220px;
+      }
+    }
+
     .project {
-      border-top:1px solid #eee;
       
       .row {
-        margin-top:20px;
+        margin-bottom:20px;
 
         p {
           text-align: justify;
         }
 
         h2 {
-          text-transform:uppercase;
           text-align:right;
           font-weight:bold;
           font-size:1em;
+
+          &:after {
+            content:":";
+          }
+        }
+      }
+    }
+
+    aside {
+      .row {
+        margin-bottom:20px;
+        
+        .well {
+          margin-bottom:0;
         }
       }
     }
@@ -677,6 +709,16 @@
   }
 
   #search-result {
+    .page-header {
+      position:relative;
+
+      .form-search {
+        position:absolute;
+        right:0;
+        top:0;
+        width:700px;
+      }
+    }
     .nav  {
       li.active {
         a {
@@ -684,10 +726,6 @@
           color:#fff;
         }
       }
-    }
-
-    hr {
-      margin-top:0;
     }
 
     form {

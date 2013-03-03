@@ -21,7 +21,7 @@
         <a class="btn" href="{% url volunteer:edit-volunteer-picture volunteer.user.username %}"><i class="icon-edit"></i> {% trans "Edit profile picture" %}</a>
         {% endif %}
         {% empty %}
-        <div class="img-rounded icon volunteer medium"></div>
+        <div class="img-rounded icon volunteer large"></div>
         {% if volunteer.user == request.user %}
         <a class="btn" href="{% url volunteer:edit-volunteer-picture volunteer.user.username %}"><i class="icon-edit"></i> {% trans "Add profile picture" %}</a>
         {% endif %}

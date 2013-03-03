@@ -1,5 +1,5 @@
 {% extends 'atados/project/details.html' %}
-{% load i18n atados.project %}
+{% load i18n atados.project thumbnail %}
 
 {% block project %}
 
@@ -11,6 +11,16 @@
     {{ project.details|linebreaks }}
   </div>
 </div>
+{% if project.vacancies %}
+<div class="row">
+  <div class="span2">
+    <h2>{% trans "Vacancies" %}</h2>
+  </div>
+  <div class="span6">
+    {{ project.vacancies }}
+  </div>
+</div>
+{% endif %}
 <div class="row">
   <div class="span2">
     <h2>{% trans "Causes" %}</h2>
@@ -42,20 +52,10 @@
 {% block hours %}{% endblock %}
 <div class="row">
   <div class="span2">
-    <h2>{% trans "availability" %}</h2>
+    <h2>{% trans "Availability" %}</h2>
   </div>
   <div class="span6">
     {{ project.availabilities|as_availabilities_table }}
-  </div>
-</div>
-<div class="row">
-  <div class="span2">
-    <h2>{% trans "Contact" %}</h2>
-  </div>
-  <div class="span6">
-    {% trans "Responsible" %} {{ project.responsible }} <br />
-    {% trans "Phone" %} {{ project.phone }} <br />
-    {% trans "E-mail" %} {{ project.email }} <br />
   </div>
 </div>
 <div class="row">
