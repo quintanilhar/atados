@@ -1,0 +1,13 @@
+{% extends 'atados/project/new-work.html' %}
+{% load i18n bootstrap_toolkit %}
+
+{% block breadcrumb %}
+<li><a href="{% url project:new nonprofit.slug %}">{% trans "Project kind choose" %}</a></li>
+<li class="active">{% trans "Add new job" %}</li>
+{% endblock %}
+
+{% block h1 %}
+<h1>{% trans "Add new job" %}</h1>
+{% endblock %}
+
+{% block action %}{% url project:new-job nonprofit.slug %}{% endblock %}

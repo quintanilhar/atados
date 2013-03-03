@@ -5,7 +5,8 @@ from django.template.defaultfilters import slugify
 from bootstrap_toolkit.widgets import BootstrapTextInput
 from atados.project.models import (Project,
                                    ProjectDonation,
-                                   ProjectWork)
+                                   ProjectWork,
+                                   ProjectJob)
 
 
 class ProjectCreateForm(forms.ModelForm):
@@ -48,7 +49,7 @@ class ProjectWorkCreateForm(ProjectCreateForm):
         
     class Meta:
         model = ProjectWork
-        exclude = ('nonprofit', 'slug', 'weekly_hours')
+        exclude = ('nonprofit', 'slug' )
 
 class ProjectJobCreateForm(ProjectWorkCreateForm):
 
@@ -57,7 +58,7 @@ class ProjectJobCreateForm(ProjectWorkCreateForm):
         self.fields['weekly_hours'].required = True
 
     class Meta:
-        model = ProjectWork
+        model = ProjectJob
         exclude = ('nonprofit', 'slug')
 
 class ProjectPictureForm(forms.ModelForm):

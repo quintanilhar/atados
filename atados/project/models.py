@@ -80,14 +80,19 @@ class Project(models.Model):
     def get_edit_url(self):
         return ('project:edit', (self.nonprofit.slug, self.slug))
 
+    def get_project_type(self):
+        return self.project_type
+
     class Meta:
         unique_together = (("slug", "nonprofit"),)
 
 class ProjectDonation(Project):
+    project_type = 'donation'
     collection_by_nonprofit = models.BooleanField(
             _('Collection made by the nonprofit'))
 
 class ProjectWork(Project):
+    project_type = 'work'
     availabilities = models.ManyToManyField(Availability)
     prerequisites = models.TextField(_('Prerequisites'), max_length=1024)
     skills = models.ManyToManyField(Skill)
@@ -95,6 +100,9 @@ class ProjectWork(Project):
                                         blank=True, null=True)
     can_be_done_remotely = models.BooleanField(
             _('This work can be done remotely.'))
+
+class ProjectJob(ProjectWork):
+    project_type = 'job'
 
 class Apply(models.Model):
     volunteer = models.ForeignKey(Volunteer)

@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _, ugettext as __
 from atados.atados.views import JSONResponseMixin
 from atados.volunteer.models import Volunteer
 from atados.project.models import (Project, ProjectDonation, ProjectWork,
-                                   Apply, Availability)
+                                   ProjectJob, Apply, Availability)
 from atados.nonprofit.models import Nonprofit
 from atados.nonprofit.views import NonprofitMixin
 from atados.project.forms import (ProjectDonationCreateForm,
@@ -57,11 +57,11 @@ class ProjectMixin(NonprofitMixin):
 
         return self.project
 
-class ProjectCreateView(NonprofitMixin, AvailabilityMixin, CreateView):
+class ProjectModelMixin(NonprofitMixin, AvailabilityMixin):
     model=Project
 
     def get_form_kwargs(self):
-        kwargs = super(ProjectCreateView, self).get_form_kwargs()
+        kwargs = super(ProjectModelMixin, self).get_form_kwargs()
         kwargs.update({
             'nonprofit': self.get_nonprofit(),
         })
@@ -74,7 +74,34 @@ class ProjectCreateView(NonprofitMixin, AvailabilityMixin, CreateView):
             model.slug = slugify(model.name)
         else:
             forms.ValidationError("Authentication required")
-        return super(ProjectCreateView, self).form_valid(form)
+        return super(ProjectModelMixin, self).form_valid(form)
+
+class ProjectUpdateView(ProjectModelMixin, ProjectMixin, UpdateView):
+    template_name = 'atados/project/edit.html'
+
+    def get_form_class(self):
+        if isinstance(self.object, ProjectWork):
+            return ProjectWorkCreateForm
+        elif isinstance(self.object, ProjectJob):
+            return ProjectJobCreateForm
+        elif isinstance(self.object, ProjectDonation):
+            return ProjectDonationCreateForm
+        else:
+            raise Http404
+    
+    def get_context_data(self, **kwargs):
+        context = super(ProjectUpdateView, self).get_context_data(**kwargs)
+        context.update({'form_template': ('atados/project/form-%s.html' % self.get_project().get_project_type())})
+        return context
+        
+    def get_success_url(self):
+        return reverse('project:edit',
+                       args=[self.object.nonprofit.slug, self.object.slug])
+
+    get_object = ProjectMixin.get_project
+
+class ProjectCreateView(ProjectModelMixin, CreateView):
+    pass
 
 class ProjectDonationCreateView(ProjectCreateView):
     form_class=ProjectDonationCreateForm
@@ -123,34 +150,6 @@ class ProjectDetailsView(ProjectMixin, DetailView):
             else:
                 return 'atados/project/details-work.html'
         raise Http404
-
-    get_object = ProjectMixin.get_project
-
-
-class ProjectEditView(ProjectMixin, UpdateView):
-    model=Project
-    form_class=ProjectDonationCreateForm
-    template_name='atados/project/edit.html'
-
-    def get_form_kwargs(self):
-        kwargs = super(ProjectEditView, self).get_form_kwargs()
-        kwargs.update({
-            'nonprofit': self.get_nonprofit(),
-        })
-        return kwargs
-
-    def get_success_url(self):
-        return reverse('project:edit',
-                       args=[self.object.nonprofit.slug, self.object.slug])
-
-    def form_valid(self, form):
-        model = form.save(commit=False)
-        if self.request.user.is_authenticated():
-            model.nonprofit = Nonprofit.objects.get(user=self.request.user)
-            model.slug = slugify(model.name)
-        else:
-            forms.ValidationError("Authentication required")
-        return super(ProjectEditView, self).form_valid(form)
 
     get_object = ProjectMixin.get_project
 

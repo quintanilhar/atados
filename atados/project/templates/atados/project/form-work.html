@@ -1,0 +1,65 @@
+{% load i18n bootstrap_toolkit atados.project %}
+<fieldset>
+  {{ form.name|as_bootstrap }}
+</fieldset>
+<fieldset>
+  <legend>{% trans "Causes" %}</legend>
+  {{ form.causes|as_select_button_list_field }}
+</fieldset>
+<fieldset>
+  <legend>{% trans "Skills" %}</legend>
+  {{ form.skills|as_select_button_list_field }}
+  {{ form.prerequisites|as_bootstrap }}
+</fieldset>
+<fieldset>
+  <legend>{% trans "Disponibility" %}</legend>
+  <div class="row-fluid">
+    <div class="span4">
+      {{ form.weekly_hours|as_bootstrap }}
+    </div>
+  </div>
+
+  {{ form.availabilities|as_availabilities_field }}
+
+</fieldset>
+<fieldset>
+  <legend>{% trans "Location" %}</legend>
+  {{ form.can_be_done_remotely|as_bootstrap }}
+  <div class="row-fluid">
+    <div class="span4">
+      {{ form.zipcode|as_bootstrap }}
+    </div>
+    <div class="span8">
+      {{ form.addressline|as_bootstrap }}
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6">
+      {{ form.neighborhood|as_bootstrap }}
+    </div>
+    <div class="span6">
+      {{ form.city|as_bootstrap }}
+    </div>
+  </div>
+</fieldset>
+<fieldset id="project-new-contact">
+  <legend>{% trans "Contact" %}</legend>
+  {{ form.responsible|as_bootstrap }}
+  <div class="row-fluid">
+    <div class="span6">
+      {{ form.phone|as_bootstrap }}
+    </div>
+    <div class="span6">
+      {{ form.email|as_bootstrap }}
+    </div>
+  </div>
+</fieldset>
+<fieldset>
+  <legend>{% trans "More info" %}</legend>
+  <div class="row-fluid">
+    <div class="span4">
+      {{ form.vacancies|as_bootstrap }}
+    </div>
+  </div>
+  {{ form.details|as_bootstrap }}
+</fieldset>
