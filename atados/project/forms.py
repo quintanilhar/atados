@@ -39,10 +39,10 @@ class ProjectDonationCreateForm(ProjectCreateForm):
         model = ProjectDonation
         exclude = ('nonprofit', 'slug')
 
-class ProjectJustOnceCreateForm(ProjectCreateForm):
+class ProjectWorkCreateForm(ProjectCreateForm):
 
     def __init__(self, *args, **kwargs):
-        super(ProjectJustOnceCreateForm, self).__init__(*args, **kwargs)
+        super(ProjectWorkCreateForm, self).__init__(*args, **kwargs)
         self.fields['skills'].empty_label = ""
         self.fields['skills'].label = _("Select one or more skills")
         
@@ -50,10 +50,11 @@ class ProjectJustOnceCreateForm(ProjectCreateForm):
         model = ProjectWork
         exclude = ('nonprofit', 'slug', 'weekly_hours')
 
-class ProjectPeriodicCreateForm(ProjectJustOnceCreateForm):
+class ProjectJobCreateForm(ProjectWorkCreateForm):
 
     def __init__(self, *args, **kwargs):
-        super(ProjectPeriodicCreateForm, self).__init__(*args, **kwargs)
+        super(ProjectJobCreateForm, self).__init__(*args, **kwargs)
+        self.fields['weekly_hours'].required = True
 
     class Meta:
         model = ProjectWork

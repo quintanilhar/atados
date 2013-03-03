@@ -15,8 +15,8 @@ from atados.project.models import (Project, ProjectDonation, ProjectWork,
 from atados.nonprofit.models import Nonprofit
 from atados.nonprofit.views import NonprofitMixin
 from atados.project.forms import (ProjectDonationCreateForm,
-                                  ProjectJustOnceCreateForm,
-                                  ProjectPeriodicCreateForm,
+                                  ProjectWorkCreateForm,
+                                  ProjectJobCreateForm,
                                   ProjectPictureForm)
 
 
@@ -80,13 +80,13 @@ class ProjectDonationCreateView(ProjectCreateView):
     form_class=ProjectDonationCreateForm
     template_name='atados/project/new-donation.html'
 
-class ProjectJustOnceCreateView(ProjectCreateView):
-    form_class=ProjectJustOnceCreateForm
+class ProjectWorkCreateView(ProjectCreateView):
+    form_class=ProjectWorkCreateForm
     template_name='atados/project/new-work.html'
 
-class ProjectPeriodicCreateView(ProjectJustOnceCreateView):
-    form_class=ProjectPeriodicCreateForm
-    template_name='atados/project/new-periodic.html'
+class ProjectJobCreateView(ProjectWorkCreateView):
+    form_class=ProjectJobCreateForm
+    template_name='atados/project/new-job.html'
 
 class ProjectDetailsView(ProjectMixin, DetailView):
     only_owner=False
@@ -119,7 +119,7 @@ class ProjectDetailsView(ProjectMixin, DetailView):
             return 'atados/project/details-donation.html'
         if isinstance(self.object, ProjectWork):
             if self.object.weekly_hours > 0:
-                return 'atados/project/details-periodic.html'
+                return 'atados/project/details-job.html'
             else:
                 return 'atados/project/details-work.html'
         raise Http404

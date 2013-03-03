@@ -4,8 +4,8 @@ from django.views.generic.simple import direct_to_template, redirect_to
 from django.utils.translation import ugettext_lazy as _
 from atados.nonprofit.views import NonprofitBaseView
 from atados.project.views import (ProjectDonationCreateView,
-                                  ProjectJustOnceCreateView,
-                                  ProjectPeriodicCreateView,
+                                  ProjectWorkCreateView,
+                                  ProjectJobCreateView,
                                   ProjectDetailsView, ProjectEditView,
                                   ProjectCollaboratorsView,
                                   ProjectRequestsView, ProjectStepsView,
@@ -18,8 +18,8 @@ urlpatterns = patterns(
     url(_(r'^project$'), direct_to_template, {'template': 'atados/project/index.html'}, name='index'),
     url(_(r'^(?P<nonprofit>[-\w]+)/add-new-project$'), NonprofitBaseView.as_view(template_name='atados/project/project-kind-choose.html'), name='new'),
     url(_(r'^(?P<nonprofit>[-\w]+)/add-new-project/donation$'), ProjectDonationCreateView.as_view(), name='new-donation'),
-    url(_(r'^(?P<nonprofit>[-\w]+)/add-new-project/work$'), ProjectJustOnceCreateView.as_view(), name='new-just-once'),
-    url(_(r'^(?P<nonprofit>[-\w]+)/add-new-project/job$'), ProjectPeriodicCreateView.as_view(), name='new-periodic'),
+    url(_(r'^(?P<nonprofit>[-\w]+)/add-new-project/work$'), ProjectWorkCreateView.as_view(), name='new-work'),
+    url(_(r'^(?P<nonprofit>[-\w]+)/add-new-project/job$'), ProjectJobCreateView.as_view(), name='new-job'),
     url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)$'), ProjectDetailsView.as_view(), name='details'),
     url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/edit$'), ProjectEditView.as_view(), name='edit'),
     url(_(r'^(?P<nonprofit>[-\w]+)/(?P<project>[-\w]+)/collaborators$'), ProjectCollaboratorsView.as_view(), name='collaborators'),
