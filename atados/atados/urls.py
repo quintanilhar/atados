@@ -24,5 +24,15 @@ urlpatterns = patterns(
 
     url(_(r'^search$'), SearchView(form_class=SearchForm), name='search'),
 
-    url(_(r'^terms$'), direct_to_template, {'template': 'atados/atados/terms.html'}, name='terms'),
+    url(_(r'^terms$'), direct_to_template,
+        {'template': 'atados/atados/terms.html'}, name='terms'),
+
+    url(_(r'^privacy$'), direct_to_template,
+        {'template': 'atados/atados/privacy.html'}, name='privacy'),
+
+    url(_(r'^security$'), direct_to_template,
+        {'template': 'atados/atados/security.html'}, name='security'),
+
+    url(_(r'^about$'), direct_to_template,
+        {'template': 'atados/atados/about.html'}, name='about'),
 )
