@@ -1,10 +1,8 @@
 Atados
 ======
 
-O Atados é uma rede social que possibilita às pessoas encontrar de maneira
-fácil as mais diversas oportunidades de voluntariado. Os usuários podem
-compartilhar atividades e experiências e estimular seus amigos a participar de
-ações voluntárias.
+A ideia é simples: uma rede social na qual pessoas predispostas a praticar o bem
+encontram oportunidades de voluntariado.
 
 Nosso principal objetivo é ampliar o senso de comunidade na sociedade, levando
 cada vez mais pessoas a entrar nessa corrente de gente boa. Afinal, tudo o que
@@ -16,18 +14,16 @@ Por que colaborar com o projeto?
 
 Porque você quer viver em uma sociedade melhor!
 
-Já que você está aqui, provavelmente você é alguém envolvido com
-tecnologia. Suas habilidades são muito valiosas para a sociedade. Colaborar com
-o Atados é uma forma de contribuir para o desenvolvimento coletivo fazendo
-algo que você faz muito bem!
-
-Agora você deve estar se perguntando se esse projeto tem a ver com as causas
-que você se identifica. Você já parou para pensar quais causas te motivam?
-Sejam elas lutar pelo direito dos animais, pelo meio ambiente, por educação de
-qualidade, por mais respeito aos direitos humanos ou qualquer outra,
-colaborando com o Atados você estará ajudando todas as causas! Isso mesmo!
+Porque colaborando com o Atados você estará ajudando todas as causas! Sejam
+elas lutar pelo direito dos animais, pelo meio ambiente, por educação de
+qualidade, por mais respeito aos direitos humanos entre outras. Isso mesmo!
 Você vai contribuir com o trabalho de diversas ONGs que juntas apoiam todas as
 causas!
+
+Já que você está aqui, provavelmente você é alguém envolvido com tecnologia.
+Suas habilidades são muito valiosas para a sociedade. Colaborar com o Atados é
+uma forma de contribuir para o desenvolvimento coletivo fazendo algo que você
+faz muito bem!
 
 
 Quero colaborar!
