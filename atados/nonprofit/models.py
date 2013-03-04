@@ -11,6 +11,14 @@ class Nonprofit(models.Model):
     slug = models.SlugField(max_length=50)
     details = models.TextField(_('Details'), max_length=1024, blank=True,
                                null=True, default=None)
+    zipcode = models.CharField(_('Zip code'), max_length=10,
+                               blank=True, null=True, default=None)
+    addressline = models.CharField(_('Address line'), max_length=200,
+                                  blank=True, null=True, default=None)
+    neighborhood = models.CharField(_('Neighborhood'), max_length=50,
+                                    blank=True, null=True, default=None)
+    city = models.CharField(_('City'), max_length=50,
+                            blank=True, null=True, default=None)
 
     def image_name(self, filename):
         left_path, extension = filename.rsplit('.', 1)
