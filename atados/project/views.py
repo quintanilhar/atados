@@ -1,6 +1,7 @@
 from django.http import Http404
 from django.views.generic import TemplateView, View
-from django.views.generic.edit import CreateView, ModelFormMixin, UpdateView
+from django.views.generic.edit import (CreateView, ModelFormMixin, UpdateView,
+                                       DeleteView)
 from django.views.generic.detail import DetailView
 from django.utils.decorators import method_decorator
 from django.shortcuts import get_object_or_404
@@ -180,4 +181,7 @@ class ProjectPictureUpdateView(ProjectMixin, UpdateView):
     model = Project
     form_class=ProjectPictureForm
     template_name='atados/project/picture.html'
+    get_object = ProjectMixin.get_project
+
+class ProjectDeleteView(ProjectMixin, DeleteView):
     get_object = ProjectMixin.get_project

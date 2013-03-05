@@ -38,7 +38,7 @@ class ProjectDonationCreateForm(ProjectCreateForm):
 
     class Meta:
         model = ProjectDonation
-        exclude = ('nonprofit', 'slug')
+        exclude = ('nonprofit', 'slug', 'published', 'deleted', 'deleted_date')
 
 class ProjectWorkCreateForm(ProjectCreateForm):
 
@@ -49,7 +49,7 @@ class ProjectWorkCreateForm(ProjectCreateForm):
         
     class Meta:
         model = ProjectWork
-        exclude = ('nonprofit', 'slug' )
+        exclude = ('nonprofit', 'slug', 'published', 'deleted', 'deleted_date')
 
 class ProjectJobCreateForm(ProjectWorkCreateForm):
 
@@ -59,7 +59,7 @@ class ProjectJobCreateForm(ProjectWorkCreateForm):
 
     class Meta:
         model = ProjectJob
-        exclude = ('nonprofit', 'slug')
+        exclude = ('nonprofit', 'slug', 'published', 'deleted', 'deleted_date')
 
 class ProjectPictureForm(forms.ModelForm):
     class Meta:

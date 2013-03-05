@@ -4,6 +4,7 @@ from atados.nonprofit.models import Nonprofit
 from atados.volunteer.models import Volunteer
 from sorl.thumbnail import ImageField
 from time import time
+from datetime import datetime
 
 
 WEEKDAYS = (
@@ -41,6 +42,15 @@ class Skill(models.Model):
     def __unicode__(self):
         return self.name
 
+class ProjectManager(models.Manager):
+    use_for_related_fields = True
+
+    def get_query_set(self):
+        return super(ProjectManager, self).get_query_set().filter(deleted=False, published=True)
+
+    def with_unpublished(self):
+        return super(ProjectManager, self).get_query_set().filter(deleted=False)
+
 class Project(models.Model):
     nonprofit = models.ForeignKey(Nonprofit)
     causes = models.ManyToManyField(Cause)
@@ -60,6 +70,16 @@ class Project(models.Model):
                             blank=True, null=True, default=None)
     vacancies = models.PositiveSmallIntegerField(_('Vacancies'),
                                     blank=True, null=True, default=None)
+    published = models.BooleanField(_("Published"), default=False)
+    deleted = models.BooleanField(_("Deleted"), default=False)
+    deleted_date = models.DateTimeField(_("Deleted date"), blank=True,
+                                        null=True)
+    objects = ProjectManager()
+
+    def delete(self, *args, **kwargs):
+        self.deleted = False
+        self.deleted_date = datetime.now()
+        self.save()
 
     def image_name(self, filename):
         left_path, extension = filename.rsplit('.', 1)
