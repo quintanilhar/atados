@@ -9,7 +9,7 @@ class Migration(DataMigration):
     def forwards(self, orm):
         from atados.project.models import Skill
         for name in {'Artes e Artesanato', 'Comunicação e Marketing',
-                     'Contrução e Reparos', 'Educação', 'Esport',
+                     'Contrução e Reparos', 'Educação', 'Esporte',
                      'Gastronomia', 'Gestão', 'Informática e Eletrônicos',
                      'Idiomas', 'Música e Dança', 'Outra'}:
             skill = Skill()
