@@ -46,12 +46,13 @@ class ProjectManager(models.Manager):
     use_for_related_fields = True
 
     def active(self):
-        return self.get_query_set().filter(deleted=True)
+        return self.get_query_set().filter(deleted=False)
 
     def published(self):
         return self.get_query_set().active(published=True)
 
 class Project(models.Model):
+    objects = ProjectManager()
     nonprofit = models.ForeignKey(Nonprofit)
     causes = models.ManyToManyField(Cause)
     name = models.CharField(_('Project name'), max_length=50)
