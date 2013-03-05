@@ -8,67 +8,18 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Availability'
-        db.create_table('project_availability', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('weekday', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
-            ('period', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
-        ))
-        db.send_create_signal('project', ['Availability'])
+        # Adding field 'Apply.project'
+        db.add_column('project_apply', 'project',
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=0, to=orm['project.Project']),
+                      keep_default=False)
 
-        # Adding model 'Cause'
-        db.create_table('project_cause', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-        ))
-        db.send_create_signal('project', ['Cause'])
+        # Removing M2M table for field applies on 'Project'
+        db.delete_table('project_project_applies')
 
-        # Adding model 'Skill'
-        db.create_table('project_skill', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=30)),
-        ))
-        db.send_create_signal('project', ['Skill'])
 
-        # Adding model 'Apply'
-        db.create_table('project_apply', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('volunteer', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['volunteer.Volunteer'])),
-        ))
-        db.send_create_signal('project', ['Apply'])
-
-        # Adding model 'Project'
-        db.create_table('project_project', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('nonprofit', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['nonprofit.Nonprofit'])),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('slug', self.gf('django.db.models.fields.SlugField')(max_length=50)),
-            ('details', self.gf('django.db.models.fields.TextField')(max_length=1024)),
-            ('responsible', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('phone', self.gf('django.db.models.fields.CharField')(max_length=20)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75)),
-            ('zipcode', self.gf('django.db.models.fields.CharField')(default=None, max_length=10, null=True, blank=True)),
-            ('addressline', self.gf('django.db.models.fields.CharField')(default=None, max_length=200, null=True, blank=True)),
-            ('neighborhood', self.gf('django.db.models.fields.CharField')(default=None, max_length=50, null=True, blank=True)),
-            ('city', self.gf('django.db.models.fields.CharField')(default=None, max_length=50, null=True, blank=True)),
-            ('vacancies', self.gf('django.db.models.fields.PositiveSmallIntegerField')(default=None, null=True, blank=True)),
-            ('published', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('deleted', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('deleted_date', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-            ('image', self.gf('sorl.thumbnail.fields.ImageField')(default=None, max_length=100, null=True, blank=True)),
-        ))
-        db.send_create_signal('project', ['Project'])
-
-        # Adding unique constraint on 'Project', fields ['slug', 'nonprofit']
-        db.create_unique('project_project', ['slug', 'nonprofit_id'])
-
-        # Adding M2M table for field causes on 'Project'
-        db.create_table('project_project_causes', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('project', models.ForeignKey(orm['project.project'], null=False)),
-            ('cause', models.ForeignKey(orm['project.cause'], null=False))
-        ))
-        db.create_unique('project_project_causes', ['project_id', 'cause_id'])
+    def backwards(self, orm):
+        # Deleting field 'Apply.project'
+        db.delete_column('project_apply', 'project_id')
 
         # Adding M2M table for field applies on 'Project'
         db.create_table('project_project_applies', (
@@ -77,85 +28,6 @@ class Migration(SchemaMigration):
             ('apply', models.ForeignKey(orm['project.apply'], null=False))
         ))
         db.create_unique('project_project_applies', ['project_id', 'apply_id'])
-
-        # Adding model 'ProjectDonation'
-        db.create_table('project_projectdonation', (
-            ('project_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['project.Project'], unique=True, primary_key=True)),
-            ('collection_by_nonprofit', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('project', ['ProjectDonation'])
-
-        # Adding model 'ProjectWork'
-        db.create_table('project_projectwork', (
-            ('project_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['project.Project'], unique=True, primary_key=True)),
-            ('prerequisites', self.gf('django.db.models.fields.TextField')(max_length=1024)),
-            ('weekly_hours', self.gf('django.db.models.fields.PositiveSmallIntegerField')(null=True, blank=True)),
-            ('can_be_done_remotely', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal('project', ['ProjectWork'])
-
-        # Adding M2M table for field availabilities on 'ProjectWork'
-        db.create_table('project_projectwork_availabilities', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('projectwork', models.ForeignKey(orm['project.projectwork'], null=False)),
-            ('availability', models.ForeignKey(orm['project.availability'], null=False))
-        ))
-        db.create_unique('project_projectwork_availabilities', ['projectwork_id', 'availability_id'])
-
-        # Adding M2M table for field skills on 'ProjectWork'
-        db.create_table('project_projectwork_skills', (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('projectwork', models.ForeignKey(orm['project.projectwork'], null=False)),
-            ('skill', models.ForeignKey(orm['project.skill'], null=False))
-        ))
-        db.create_unique('project_projectwork_skills', ['projectwork_id', 'skill_id'])
-
-        # Adding model 'ProjectJob'
-        db.create_table('project_projectjob', (
-            ('projectwork_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['project.ProjectWork'], unique=True, primary_key=True)),
-        ))
-        db.send_create_signal('project', ['ProjectJob'])
-
-
-    def backwards(self, orm):
-        # Removing unique constraint on 'Project', fields ['slug', 'nonprofit']
-        db.delete_unique('project_project', ['slug', 'nonprofit_id'])
-
-        # Deleting model 'Availability'
-        db.delete_table('project_availability')
-
-        # Deleting model 'Cause'
-        db.delete_table('project_cause')
-
-        # Deleting model 'Skill'
-        db.delete_table('project_skill')
-
-        # Deleting model 'Apply'
-        db.delete_table('project_apply')
-
-        # Deleting model 'Project'
-        db.delete_table('project_project')
-
-        # Removing M2M table for field causes on 'Project'
-        db.delete_table('project_project_causes')
-
-        # Removing M2M table for field applies on 'Project'
-        db.delete_table('project_project_applies')
-
-        # Deleting model 'ProjectDonation'
-        db.delete_table('project_projectdonation')
-
-        # Deleting model 'ProjectWork'
-        db.delete_table('project_projectwork')
-
-        # Removing M2M table for field availabilities on 'ProjectWork'
-        db.delete_table('project_projectwork_availabilities')
-
-        # Removing M2M table for field skills on 'ProjectWork'
-        db.delete_table('project_projectwork_skills')
-
-        # Deleting model 'ProjectJob'
-        db.delete_table('project_projectjob')
 
 
     models = {
@@ -211,6 +83,7 @@ class Migration(SchemaMigration):
         'project.apply': {
             'Meta': {'object_name': 'Apply'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['project.Project']"}),
             'volunteer': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['volunteer.Volunteer']"})
         },
         'project.availability': {
@@ -227,7 +100,6 @@ class Migration(SchemaMigration):
         'project.project': {
             'Meta': {'unique_together': "(('slug', 'nonprofit'),)", 'object_name': 'Project'},
             'addressline': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'applies': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'project_related'", 'symmetrical': 'False', 'to': "orm['project.Apply']"}),
             'causes': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['project.Cause']", 'symmetrical': 'False'}),
             'city': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '50', 'null': 'True', 'blank': 'True'}),
             'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),

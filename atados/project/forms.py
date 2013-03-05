@@ -29,7 +29,7 @@ class ProjectCreateForm(forms.ModelForm):
     def clean_name(self):
         name = self.cleaned_data.get('name')
         slug = slugify(name)
-        if slug and self.instance.slug != slug and Project.objects.filter(
+        if slug and self.instance.slug != slug and ProjectJob.objects.filter(
                 slug=slug, nonprofit=self.nonprofit).count():
             raise forms.ValidationError(_('This name (or a very similar) is already is use.'))
         return name

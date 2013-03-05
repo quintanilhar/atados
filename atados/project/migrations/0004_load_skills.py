@@ -16,9 +16,6 @@ class Migration(DataMigration):
             skill.name = name
             skill.save()
 
-    def backwards(self, orm):
-        raise RuntimeError("Cannot reverse this migration.")
-
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -72,6 +69,7 @@ class Migration(DataMigration):
         'project.apply': {
             'Meta': {'object_name': 'Apply'},
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'project': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['project.Project']"}),
             'volunteer': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['volunteer.Volunteer']"})
         },
         'project.availability': {
@@ -85,13 +83,11 @@ class Migration(DataMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '30'})
         },
-        'project.projectdonation': {
-            'Meta': {'unique_together': "(('slug', 'nonprofit'),)", 'object_name': 'ProjectDonation'},
+        'project.project': {
+            'Meta': {'unique_together': "(('slug', 'nonprofit'),)", 'object_name': 'Project'},
             'addressline': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'applies': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'projectdonation_related'", 'symmetrical': 'False', 'to': "orm['project.Apply']"}),
             'causes': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['project.Cause']", 'symmetrical': 'False'}),
             'city': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'collection_by_nonprofit': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'deleted_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'details': ('django.db.models.fields.TextField', [], {'max_length': '1024'}),
@@ -107,60 +103,24 @@ class Migration(DataMigration):
             'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'}),
             'vacancies': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': 'None', 'null': 'True', 'blank': 'True'}),
             'zipcode': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '10', 'null': 'True', 'blank': 'True'})
+        },
+        'project.projectdonation': {
+            'Meta': {'object_name': 'ProjectDonation', '_ormbases': ['project.Project']},
+            'collection_by_nonprofit': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'project_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['project.Project']", 'unique': 'True', 'primary_key': 'True'})
         },
         'project.projectjob': {
-            'Meta': {'unique_together': "(('slug', 'nonprofit'),)", 'object_name': 'ProjectJob'},
-            'addressline': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'applies': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'projectjob_related'", 'symmetrical': 'False', 'to': "orm['project.Apply']"}),
-            'availabilities': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['project.Availability']", 'symmetrical': 'False'}),
-            'can_be_done_remotely': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'causes': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['project.Cause']", 'symmetrical': 'False'}),
-            'city': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'deleted_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'details': ('django.db.models.fields.TextField', [], {'max_length': '1024'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('sorl.thumbnail.fields.ImageField', [], {'default': 'None', 'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'neighborhood': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'nonprofit': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['nonprofit.Nonprofit']"}),
-            'phone': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
-            'prerequisites': ('django.db.models.fields.TextField', [], {'max_length': '1024'}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'responsible': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'skills': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['project.Skill']", 'symmetrical': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'}),
-            'vacancies': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': 'None', 'null': 'True', 'blank': 'True'}),
-            'weekly_hours': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'zipcode': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '10', 'null': 'True', 'blank': 'True'})
+            'Meta': {'object_name': 'ProjectJob', '_ormbases': ['project.ProjectWork']},
+            'projectwork_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['project.ProjectWork']", 'unique': 'True', 'primary_key': 'True'})
         },
         'project.projectwork': {
-            'Meta': {'unique_together': "(('slug', 'nonprofit'),)", 'object_name': 'ProjectWork'},
-            'addressline': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'applies': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'projectwork_related'", 'symmetrical': 'False', 'to': "orm['project.Apply']"}),
+            'Meta': {'object_name': 'ProjectWork', '_ormbases': ['project.Project']},
             'availabilities': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['project.Availability']", 'symmetrical': 'False'}),
             'can_be_done_remotely': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'causes': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['project.Cause']", 'symmetrical': 'False'}),
-            'city': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'deleted_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'details': ('django.db.models.fields.TextField', [], {'max_length': '1024'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('sorl.thumbnail.fields.ImageField', [], {'default': 'None', 'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'neighborhood': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'nonprofit': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['nonprofit.Nonprofit']"}),
-            'phone': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'prerequisites': ('django.db.models.fields.TextField', [], {'max_length': '1024'}),
-            'published': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'responsible': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'project_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['project.Project']", 'unique': 'True', 'primary_key': 'True'}),
             'skills': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['project.Skill']", 'symmetrical': 'False'}),
-            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50'}),
-            'vacancies': ('django.db.models.fields.PositiveSmallIntegerField', [], {'default': 'None', 'null': 'True', 'blank': 'True'}),
-            'weekly_hours': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'zipcode': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '10', 'null': 'True', 'blank': 'True'})
+            'weekly_hours': ('django.db.models.fields.PositiveSmallIntegerField', [], {'null': 'True', 'blank': 'True'})
         },
         'project.skill': {
             'Meta': {'object_name': 'Skill'},

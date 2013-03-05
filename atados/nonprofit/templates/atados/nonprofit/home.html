@@ -40,7 +40,7 @@
         </div>
       </div>
       <ul class="nav nav-tabs nav-stacked">
-      {% for project in nonprofit.project_set.with_unpublished %}
+      {% for project in nonprofit.project_set.all %}
         <li><a href="{{ project.get_edit_url }}">{{ project.name }}</a></li>
       {% empty %}
         <li>{% trans "Your nonprofit does not have any project" %}</li>
