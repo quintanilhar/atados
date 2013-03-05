@@ -42,6 +42,9 @@ class Skill(models.Model):
     def __unicode__(self):
         return self.name
 
+class Apply(models.Model):
+    volunteer = models.ForeignKey(Volunteer)
+
 class ProjectManager(models.Manager):
     use_for_related_fields = True
 
@@ -51,9 +54,13 @@ class ProjectManager(models.Manager):
     def with_unpublished(self):
         return super(ProjectManager, self).get_query_set().filter(deleted=False)
 
+    def all_with_deleted(self):
+        return super(ProjectManager, self).get_query_set()
+
 class Project(models.Model):
     nonprofit = models.ForeignKey(Nonprofit)
     causes = models.ManyToManyField(Cause)
+    applies = models.ManyToManyField(Apply, related_name="%(class)s_related")
     name = models.CharField(_('Project name'), max_length=50)
     slug = models.SlugField(max_length=50)
     details = models.TextField(_('Details'), max_length=1024)
@@ -105,6 +112,7 @@ class Project(models.Model):
 
     class Meta:
         unique_together = (("slug", "nonprofit"),)
+        abstract = True
 
 class ProjectDonation(Project):
     project_type = 'donation'
@@ -121,9 +129,12 @@ class ProjectWork(Project):
     can_be_done_remotely = models.BooleanField(
             _('This work can be done remotely.'))
 
-class ProjectJob(ProjectWork):
+class ProjectJob(Project):
     project_type = 'job'
-
-class Apply(models.Model):
-    volunteer = models.ForeignKey(Volunteer)
-    project = models.ForeignKey(Project)
+    availabilities = models.ManyToManyField(Availability)
+    prerequisites = models.TextField(_('Prerequisites'), max_length=1024)
+    skills = models.ManyToManyField(Skill)
+    weekly_hours = models.PositiveSmallIntegerField(_('Weekly hours'),
+                                        blank=True, null=True)
+    can_be_done_remotely = models.BooleanField(
+            _('This work can be done remotely.'))
