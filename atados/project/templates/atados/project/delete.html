@@ -11,7 +11,11 @@
 <div id="project-delete">
   <div class="row">
     <div class="span9">
-      delete
+      <form action="{{ project.get_delete_url }}" method="post">{% csrf_token %}
+        <div class="form-actions">
+          <button type="submit" class="btn btn-danger">{% trans "Delete project" %}</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

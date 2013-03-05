@@ -46,7 +46,7 @@ class ProjectManager(models.Manager):
     use_for_related_fields = True
 
     def active(self):
-        return self.get_query_set().filter(deleted=False)
+        return self.get_query_set().filter(deleted=True)
 
     def published(self):
         return self.get_query_set().active(published=True)
@@ -98,6 +98,10 @@ class Project(models.Model):
     @models.permalink
     def get_edit_url(self):
         return ('project:edit', (self.nonprofit.slug, self.slug))
+
+    @models.permalink
+    def get_delete_url(self):
+        return ('project:delete', (self.nonprofit.slug, self.slug))
 
     def get_project_type(self):
         return self.project_type

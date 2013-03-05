@@ -6,6 +6,7 @@ from django.views.generic.detail import DetailView
 from django.utils.decorators import method_decorator
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _, ugettext as __
@@ -185,3 +186,8 @@ class ProjectPictureUpdateView(ProjectMixin, UpdateView):
 
 class ProjectDeleteView(ProjectMixin, DeleteView):
     get_object = ProjectMixin.get_project
+    template_name='atados/project/delete.html'
+
+    def get_success_url(self):
+        messages.info(self.request, _('Project was successfully deleted.'))
+        return reverse('atados:home')

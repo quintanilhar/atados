@@ -119,6 +119,16 @@
         </div>
         {% endblock %}
 
+        {% if messages %}
+        <div class="container">
+          <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-success"><strong>{% trans "Well done!" %}</strong> {{ message }}</div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
+
         {% block out_content %}
         <div class="container">
           {% block content %}
