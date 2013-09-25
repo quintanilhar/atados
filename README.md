@@ -37,6 +37,10 @@ pouco mais sobre você, e como você gostaria de ajudar, ou então:
  * Enviar testes unitários.
  * Resolver [nossos bugs](https://github.com/atados/atados/issues). Recomendamos que você comece por [bugs que marcamos como "bons para começar"](https://github.com/atados/atados/issues?labels=good+first+bug&page=1&state=open).
 
+Pré-requisitos
+--------------
+    * [python-pip](https://pypi.python.org/pypi/pip>python-pip) instalado.
+    * [python-mysqldb](http://sourceforge.net/projects/mysql-python/>python-mysqldb) instalado.
 
 Como rodar o projeto
 --------------------
@@ -47,7 +51,6 @@ Como rodar o projeto
     python manage.py syncdb
     python manage.py migrate
     python manage.py runserver
-
 
 Licença
 -------
