@@ -39,8 +39,8 @@ pouco mais sobre você, e como você gostaria de ajudar, ou então:
 
 Pré-requisitos
 --------------
-    * [python-pip](https://pypi.python.org/pypi/pip>python-pip) instalado.
-    * [python-mysqldb](http://sourceforge.net/projects/mysql-python/>python-mysqldb) instalado.
+    [python-pip](https://pypi.python.org/pypi/pip) instalado.
+    [python-mysqldb](http://sourceforge.net/projects/mysql-python) instalado.
 
 Como rodar o projeto
 --------------------
